@@ -47,7 +47,6 @@ public:
 	 */
 	void AutonomousInit() override {
 
-
 		m_autonomousCommand = m_chooser.GetSelected();
 
 		if (m_autonomousCommand != nullptr) {
