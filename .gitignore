@@ -12,6 +12,7 @@ workbench.xmi
 out/
 tmp/
 .settings/
+.metadata/
 .loadpath
 .project
 /.idea
