@@ -3,6 +3,11 @@
  *
  *  Created on: 9 בינו׳ 2018
  *      Author: Coding Monkeys
+ *
+ *  This version of a PIDController is designed to work directly in a
+ *  command loop. As such, one must create and configure the controller
+ *  in the command. The calculate function should be called once per cycle
+ *  for consistent results.
  */
 
 #ifndef UTIL_PIDCONTROLLER_H_

@@ -21,6 +21,14 @@ m_error(0), m_totalError(0), m_tolerance(0), m_output(0), m_minInput(0), m_maxIn
 m_minOutput(0), m_maxOutput(0), m_prevTime(0), m_currTime(0), m_isEnabled(false)
 {}
 
+double PIDController::Limit(double value, double min, double max){
+	if(value < min)
+		return min;
+	else if(value > max)
+		return max;
+	return value;
+}
+
 double PIDController::GetP(){
 	return m_p;
 }
