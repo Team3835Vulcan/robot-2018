@@ -14,6 +14,7 @@
 #define UTIL_PIDCONTROLLER_H_
 
 #include <Timer.h>
+#include <RobotController.h>
 
 namespace vulcan {
 
@@ -49,8 +50,6 @@ private:
 
 	//allows controller to calculate
 	bool m_isEnabled;
-
-	Timer time;
 
 	double Limit(double value, double min, double max); //limit value between a min and max
 public:

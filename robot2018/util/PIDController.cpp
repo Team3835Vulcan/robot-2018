@@ -113,7 +113,7 @@ void PIDController::SetRelativeSetpoint(double delta){
 void PIDController::Calculate(double input){
 	if(m_isEnabled){
 		m_error = m_setpoint - input;
-		m_currTime = time.Get();
+		m_currTime = RobotController::GetFPGATime();
 		double dt = m_currTime - m_prevTime;
 		m_totalError += m_error * dt;
 		double diffTerm = (m_error - m_prevError) / dt;
@@ -132,17 +132,17 @@ double PIDController::GetOutput(){
 
 void PIDController::Enable(){
 	m_isEnabled = true;
-	time.Start();
+	m_prevTime = RobotController::GetFPGATime();
 }
 
 void PIDController::Disable(){
 	m_isEnabled = false;
-	time.Stop();
 }
 
 void PIDController::Reset(){
 	Disable();
-	time.Reset();
+	m_prevTime = 0;
+	m_currTime = 0;
 	m_setpoint = 0;
 	m_totalError = 0;
 	m_output = 0;
