@@ -49,7 +49,7 @@ void PIDController::SetP(double p){
 	m_p = p;
 }
 
-void PIDController::SetP(double i){
+void PIDController::SetI(double i){
 	m_i = i;
 }
 
@@ -96,10 +96,6 @@ void PIDController::SetTolerance(double tolerance){
 void PIDController::SetPercentTolerance(double percent){
 	if(!(percent > 1 || percent < 0) && m_setpoint != 0)
 		m_tolerance = percent * m_setpoint;
-}
-
-bool PIDController::IsOnTarget(){
-	return m_error < m_tolerance;
 }
 
 void PIDController::SetSetpoint(double setpoint){
