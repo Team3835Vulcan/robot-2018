@@ -20,6 +20,7 @@ public:
 		Fatal
 	};
 
+	Logger();
 	bool Create(std::string name);
 	bool Log(std::string msg, LogType type = Info);
 	bool Close();
@@ -27,7 +28,7 @@ public:
 private:
 	std::fstream file;
 	std::string filepath;
-	bool opened = false;
+	bool opened;
 
 	std::string GetTimeString();
 	std::string GetTypeString(LogType type);

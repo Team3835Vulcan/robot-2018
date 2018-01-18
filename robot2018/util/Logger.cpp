@@ -8,6 +8,10 @@
 #include "Logger.h"
 
 namespace vulcan {
+Logger::Logger()
+{
+	opened = false;
+}
 /**
 * Create a log file.
 *
