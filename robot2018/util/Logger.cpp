@@ -8,36 +8,24 @@
 #include "Logger.h"
 
 namespace vulcan {
-Logger::Logger()
+Logger::Logger(const std::string &filename)
 {
+	filepath = filename;
 	opened = false;
 }
-/**
-* Create a log file.
-*
-* @param name			The log file name.
-* @return				True if created, False otherwise.
-*/
-bool Logger::Create(std::string name)
+
+bool Logger::Create()
 {
-	file.open(name);
+	file.open(filepath);
 
 	if (!file.is_open())
 		return false;
 
-	filepath = name;
 	opened = true;
 	return true;
 }
 
-/*
-* Log to the file.
-*
-* @param msg			Message to write in the log.
-* @param type			Log type.
-* @return				True if message was logged, False otherwise.
-*/
-bool Logger::Log(std::string msg, LogType type)
+bool Logger::Log(const std::string &msg, LogType type)
 {
 	if (!opened)
 		return false;
@@ -94,11 +82,6 @@ std::string Logger::GetTypeString(LogType type)
 	return result;
 }
 
-/*
-* Close the log file.
-*
-* @return			True if closed, False otherwise.
-*/
 bool Logger::Close()
 {
 	if (!opened)
@@ -108,4 +91,8 @@ bool Logger::Close()
 	return true;
 }
 
+Logger::~Logger()
+{
+	Close();
+}
 }

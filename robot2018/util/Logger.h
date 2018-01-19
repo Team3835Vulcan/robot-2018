@@ -20,9 +20,11 @@ public:
 		Fatal
 	};
 
-	Logger();
-	bool Create(std::string name);
-	bool Log(std::string msg, LogType type = Info);
+	Logger(const std::string &name);
+	virtual ~Logger();
+
+	bool Create();
+	bool Log(const std::string &msg, LogType type = Info);
 	bool Close();
 
 private:
