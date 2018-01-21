@@ -16,12 +16,12 @@
 
 class Chassis : public frc::Subsystem {
 private:
-	std::shared_ptr<VictorSP> m_rLeft;
-	std::shared_ptr<VictorSP> m_fLeft;
-	std::shared_ptr<VictorSP> m_rRight;
-	std::shared_ptr<VictorSP> m_fRight;
-	std::unique_ptr<SpeedControllerGroup> m_left;
-	std::unique_ptr<SpeedControllerGroup> m_right;
+	std::shared_ptr<frc::VictorSP> m_rLeft;
+	std::shared_ptr<frc::VictorSP> m_fLeft;
+	std::shared_ptr<frc::VictorSP> m_rRight;
+	std::shared_ptr<frc::VictorSP> m_fRight;
+	std::unique_ptr<frc::SpeedControllerGroup> m_left;
+	std::unique_ptr<frc::SpeedControllerGroup> m_right;
 
 	std::unique_ptr<AHRS> m_navx;
 
