@@ -35,6 +35,7 @@ public:
 	const Setpoint& GetStart() const;
 	const Setpoint& GetEnd() const;
 	const std::vector<MotionPart>& GetParts() const;
+	std::unique_ptr<Setpoint> GetSetpoint(float t) const;
 	MotionProfile(const Setpoint& start, const Setpoint& end, const MotionProfileConfig& config);
 	void Generate();
 };

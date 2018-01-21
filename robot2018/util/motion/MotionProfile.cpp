@@ -1,11 +1,8 @@
-#include "../include/MotionProfile.h"
+#include "MotionProfile.h"
+#include <cmath>
 
 MotionProfile::MotionProfile(const Setpoint& start, const Setpoint& end, const MotionProfileConfig& config) :
-	m_start(start), m_end(end), m_config(config) {
-}
-
-const std::vector<MotionPart>& MotionProfile::GetParts() const {
-	return m_parts;
+	m_config(config), m_start(start), m_end(end) {
 }
 
 const Setpoint& MotionProfile::GetStart() const {
@@ -16,14 +13,24 @@ const Setpoint& MotionProfile::GetEnd() const {
 	return m_end;
 }
 
+const std::vector<MotionPart>& MotionProfile::GetParts() const {
+	return m_parts;
+}
+
+std::unique_ptr<Setpoint> MotionProfile::GetSetpoint(float t) const{
+	for(std::size_t i = 0; i < m_parts.size(); ++i){
+		auto s = m_parts.at(i).FindSetpoint(t);
+		if(s)
+			return s;
+	}
+	return nullptr;
+}
 
 /*
 while reading this function take note that time variables represent a coordinate and not the time to complete an action, which is called an interval.
 */
 void MotionProfile::Generate() {
-	float distCovered = 0;
 	float goalDist = m_end.GetPos() - m_start.GetPos();
-	float goalTime = m_end.GetTime() - m_start.GetTime();
 	float maxAcc = m_config.m_maxAcc;
 	float decel = -maxAcc;
 	float maxVel = sqrtf(goalDist*maxAcc);
