@@ -6,8 +6,15 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
+#include <WPILib.h>
 
 class OI {
 public:
 	OI();
+	double GetLeftY();
+	double GetRightY();
+
+private:
+	frc::Joystick* left;
+	frc::Joystick* right;
 };

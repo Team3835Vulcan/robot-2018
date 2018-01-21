@@ -11,9 +11,14 @@
 #include <SmartDashboard/SendableChooser.h>
 #include <SmartDashboard/SmartDashboard.h>
 #include <TimedRobot.h>
+#include "OI.h"
+#include "Subsystems/Chassis.h"
 
 class Robot : public frc::TimedRobot {
 public:
+	static OI* oi;
+	static Chassis* chassis;
+
 	void RobotInit() override {
 		frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 	}

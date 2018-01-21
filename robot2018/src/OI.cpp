@@ -11,4 +11,14 @@
 
 OI::OI() {
 	// Process operator interface input here.
+	left = new frc::Joystick(0);
+	right = new frc::Joystick(1);
+}
+
+double OI::GetLeftY(){
+	return left->GetY();
+}
+
+double OI::GetRightY(){
+	return right->GetY();
 }
