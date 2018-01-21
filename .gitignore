@@ -12,11 +12,7 @@ workbench.xmi
 out/
 tmp/
 .settings/
-<<<<<<< HEAD
 .metadata/
-=======
-.metadata
->>>>>>> refs/remotes/origin/master
 .loadpath
 .project
 /.idea
