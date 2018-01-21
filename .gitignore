@@ -1,3 +1,6 @@
+#useless files
+*.xml
+
 # WPILib
 bin/
 build/
@@ -12,11 +15,10 @@ workbench.xmi
 out/
 tmp/
 .settings/
-<<<<<<< HEAD
+.cproject
+build.properties
 .metadata/
-=======
-.metadata
->>>>>>> refs/remotes/origin/master
+Debug/
 .loadpath
 .project
 /.idea
