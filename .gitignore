@@ -1,3 +1,6 @@
+#useless files
+*.xml
+
 # WPILib
 bin/
 build/
@@ -12,7 +15,10 @@ workbench.xmi
 out/
 tmp/
 .settings/
+.cproject
+build.properties
 .metadata/
+Debug/
 .loadpath
 .project
 /.idea
