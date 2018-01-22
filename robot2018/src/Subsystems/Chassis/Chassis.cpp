@@ -2,18 +2,14 @@
 
 Chassis* Chassis::m_instance = nullptr;
 
-Chassis::Chassis() : Subsystem("ExampleSubsystem") {
-	m_rLeft = std::make_shared<frc::VictorSP>(RLEFT_MOTOR);
-	m_fLeft = std::make_shared<frc::VictorSP>(FLEFT_MOTOR);
-	m_rRight = std::make_shared<frc::VictorSP>(RRIGHT_MOTOR);
-	m_fRight = std::make_shared<frc::VictorSP>(FRIGHT_MOTOR);
-	m_left = std::make_unique<frc::SpeedControllerGroup>(m_rLeft, m_fLeft);
-	m_right = std::make_unique<frc::SpeedControllerGroup>(m_rRight, m_fRight);
-
-	m_navx = std::make_unique<AHRS>(I2C::Port::kOnboard); //Should be constant value
-
-	m_lEnc = std::make_unique<frc::Encoder>(LEFT_ENCODER);
-	m_rEnc = std::make_unique<frc::Encoder>(RIGHT_ENCODER);
+Chassis::Chassis() : Subsystem("Chassis"), m_rLeft(RLEFT_MOTOR), m_fLeft(FLEFT_MOTOR),
+										   m_rRight(RRIGHT_MOTOR), m_fRight(FRIGHT_MOTOR),
+										   m_left(std::make_unique<frc::SpeedControllerGroup>(m_rLeft, m_fLeft)),
+										   m_right(std::make_unique<frc::SpeedControllerGroup>(m_rRight, m_fRight)),
+										   m_navx(std::make_unique<AHRS>(I2C::Port::kOnboard)), // Should be constant
+										   m_lEnc(std::make_unique<frc::Encoder>(LEFT_ENCODER_A, LEFT_ENCODER_B)),
+										   m_rEnc(std::make_unique<frc::Encoder>(RIGHT_ENCODER_A, RIGHT_ENCODER_B)){
+	m_navx->Reset();
 
 	m_lEnc->SetDistancePerPulse(DISTANCE_PER_PULSE);
 	m_rEnc->SetDistancePerPulse(DISTANCE_PER_PULSE);
@@ -51,7 +47,7 @@ float Chassis::LimitSpeed(float speed)
 	if(speed > 1.0)
 		return 1.0;
 
-	else if(speed < -1.0)
+	if(speed < -1.0)
 		return -1.0;
 
 	return speed;

@@ -7,8 +7,25 @@
 
 #include "OI.h"
 
-#include <WPILib.h>
+OI* OI::m_instance = nullptr;
 
-OI::OI() {
-	// Process operator interface input here.
+OI::OI() : m_left(std::make_unique<frc::Joystick>(LEFT_JOYSTICK)), m_right(std::make_unique<frc::Joystick>(RIGHT_JOYSTICK)){
+}
+
+OI* OI::GetInstance()
+{
+	if(m_instance == nullptr)
+		m_instance = new OI();
+
+	return m_instance;
+}
+
+const float OI::GetLeftY() const
+{
+	return m_left->GetY();
+}
+
+const float OI::GetRightY() const
+{
+	return m_right->GetY();
 }
