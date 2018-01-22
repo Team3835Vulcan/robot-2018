@@ -4,6 +4,8 @@
 #include "Setpoint.h"
 #include "MotionPart.h"
 
+
+namespace vulcan{
 /*
 Defines constraints for the the profile
 */
@@ -40,3 +42,4 @@ public:
 	void Generate();
 };
 
+}

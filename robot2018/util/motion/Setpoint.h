@@ -1,4 +1,6 @@
 #pragma once
+
+namespace vulcan{
 class Setpoint
 {
 private:
@@ -11,4 +13,4 @@ public:
 	const float GetPos() const;
 	const float GetVelocity() const;
 };
-
+}

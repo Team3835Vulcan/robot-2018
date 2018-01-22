@@ -1,5 +1,6 @@
 #include "MotionPart.h"
 
+namespace vulcan{
 MotionPart::MotionPart(const Setpoint& start, const Setpoint& end) : m_start(start), m_end(end), 
 m_distance(m_end.GetPos() - m_start.GetPos()), m_time(m_end.GetTime() - m_start.GetTime()), 
 m_acc((m_end.GetVelocity() - m_start.GetVelocity()) / m_time)
@@ -36,4 +37,5 @@ std::unique_ptr<Setpoint> MotionPart::FindSetpoint(float t) const {
 		return setpoint;
 	}
 	return nullptr;
+}
 }

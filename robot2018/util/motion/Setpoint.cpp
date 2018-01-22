@@ -1,7 +1,7 @@
 #include "Setpoint.h"
 
 
-
+namespace vulcan{
 Setpoint::Setpoint(float time, float dist, float velocity) :
 	m_time(time), m_pos(dist), m_velocity(velocity) {}
 
@@ -15,4 +15,5 @@ const float Setpoint::GetPos() const{
 
 const float Setpoint::GetVelocity() const{
 	return m_velocity;
+}
 }

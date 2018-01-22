@@ -3,6 +3,9 @@
 #include <memory>
 #include "Setpoint.h"
 
+
+
+namespace vulcan{
 /*
 	MotionPart describes a motion between two setpoints which has linear acceleration
 */
@@ -31,3 +34,4 @@ public:
 	//returns null if setpoint if time is not contained
 	std::unique_ptr<Setpoint> FindSetpoint(float t) const;
 };
+}

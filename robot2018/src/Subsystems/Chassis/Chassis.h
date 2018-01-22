@@ -33,8 +33,10 @@ private:
 
 	std::unique_ptr<frc::Encoder> m_lEnc;
 	std::unique_ptr<frc::Encoder> m_rEnc;
+
 public:
 	static Chassis* GetInstance();
+
 	void InitDefaultCommand();
 
 	void TankDrive(double left, double right);

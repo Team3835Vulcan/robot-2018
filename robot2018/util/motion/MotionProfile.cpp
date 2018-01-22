@@ -1,6 +1,7 @@
 #include "MotionProfile.h"
 #include <cmath>
 
+namespace vulcan{
 MotionProfile::MotionProfile(const Setpoint& start, const Setpoint& end, const MotionProfileConfig& config) :
 	m_config(config), m_start(start), m_end(end) {
 }
@@ -74,7 +75,7 @@ void MotionProfile::Generate() {
 		
 	}
 }
-
+}
 
 
 
