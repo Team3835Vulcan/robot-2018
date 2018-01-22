@@ -16,3 +16,12 @@
  */
 
 //speed controllers
+constexpr int RLEFT_MOTOR = 0;
+constexpr int FLEFT_MOTOR = 0;
+constexpr int RRIGHT_MOTOR = 0;
+constexpr int FRIGHT_MOTOR = 0;
+
+constexpr int LEFT_ENCODER = 0;
+constexpr int RIGHT_ENCODER = 0;
+
+constexpr float DISTANCE_PER_PULSE = 0;
