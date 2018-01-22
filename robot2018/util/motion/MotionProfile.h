@@ -30,6 +30,7 @@ private:
 	Setpoint m_start, m_end;
 	std::vector<MotionPart> m_parts;
 	
+	float m_dist;
 public:
 
 	const Setpoint& GetStart() const;

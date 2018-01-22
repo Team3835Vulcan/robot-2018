@@ -2,9 +2,9 @@
 #include <cmath>
 
 namespace vulcan{
-MotionProfile::MotionProfile(const Setpoint& start, const Setpoint& end, const MotionProfileConfig& config) :
-	m_config(config), m_start(start), m_end(end) {
-}
+MotionProfile::MotionProfile(const Setpoint& start, const Setpoint& end,
+	const MotionProfileConfig& config) :
+	m_config(config), m_start(start), m_end(end), m_dist(m_end.GetPos()-m_start.GetPos()) {}
 
 const Setpoint& MotionProfile::GetStart() const {
 	return m_start;
@@ -31,7 +31,7 @@ std::unique_ptr<Setpoint> MotionProfile::GetSetpoint(float t) const{
 while reading this function take note that time variables represent a coordinate and not the time to complete an action, which is called an interval.
 */
 void MotionProfile::Generate() {
-	float goalDist = m_end.GetPos() - m_start.GetPos();
+	float goalDist = m_dist;
 	float maxAcc = m_config.m_maxAcc;
 	float decel = -maxAcc;
 	float maxVel = sqrtf(goalDist*maxAcc);
