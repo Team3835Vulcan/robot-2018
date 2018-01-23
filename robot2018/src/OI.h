@@ -7,7 +7,21 @@
 
 #pragma once
 
+#include "Constants.h"
+#include <memory>
+#include <Joystick.h>
+
 class OI {
-public:
+private:
 	OI();
+	static OI* m_instance;
+
+	std::unique_ptr<frc::Joystick> m_left;
+	std::unique_ptr<frc::Joystick> m_right;
+
+public:
+	static OI* GetInstance();
+
+	const float GetRightY() const;
+	const float GetLeftY() const;
 };

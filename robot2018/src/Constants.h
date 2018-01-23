@@ -16,3 +16,18 @@
  */
 
 //speed controllers
+constexpr int RLEFT_MOTOR = 0;
+constexpr int FLEFT_MOTOR = 0;
+constexpr int RRIGHT_MOTOR = 0;
+constexpr int FRIGHT_MOTOR = 0;
+
+constexpr int LEFT_ENCODER_A = 0;
+constexpr int LEFT_ENCODER_B = 0;
+constexpr int RIGHT_ENCODER_A = 0;
+constexpr int RIGHT_ENCODER_B = 0;
+
+//Joysticks
+constexpr int RIGHT_JOYSTICK = 0;
+constexpr int LEFT_JOYSTICK = 0;
+
+constexpr float DISTANCE_PER_PULSE = 0;
