@@ -17,7 +17,6 @@
  */
 
 //speed controllers
-<<<<<<< HEAD
 constexpr int RLEFT_MOTOR = 0;
 constexpr int FLEFT_MOTOR = 0;
 constexpr int RRIGHT_MOTOR = 0;
@@ -33,10 +32,8 @@ constexpr int RIGHT_JOYSTICK = 0;
 constexpr int LEFT_JOYSTICK = 0;
 
 constexpr float DISTANCE_PER_PULSE = 0;
-=======
 
 //physical limits
 constexpr double MAX_ROBOT_VELOCITY = 10;//in m/s
 constexpr double VELOCITY_FEEDFORWARD = 1/MAX_ROBOT_VELOCITY;
 constexpr double MAX_ROBOT_ACCELERATION = 2; //in m/s^2
->>>>>>> changes to motion profiles, added command to follow profile for 1d movement
