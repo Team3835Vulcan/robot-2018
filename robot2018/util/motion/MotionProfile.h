@@ -31,13 +31,20 @@ private:
 	std::vector<MotionPart> m_parts;
 	
 	float m_dist;
+	float m_time;
+
 public:
+	MotionProfile(const Setpoint& start, const Setpoint& end, const MotionProfileConfig& config);
 
 	const Setpoint& GetStart() const;
 	const Setpoint& GetEnd() const;
+
 	const std::vector<MotionPart>& GetParts() const;
 	std::unique_ptr<Setpoint> GetSetpoint(float t) const;
-	MotionProfile(const Setpoint& start, const Setpoint& end, const MotionProfileConfig& config);
+
+	const float GetDist() const;
+	const float GetTime() const;
+
 	void Generate();
 };
 

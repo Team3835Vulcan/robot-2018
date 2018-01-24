@@ -13,6 +13,7 @@
  * 1. Ports on the robot(for speedcontrollers, sensors etc)
  * 2. physical size measurements of the robot
  * 3. physical limits of the robot
+ * 4. final controller parameters
  */
 
 //speed controllers

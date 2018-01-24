@@ -21,10 +21,16 @@ class MotionProfileDriveController {
 private:
 	Timer time;
 
-	const float m_tolerance;
-	const float m_dt = 0.02;
-	float m_goalDist = 0;
+	float m_tolerance;
+	const float m_dt;
 	bool m_enabled;
+
+	float m_goalDist;
+	float m_goalTime;
+	float m_currDist;
+	float m_currVel;
+	float m_currTime;
+	float m_prevTime;
 
 	std::unique_ptr<vulcan::PIDController> m_velController;
 	std::unique_ptr<vulcan::MotionProfile> m_profile;
@@ -43,7 +49,7 @@ public:
 	void SetTolerance(float tolerance);
 
 	void Calculate();
-	double GetOutput();
+	const double GetOutput() const;
 
 	bool IsOnTarget();
 };
