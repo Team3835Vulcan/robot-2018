@@ -9,16 +9,19 @@
 
 namespace vulcan {
 	MotionProfileDriveController::MotionProfileDriveController(float tolerance, float dt) :
-		m_tolerance(tolerance), m_dt(dt), output(0), m_goalDist(0), m_goalTime(0),
-		m_currDist(0), m_currVel(0), m_currTime(0), m_prevTime(0), m_enabled(false),
-		m_velController(std::make_unique<vulcan::PIDController>(0,0,0,VELOCITY_FEEDFORWARD)){
+		m_tolerance(tolerance), m_dt(dt), m_enabled(false), m_goalDist(0), m_goalTime(0),
+		m_currDist(0), m_currVel(0), m_currTime(0), m_prevTime(0),
+		m_velController(std::make_unique<vulcan::PIDController>(0,0,0,VELOCITY_FEEDFORWARD)),
+		output(0){
 			m_velController->SetInputRange(-MAX_ROBOT_VELOCITY, MAX_ROBOT_VELOCITY);
 			m_velController->SetOutputRange(-1,1);
 	}
 
-	MotionProfileDriveController::MotionProfileDriveController(float tolerance) : m_tolerance(tolerance), m_dt(0.02), output(0),
-		m_goalDist(0), m_goalTime(0), m_currDist(0), m_currVel(0), m_currTime(0), m_prevTime(0), m_enabled(false),
-		m_velController(std::make_unique<vulcan::PIDController>(0,0,0,VELOCITY_FEEDFORWARD)){
+	MotionProfileDriveController::MotionProfileDriveController(float tolerance) :
+			m_tolerance(tolerance), m_dt(0.02), m_enabled(false), m_goalDist(0), m_goalTime(0),
+			m_currDist(0), m_currVel(0), m_currTime(0), m_prevTime(0),
+			m_velController(std::make_unique<vulcan::PIDController>(0,0,0,VELOCITY_FEEDFORWARD)),
+			output(0){
 			m_velController->SetInputRange(-MAX_ROBOT_VELOCITY, MAX_ROBOT_VELOCITY);
 			m_velController->SetOutputRange(-1,1);
 	}
