@@ -7,7 +7,6 @@
 
 class TurnAngle : public frc::Command {
 private:
-
 	const double m_angle;
 	std::unique_ptr<vulcan::PIDController> m_turnController;
 public:
