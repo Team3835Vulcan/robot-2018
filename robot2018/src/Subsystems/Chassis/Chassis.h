@@ -10,15 +10,9 @@
 #include <Drive/DifferentialDrive.h>
 #include <Encoder.h>
 
-/*
- * gior,
- * we made this header for you. you must implement it. enjoy
- */
-
 class Chassis : public frc::Subsystem {
 private:
 	Chassis();
-	static Chassis* m_instance;
 
 	float LimitSpeed(float speed);
 
@@ -35,7 +29,7 @@ private:
 	std::unique_ptr<frc::Encoder> m_rEnc;
 
 public:
-	static Chassis* GetInstance();
+	static Chassis& GetInstance();
 
 	void InitDefaultCommand();
 

@@ -3,12 +3,12 @@
 
 DriveStraightWithMotionProfile::DriveStraightWithMotionProfile(double dist) : m_dist(dist){
 	// Use Requires() here to declare subsystem dependencies
-	Requires(Chassis::GetInstance());
+	Requires(&Chassis::GetInstance());
 }
 
 // Called just before this Command runs the first time
 void DriveStraightWithMotionProfile::Initialize() {
-	Chassis::GetInstance()->ZeroYaw();
+	Chassis::GetInstance().ZeroYaw();
 
 	this->m_controller = std::make_unique<vulcan::MotionProfileDriveController>(
 	0.05);
@@ -25,7 +25,7 @@ void DriveStraightWithMotionProfile::Execute() {
 	m_controller->Calculate();
 	double output = m_controller->GetOutput();
 
-	Chassis::GetInstance()->CurveDrive(output, -m_angleKP*Chassis::GetInstance()->GetAngle());
+	Chassis::GetInstance().CurveDrive(output, -m_angleKP*Chassis::GetInstance().GetAngle());
 }
 
 // Make this return true when this Command no longer needs to run execute()
@@ -35,11 +35,11 @@ bool DriveStraightWithMotionProfile::IsFinished() {
 
 // Called once after isFinished returns true
 void DriveStraightWithMotionProfile::End() {
-	Chassis::GetInstance()->TankDrive(0,0);
+	Chassis::GetInstance().TankDrive(0,0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void DriveStraightWithMotionProfile::Interrupted() {
-	Chassis::GetInstance()->TankDrive(0,0);
+	Chassis::GetInstance().TankDrive(0,0);
 }

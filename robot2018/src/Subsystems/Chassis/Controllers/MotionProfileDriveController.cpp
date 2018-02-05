@@ -59,12 +59,12 @@ namespace vulcan {
 		if(m_enabled){
 			m_currTime = time.Get();
 			double dt = m_currTime - m_prevTime;
-			m_currVel = Chassis::GetInstance()->GetVelocity();
+			m_currVel = Chassis::GetInstance().GetVelocity();
 			m_currDist += m_currVel * dt;
 
 			float goalVel = m_profile->GetSetpoint(m_currTime)->GetVelocity();
 			m_velController->SetRelativeSetpoint(goalVel - m_currVel);
-			m_velController->Calculate(Chassis::GetInstance()->GetVelocity());
+			m_velController->Calculate(Chassis::GetInstance().GetVelocity());
 			output = m_velController->GetOutput();
 
 			m_prevTime = m_currTime;

@@ -1,7 +1,5 @@
 #include "Chassis.h"
 
-Chassis* Chassis::m_instance = nullptr;
-
 Chassis::Chassis() : Subsystem("Chassis"), m_rLeft(RLEFT_MOTOR), m_fLeft(FLEFT_MOTOR),
 										   m_rRight(RRIGHT_MOTOR), m_fRight(FRIGHT_MOTOR),
 										   m_left(std::make_unique<frc::SpeedControllerGroup>(m_rLeft, m_fLeft)),
@@ -15,12 +13,10 @@ Chassis::Chassis() : Subsystem("Chassis"), m_rLeft(RLEFT_MOTOR), m_fLeft(FLEFT_M
 	m_rEnc->SetDistancePerPulse(DISTANCE_PER_PULSE);
 }
 
-Chassis* Chassis::GetInstance()
+Chassis& Chassis::GetInstance()
 {
-	if(m_instance == nullptr)
-		m_instance = new Chassis();
-
-	return m_instance;
+	static Chassis instance;
+	return instance;
 }
 
 void Chassis::InitDefaultCommand() {

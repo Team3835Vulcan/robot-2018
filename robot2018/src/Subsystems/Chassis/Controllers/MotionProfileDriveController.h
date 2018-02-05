@@ -9,8 +9,9 @@
 #define SRC_SUBSYSTEMS_CHASSIS_CONTROLLERS_MOTIONPROFILEDRIVECONTROLLER_H_
 
 #include <Subsystems/Chassis/Chassis.h>
-#include <util/PIDController.h>
 #include <util/motion/MotionProfile.h>
+#include <util/PIDController.h>
+
 #include <Constants.h>
 #include <Timer.h>
 #include <memory>
