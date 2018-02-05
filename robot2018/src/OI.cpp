@@ -5,10 +5,10 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "OI.h"
+#include <OI.h>
 
-OI::OI() : m_left(std::make_unique<frc::Joystick>(LEFT_JOYSTICK)), m_right(std::make_unique<frc::Joystick>(RIGHT_JOYSTICK)){
-}
+OI::OI() : m_left(std::make_unique<frc::Joystick>(LEFT_JOYSTICK)),
+		   m_right(std::make_unique<frc::Joystick>(RIGHT_JOYSTICK)){}
 
 OI& OI::GetInstance()
 {
