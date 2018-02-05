@@ -13,6 +13,7 @@
  * 1. Ports on the robot(for speedcontrollers, sensors etc)
  * 2. physical size measurements of the robot
  * 3. physical limits of the robot
+ * 4. final controller parameters
  */
 
 //speed controllers
@@ -31,3 +32,8 @@ constexpr int RIGHT_JOYSTICK = 0;
 constexpr int LEFT_JOYSTICK = 0;
 
 constexpr float DISTANCE_PER_PULSE = 0;
+
+//physical limits
+constexpr double MAX_ROBOT_VELOCITY = 10;//in m/s
+constexpr double VELOCITY_FEEDFORWARD = 1/MAX_ROBOT_VELOCITY;
+constexpr double MAX_ROBOT_ACCELERATION = 2; //in m/s^2

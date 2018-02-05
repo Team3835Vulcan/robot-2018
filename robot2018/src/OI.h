@@ -14,13 +14,12 @@
 class OI {
 private:
 	OI();
-	static OI* m_instance;
 
 	std::unique_ptr<frc::Joystick> m_left;
 	std::unique_ptr<frc::Joystick> m_right;
 
 public:
-	static OI* GetInstance();
+	static OI& GetInstance();
 
 	const float GetRightY() const;
 	const float GetLeftY() const;

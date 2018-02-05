@@ -13,7 +13,6 @@
 #ifndef UTIL_PIDCONTROLLER_H_
 #define UTIL_PIDCONTROLLER_H_
 
-#include <Timer.h>
 #include <RobotController.h>
 
 namespace vulcan {
