@@ -17,18 +17,36 @@
  */
 
 //speed controllers
-constexpr int RLEFT_MOTOR = 0;
-constexpr int FLEFT_MOTOR = 0;
-constexpr int RRIGHT_MOTOR = 0;
-constexpr int FRIGHT_MOTOR = 0;
+constexpr int RLEFT_MOTOR = 8;
+constexpr int FLEFT_MOTOR = 9;
+constexpr int RRIGHT_MOTOR = 6;
+constexpr int FRIGHT_MOTOR = 7;
+
+constexpr int CONV_MOTOR = 0;
+
+constexpr int COLL1_MOTOR = 3;
+constexpr int COLL2_MOTOR = 4;
+constexpr int ROTOR_MOTOR = 5;
+
+constexpr int ELEV1_MOTOR = 1;
+constexpr int ELEV2_MOTOR = 2;
 
 constexpr int LEFT_ENCODER_A = 0;
 constexpr int LEFT_ENCODER_B = 0;
 constexpr int RIGHT_ENCODER_A = 0;
 constexpr int RIGHT_ENCODER_B = 0;
 
+//limit switches
+constexpr int UP_COLL_SWITCH = 0;
+constexpr int DOWN_COLL_SWITCH = 0;
+constexpr int CUBE_SWITCH = 0;
+
+//pneumatics
+constexpr int CLAW_FORWARD = 0;
+constexpr int CLAW_BACKWARD = 0;
+
 //Joysticks
-constexpr int RIGHT_JOYSTICK = 0;
+constexpr int RIGHT_JOYSTICK = 1;
 constexpr int LEFT_JOYSTICK = 0;
 
 constexpr float DISTANCE_PER_PULSE = 0;
