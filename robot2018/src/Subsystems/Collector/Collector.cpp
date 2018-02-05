@@ -1,7 +1,7 @@
 #include "Collector.h"
 #include <Constants.h>
 
-Collector::Collector() : Subsystem("ExampleSubsystem"),
+Collector::Collector() : Subsystem("Collector"),
 						m_rCollector(std::make_unique<frc::Talon>(COLL1_MOTOR)),
 						m_lCollector(std::make_unique<frc::Talon>(COLL2_MOTOR)),
 						m_collectSwitch(std::make_unique<frc::DigitalInput>(CUBE_SWITCH)),
@@ -11,6 +11,11 @@ Collector::Collector() : Subsystem("ExampleSubsystem"),
 						m_claw(std::make_unique<frc::DoubleSolenoid>(CLAW_FORWARD, CLAW_BACKWARD)),
 						m_isOpen(false)
 						{}
+
+Collector& Collector::GetInstance(){
+	static Collector instance;
+	return instance;
+}
 
 void Collector::InitDefaultCommand() {
 	// Set the default command for a subsystem here.

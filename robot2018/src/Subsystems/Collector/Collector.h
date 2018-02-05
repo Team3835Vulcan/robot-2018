@@ -9,6 +9,8 @@
 
 class Collector : public frc::Subsystem {
 private:
+	Collector();
+
 	std::unique_ptr<frc::Talon> m_rCollector;
 	std::unique_ptr<frc::Talon> m_lCollector;
 	std::unique_ptr<frc::DigitalInput> m_collectSwitch;
@@ -21,7 +23,9 @@ private:
 	bool m_isOpen;
 
 public:
-	Collector();
+	static Collector& GetInstance();
+
+
 	void InitDefaultCommand();
 
 	void Collect(double val);
