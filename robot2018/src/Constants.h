@@ -31,10 +31,10 @@ constexpr int ROTOR_MOTOR = 5;
 constexpr int ELEV1_MOTOR = 1;
 constexpr int ELEV2_MOTOR = 2;
 
-constexpr int LEFT_ENCODER_A = 0;
-constexpr int LEFT_ENCODER_B = 0;
-constexpr int RIGHT_ENCODER_A = 0;
-constexpr int RIGHT_ENCODER_B = 0;
+constexpr int LEFT_ENCODER_A = 2;
+constexpr int LEFT_ENCODER_B = 1;
+constexpr int RIGHT_ENCODER_A = 4;
+constexpr int RIGHT_ENCODER_B = 3;
 
 //limit switches
 constexpr int UP_COLL_SWITCH = 7;

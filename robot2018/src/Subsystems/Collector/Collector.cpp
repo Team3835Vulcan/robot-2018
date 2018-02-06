@@ -1,7 +1,6 @@
 #include "Collector.h"
 #include <Constants.h>
 #include <SmartDashboard/SmartDashboard.h>
-#include <Commands/Collector/ManualRotor.h>
 
 Collector::Collector() : Subsystem("Collector"),
 						m_rCollector(std::make_unique<frc::Talon>(COLL1_MOTOR)),
@@ -22,7 +21,7 @@ Collector& Collector::GetInstance(){
 
 void Collector::InitDefaultCommand() {
 	// Set the default command for a subsystem here.
-	SetDefaultCommand(new ManualRotor());
+//	SetDefaultCommand(new ManualRotor());
 }
 
 void Collector::Periodic(){

@@ -4,7 +4,7 @@
 
 Collect::Collect(double val) : m_val(val){
 	// Use Requires() here to declare subsystem dependencies
-	//Requires(&Collector::GetInstance());
+	Requires(&Collector::GetInstance());
 }
 
 // Called just before this Command runs the first time

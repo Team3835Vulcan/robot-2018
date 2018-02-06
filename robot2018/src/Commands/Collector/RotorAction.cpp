@@ -18,11 +18,11 @@ void RotorAction::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool RotorAction::IsFinished() {
-	/*if(m_val > 0)
+	if(m_val > 0)
 		return Collector::GetInstance().IsUp();
 	else
-		return Collector::GetInstance().IsDown();*/
-	return Collector::GetInstance().IsDown();
+		return Collector::GetInstance().IsDown();
+	//return Collector::GetInstance().IsDown();
 }
 
 // Called once after isFinished returns true
