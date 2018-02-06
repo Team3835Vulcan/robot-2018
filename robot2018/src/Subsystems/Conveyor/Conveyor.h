@@ -7,11 +7,12 @@
 
 class Conveyor : public Subsystem {
 private:
-	// It's desirable that everything possible under private except
-	// for methods that implement subsystem capabilities
+	Conveyor();
+
 	std::unique_ptr<Spark> m_engine;
 public:
-	Conveyor();
+	static Conveyor& GetInstance();
+
 	void Set(double val);
 };
 
