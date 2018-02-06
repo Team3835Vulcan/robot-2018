@@ -2,7 +2,7 @@
 #include <Constants.h>
 
 Conveyor::Conveyor() : Subsystem("Conveyor"),
-					   m_engine(CONV_MOTOR){}
+					   m_engine(std::make_unique<frc::Spark>(CONV_MOTOR)){}
 
 
 Conveyor& Conveyor::GetInstance(){

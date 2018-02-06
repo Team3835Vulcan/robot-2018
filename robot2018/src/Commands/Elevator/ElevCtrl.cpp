@@ -26,11 +26,11 @@ bool ElevCtrl::IsFinished() {
 
 // Called once after isFinished returns true
 void ElevCtrl::End() {
-	Elevator::GetInstance.Set(0);
+	Elevator::GetInstance().Set(0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void ElevCtrl::Interrupted() {
-	Elevator::GetInstance.Set(0);
+	Elevator::GetInstance().Set(0);
 }
