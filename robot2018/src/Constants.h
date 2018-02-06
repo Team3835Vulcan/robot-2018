@@ -40,6 +40,8 @@ constexpr int RIGHT_ENCODER_B = 0;
 constexpr int UP_COLL_SWITCH = 7;
 constexpr int DOWN_COLL_SWITCH = 8;
 constexpr int CUBE_SWITCH = 9;
+constexpr int ELEV_UP_SWITCH = 6;
+constexpr int ELEV_DOWN_SWITCH = 5;
 
 //pneumatics
 constexpr int CLAW_FORWARD = 0;

@@ -24,6 +24,11 @@ private:
 	std::unique_ptr<frc::JoystickButton> m_ejectBtn;
 	std::unique_ptr<frc::JoystickButton> m_rotorUpBtn;
 	std::unique_ptr<frc::JoystickButton> m_rotorDownBtn;
+
+	std::unique_ptr<frc::JoystickButton> m_convLeft;
+	std::unique_ptr<frc::JoystickButton> m_convRight;
+
+
 public:
 	static OI& GetInstance();
 
