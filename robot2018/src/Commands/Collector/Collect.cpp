@@ -4,7 +4,7 @@
 
 Collect::Collect(double val) : m_val(val){
 	// Use Requires() here to declare subsystem dependencies
-	Requires(&Collector::GetInstance());
+	//Requires(&Collector::GetInstance());
 }
 
 // Called just before this Command runs the first time
@@ -19,15 +19,16 @@ void Collect::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool Collect::IsFinished() {
-	if(m_val > 0)
-		return Collector::GetInstance().CubeIn();
+	/*if(m_val < 0)
+		return Collector::GetInstance().IsDown();
 	else
-		return true;
+		return true;*/
+	return false;
 }
 
 // Called once after isFinished returns true
 void Collect::End() {
-	Wait(1);
+	//Wait(1);
 	Collector::GetInstance().Collect(0);
 }
 

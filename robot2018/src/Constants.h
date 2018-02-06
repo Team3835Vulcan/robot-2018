@@ -37,9 +37,9 @@ constexpr int RIGHT_ENCODER_A = 0;
 constexpr int RIGHT_ENCODER_B = 0;
 
 //limit switches
-constexpr int UP_COLL_SWITCH = 0;
-constexpr int DOWN_COLL_SWITCH = 0;
-constexpr int CUBE_SWITCH = 0;
+constexpr int UP_COLL_SWITCH = 7;
+constexpr int DOWN_COLL_SWITCH = 8;
+constexpr int CUBE_SWITCH = 9;
 
 //pneumatics
 constexpr int CLAW_FORWARD = 0;

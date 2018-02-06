@@ -12,12 +12,16 @@
 #include <SmartDashboard/SmartDashboard.h>
 #include <TimedRobot.h>
 #include <RobotBase.h>
+#include <Subsystems/Chassis/Chassis.h>
+#include <Subsystems/Collector/Collector.h>
 #include <OI.h>
 
 
 class Robot : public frc::TimedRobot {
 public:
 	void RobotInit() override {
+		Chassis::GetInstance();
+		Collector::GetInstance();
 		OI::GetInstance();
 		frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 		SetPeriod(1e-3);

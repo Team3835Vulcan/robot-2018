@@ -1,9 +1,12 @@
 #include "Collector.h"
 #include <Constants.h>
+#include <SmartDashboard/SmartDashboard.h>
+#include <Commands/Collector/ManualRotor.h>
 
 Collector::Collector() : Subsystem("Collector"),
 						m_rCollector(std::make_unique<frc::Talon>(COLL1_MOTOR)),
-						m_lCollector(std::make_unique<frc::Talon>(COLL2_MOTOR)),
+						m_lCollector(std::
+								make_unique<frc::Talon>(COLL2_MOTOR)),
 						m_collectSwitch(std::make_unique<frc::DigitalInput>(CUBE_SWITCH)),
 						m_rotor(std::make_unique<frc::Talon>(ROTOR_MOTOR)),
 						m_downSwitch(std::make_unique<frc::DigitalInput>(DOWN_COLL_SWITCH)),
@@ -19,12 +22,18 @@ Collector& Collector::GetInstance(){
 
 void Collector::InitDefaultCommand() {
 	// Set the default command for a subsystem here.
-	// SetDefaultCommand(new MySpecialCommand());
+	SetDefaultCommand(new ManualRotor());
+}
+
+void Collector::Periodic(){
+	frc::SmartDashboard::PutBoolean("cube in", CubeIn());
+	frc::SmartDashboard::PutBoolean("rotor down", IsDown());
+	frc::SmartDashboard::PutBoolean("rotor up", IsUp());
 }
 
 void Collector::Collect(double val){
 	m_rCollector->Set(val);
-	m_lCollector->Set(val);
+	m_lCollector->Set(-val);
 }
 
 void Collector::Rotate(double val){
@@ -32,15 +41,15 @@ void Collector::Rotate(double val){
 }
 
 bool Collector::IsUp(){
-	return m_upSwitch->Get();
+	return !m_upSwitch->Get();
 }
 
 bool Collector::IsDown(){
-	return m_downSwitch->Get();
+	return !m_downSwitch->Get();
 }
 
 bool Collector::CubeIn(){
-	return m_collectSwitch->Get();
+	return !m_collectSwitch->Get();
 }
 
 void Collector::SwitchPump(){

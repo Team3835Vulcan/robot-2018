@@ -1,4 +1,5 @@
 #include "Chassis.h"
+#include <Commands/Chassis/JoystickTankDrive.h>
 
 Chassis::Chassis() : Subsystem("Chassis"), m_rLeft(RLEFT_MOTOR), m_fLeft(FLEFT_MOTOR),
 										   m_rRight(RRIGHT_MOTOR), m_fRight(FRIGHT_MOTOR),
@@ -8,7 +9,7 @@ Chassis::Chassis() : Subsystem("Chassis"), m_rLeft(RLEFT_MOTOR), m_fLeft(FLEFT_M
 										   m_lEnc(std::make_unique<frc::Encoder>(LEFT_ENCODER_A, LEFT_ENCODER_B)),
 										   m_rEnc(std::make_unique<frc::Encoder>(RIGHT_ENCODER_A, RIGHT_ENCODER_B)){
 	m_navx->Reset();
-
+	m_left->SetInverted(true);
 	m_lEnc->SetDistancePerPulse(DISTANCE_PER_PULSE);
 	m_rEnc->SetDistancePerPulse(DISTANCE_PER_PULSE);
 }
@@ -21,7 +22,7 @@ Chassis& Chassis::GetInstance()
 
 void Chassis::InitDefaultCommand() {
 	// Set the default command for a subsystem here.
-	// SetDefaultCommand(new MySpecialCommand());
+	SetDefaultCommand(new JoystickTankDrive());
 }
 
 // Put methods for controlling this subsystem

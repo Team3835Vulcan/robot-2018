@@ -27,6 +27,7 @@ public:
 
 
 	void InitDefaultCommand();
+	void Periodic();
 
 	void Collect(double val);
 	void Rotate(double val);
