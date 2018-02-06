@@ -26,7 +26,10 @@ bool ElevCtrl::IsFinished() {
 
 // Called once after isFinished returns true
 void ElevCtrl::End() {
-	Elevator::GetInstance().Set(0);
+	if(m_val > 0)
+		Elevator::GetInstance().Set(0.1);
+	else
+		Elevator::GetInstance().Set(0);
 }
 
 // Called when another command which requires one or more of the same

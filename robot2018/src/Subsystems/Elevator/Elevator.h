@@ -18,6 +18,8 @@ private:
 public:
 	static Elevator& GetInstance();
 
+	void Periodic();
+
 	void Set(double val);
 
 	bool IsUp();

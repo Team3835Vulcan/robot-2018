@@ -1,5 +1,6 @@
 #include "Elevator.h"
 #include <Constants.h>
+#include <SmartDashboard/SmartDashboard.h>
 
 Elevator::Elevator() : Subsystem("Elevator"), m_eng1(std::make_unique<frc::Spark>(ELEV1_MOTOR)),
 					   m_eng2(std::make_unique<frc::Spark>(ELEV2_MOTOR)),
@@ -11,6 +12,12 @@ Elevator::Elevator() : Subsystem("Elevator"), m_eng1(std::make_unique<frc::Spark
 Elevator& Elevator::GetInstance(){
 	static Elevator instance;
 	return instance;
+}
+
+void Elevator::Periodic(){
+	frc::SmartDashboard::PutNumber("elevator rate", (m_eng1->Get() + m_eng2->Get()) / 2);
+	frc::SmartDashboard::PutBoolean("elev up", !m_elevUp->Get());
+	frc::SmartDashboard::PutBoolean("elev down", !m_elevDown->Get());
 }
 
 void Elevator::Set(double val){

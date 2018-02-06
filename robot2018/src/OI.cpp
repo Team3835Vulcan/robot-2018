@@ -7,6 +7,7 @@
 
 #include <OI.h>
 #include <Commands/Collector/Collect.h>
+#include <Commands/Collector/SwitchClaw.h>
 #include <Commands/Collector/RotorAction.h>
 #include <Commands/Conveyor/MoveBelt.h>
 #include <Commands/Elevator/ElevCtrl.h>
@@ -18,19 +19,21 @@ OI::OI() : m_left(std::make_unique<frc::Joystick>(LEFT_JOYSTICK)),
 		   m_ejectBtn(std::make_unique<frc::JoystickButton>(m_op.get(),2)),
 		   m_rotorUpBtn(std::make_unique<frc::JoystickButton>(m_op.get(),6)),
 		   m_rotorDownBtn(std::make_unique<frc::JoystickButton>(m_op.get(),7)),
+		   m_switchClaw(std::make_unique<frc::JoystickButton>(m_op.get(),3)),
 		   m_convLeft(std::make_unique<frc::JoystickButton>(m_op.get(),4)),
 		   m_convRight(std::make_unique<frc::JoystickButton>(m_op.get(),5)),
-		   m_elevUpBtn(std::make_unique<frc::JoystickButton>(m_op.get(),11)),
-		   m_elevDownBtn(std::make_unique<frc::JoystickButton>(m_op.get(),10))
+		   m_elevUp(std::make_unique<frc::JoystickButton>(m_op.get(),11)),
+		   m_elevDown(std::make_unique<frc::JoystickButton>(m_op.get(),10))
 		   {
 				m_collectBtn->ToggleWhenPressed(new Collect(-0.8));
 				m_ejectBtn->ToggleWhenPressed(new Collect(1));
 				m_convLeft->ToggleWhenPressed(new MoveBelt(0.6));
 				m_convRight->ToggleWhenPressed(new MoveBelt(-0.6));
-				m_rotorUpBtn->WhenPressed(new RotorAction(-0.45));
-				m_rotorDownBtn->WhenPressed(new RotorAction(0.3));
-				m_elevUpBtn->WhenPressed(new ElevCtrl(0.5));
-				m_elevDownBtn->WhenPressed(new ElevCtrl(-0.5));
+				m_rotorUpBtn->WhenPressed(new RotorAction(0.6));
+				m_rotorDownBtn->WhenPressed(new RotorAction(-0.225));
+				m_switchClaw->WhenPressed(new SwitchClaw());
+				m_elevUp->WhenPressed(new ElevCtrl(0.75));
+				m_elevDown->WhenPressed(new ElevCtrl(-0.25));
 		   }
 
 OI& OI::GetInstance(){

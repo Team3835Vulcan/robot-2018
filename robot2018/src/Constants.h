@@ -40,12 +40,12 @@ constexpr int RIGHT_ENCODER_B = 3;
 constexpr int UP_COLL_SWITCH = 7;
 constexpr int DOWN_COLL_SWITCH = 8;
 constexpr int CUBE_SWITCH = 9;
-constexpr int ELEV_UP_SWITCH = 6;
-constexpr int ELEV_DOWN_SWITCH = 5;
+constexpr int ELEV_UP_SWITCH = 5;
+constexpr int ELEV_DOWN_SWITCH = 6;
 
 //pneumatics
 constexpr int CLAW_FORWARD = 0;
-constexpr int CLAW_BACKWARD = 0;
+constexpr int CLAW_BACKWARD = 1;
 
 //Joysticks
 constexpr int RIGHT_JOYSTICK = 1;
