@@ -31,7 +31,8 @@ private:
 public:
 	static Chassis& GetInstance();
 
-	void InitDefaultCommand();
+	void InitDefaultCommand() override;
+	void Periodic() override;
 
 	void TankDrive(double left, double right);
 	void CurveDrive(double speed, double curve);

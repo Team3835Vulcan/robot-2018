@@ -31,10 +31,10 @@ constexpr int ROTOR_MOTOR = 5;
 constexpr int ELEV1_MOTOR = 1;
 constexpr int ELEV2_MOTOR = 2;
 
-constexpr int LEFT_ENCODER_A = 2;
-constexpr int LEFT_ENCODER_B = 1;
-constexpr int RIGHT_ENCODER_A = 4;
-constexpr int RIGHT_ENCODER_B = 3;
+constexpr int LEFT_ENCODER_A = 4;
+constexpr int LEFT_ENCODER_B = 3;
+constexpr int RIGHT_ENCODER_A = 2;
+constexpr int RIGHT_ENCODER_B = 1;
 
 //limit switches
 constexpr int UP_COLL_SWITCH = 7;
@@ -51,7 +51,13 @@ constexpr int CLAW_BACKWARD = 1;
 constexpr int RIGHT_JOYSTICK = 1;
 constexpr int LEFT_JOYSTICK = 0;
 
-constexpr float DISTANCE_PER_PULSE = 0;
+//math
+constexpr double PI = 3.141592653589793238462;
+
+//physical properties
+constexpr float GEAR_RATIO = 9.52;
+constexpr float WHEEL_DIAMETER = 6 * 0.0254; //in meters
+constexpr float DISTANCE_PER_PULSE = PI * WHEEL_DIAMETER / (GEAR_RATIO * 20);
 
 //physical limits
 constexpr double MAX_ROBOT_VELOCITY = 10;//in m/s

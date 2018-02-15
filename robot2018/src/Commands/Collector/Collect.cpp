@@ -19,16 +19,16 @@ void Collect::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool Collect::IsFinished() {
-	/*if(m_val < 0)
-		return Collector::GetInstance().IsDown();
+	if(m_val < 0)
+		return Collector::GetInstance().CubeIn();
 	else
-		return true;*/
-	return false;
+		return true;
+	//return false;
 }
 
 // Called once after isFinished returns true
 void Collect::End() {
-	//Wait(1);
+	Wait(1);
 	Collector::GetInstance().Collect(0);
 }
 

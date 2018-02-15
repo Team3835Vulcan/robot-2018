@@ -19,6 +19,7 @@ public:
 	static Elevator& GetInstance();
 
 	void Periodic();
+	void InitDefaultCommand();
 
 	void Set(double val);
 

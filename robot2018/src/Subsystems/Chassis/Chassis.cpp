@@ -1,5 +1,6 @@
 #include "Chassis.h"
 #include <Commands/Chassis/JoystickTankDrive.h>
+#include <SmartDashboard/SmartDashboard.h>
 
 Chassis::Chassis() : Subsystem("Chassis"), m_rLeft(RLEFT_MOTOR), m_fLeft(FLEFT_MOTOR),
 										   m_rRight(RRIGHT_MOTOR), m_fRight(FRIGHT_MOTOR),
@@ -9,7 +10,10 @@ Chassis::Chassis() : Subsystem("Chassis"), m_rLeft(RLEFT_MOTOR), m_fLeft(FLEFT_M
 										   m_lEnc(std::make_unique<frc::Encoder>(LEFT_ENCODER_A, LEFT_ENCODER_B)),
 										   m_rEnc(std::make_unique<frc::Encoder>(RIGHT_ENCODER_A, RIGHT_ENCODER_B)){
 	m_navx->Reset();
+	m_lEnc->Reset();
+	m_rEnc->Reset();
 	m_left->SetInverted(true);
+	m_lEnc->SetReverseDirection(true);
 	m_lEnc->SetDistancePerPulse(DISTANCE_PER_PULSE);
 	m_rEnc->SetDistancePerPulse(DISTANCE_PER_PULSE);
 }
@@ -25,12 +29,33 @@ void Chassis::InitDefaultCommand() {
 	SetDefaultCommand(new JoystickTankDrive());
 }
 
+void Chassis::Periodic(){
+	float angle = m_navx->GetAngle();
+	bool navxConnected = m_navx->IsConnected();
+	float lDist = m_lEnc->GetDistance();
+	float rDist = m_rEnc->GetDistance();
+	float dist = (lDist + rDist) / 2;
+	float lVel = m_lEnc->GetRate();
+	float rVel = m_rEnc->GetRate();
+	float vel = GetVelocity();
+	frc::SmartDashboard::PutNumber("dist per pulse", DISTANCE_PER_PULSE);
+	frc::SmartDashboard::PutNumber("yaw", angle);
+	frc::SmartDashboard::PutBoolean("navx connected", navxConnected);
+	frc::SmartDashboard::PutNumber("left enc dist", lDist);
+	frc::SmartDashboard::PutNumber("right enc dist", rDist);
+	frc::SmartDashboard::PutNumber("distance[m]", dist);
+	frc::SmartDashboard::PutNumber("left enc vel", lVel);
+	frc::SmartDashboard::PutNumber("right enc vel", rVel);
+	frc::SmartDashboard::PutNumber("velocity[m/s]", vel);
+
+}
+
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 void Chassis::TankDrive(double left, double right)
 {
-	m_left->Set(LimitSpeed(left));
-	m_right->Set(LimitSpeed(right));
+	m_left->Set(-LimitSpeed(left));
+	m_right->Set(-LimitSpeed(right));
 }
 
 void Chassis::CurveDrive(double speed, double curve)

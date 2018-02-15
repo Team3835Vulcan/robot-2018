@@ -1,5 +1,7 @@
 #include "ElevCtrl.h"
 #include <Subsystems/Elevator/Elevator.h>
+#include <iostream>
+#include <SmartDashboard/SmartDashboard.h>
 
 ElevCtrl::ElevCtrl(double val) : m_val(val) {
 	// Use Requires() here to declare subsystem dependencies
@@ -9,6 +11,7 @@ ElevCtrl::ElevCtrl(double val) : m_val(val) {
 // Called just before this Command runs the first time
 void ElevCtrl::Initialize() {
 	Elevator::GetInstance().Set(m_val);
+
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -26,8 +29,9 @@ bool ElevCtrl::IsFinished() {
 
 // Called once after isFinished returns true
 void ElevCtrl::End() {
-	if(m_val > 0)
-		Elevator::GetInstance().Set(0.1);
+	if(m_val > 0){
+		Elevator::GetInstance().Set(0.185);
+	}
 	else
 		Elevator::GetInstance().Set(0);
 }
