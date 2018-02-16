@@ -8,7 +8,9 @@
 #include <SpeedControllerGroup.h>
 #include <AHRS.h>
 #include <Drive/DifferentialDrive.h>
-#include <Encoder.h>
+#include "ctre/phoenix/MotorControl/CAN/WPI_VictorSPX.h"
+
+using ctre::phoenix::motorcontrol::can::WPI_VictorSPX;
 
 class Chassis : public frc::Subsystem {
 private:
@@ -16,10 +18,10 @@ private:
 
 	float LimitSpeed(float speed);
 
-	frc::VictorSP m_rLeft;
-	frc::VictorSP m_fLeft;
-	frc::VictorSP m_rRight;
-	frc::VictorSP m_fRight;
+	WPI_VictorSPX m_rLeft;
+	WPI_VictorSPX m_fLeft;
+	WPI_VictorSPX m_rRight;
+	WPI_VictorSPX m_fRight;
 	std::unique_ptr<frc::SpeedControllerGroup> m_left;
 	std::unique_ptr<frc::SpeedControllerGroup> m_right;
 

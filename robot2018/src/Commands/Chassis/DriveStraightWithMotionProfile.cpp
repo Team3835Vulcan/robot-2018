@@ -1,7 +1,8 @@
 #include "DriveStraightWithMotionProfile.h"
 #include <Constants.h>
 
-DriveStraightWithMotionProfile::DriveStraightWithMotionProfile(double dist) : m_dist(dist){
+DriveStraightWithMotionProfile::DriveStraightWithMotionProfile(double dist) : m_dist(dist),
+		m_yaw0(Chassis::GetInstance().GetAngle()){
 	// Use Requires() here to declare subsystem dependencies
 	Requires(&Chassis::GetInstance());
 }
@@ -16,7 +17,7 @@ void DriveStraightWithMotionProfile::Initialize() {
 	vulcan::Setpoint start(0,0,0);
 	vulcan::Setpoint end(0,m_dist,0);
 	m_controller->SetProfile(vulcan::MotionProfile(start,end,config));
-	m_controller->SetPID(0.0005,0,0);
+	m_controller->SetPID(0.00005,0,0);
 	m_controller->Enable();
 }
 
@@ -24,8 +25,8 @@ void DriveStraightWithMotionProfile::Initialize() {
 void DriveStraightWithMotionProfile::Execute() {
 	m_controller->Calculate();
 	double output = m_controller->GetOutput();
-
-	Chassis::GetInstance().CurveDrive(output, -m_angleKP*Chassis::GetInstance().GetAngle());
+	double dTheta = Chassis::GetInstance().GetAngle() - m_yaw0;
+	Chassis::GetInstance().CurveDrive(output, -m_angleKP * dTheta);
 }
 
 // Make this return true when this Command no longer needs to run execute()

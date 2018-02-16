@@ -17,19 +17,19 @@
  */
 
 //speed controllers
-constexpr int RLEFT_MOTOR = 8;
-constexpr int FLEFT_MOTOR = 9;
-constexpr int RRIGHT_MOTOR = 6;
-constexpr int FRIGHT_MOTOR = 7;
+constexpr int RLEFT_MOTOR = 12;
+constexpr int FLEFT_MOTOR = 13;
+constexpr int RRIGHT_MOTOR = 10;
+constexpr int FRIGHT_MOTOR = 11;
 
-constexpr int CONV_MOTOR = 0;
+constexpr int CONV_MOTOR = 19;
 
-constexpr int COLL1_MOTOR = 3;
-constexpr int COLL2_MOTOR = 4;
-constexpr int ROTOR_MOTOR = 5;
+constexpr int COLL1_MOTOR = 14;
+constexpr int COLL2_MOTOR = 15;
+constexpr int ROTOR_MOTOR = 16;
 
-constexpr int ELEV1_MOTOR = 1;
-constexpr int ELEV2_MOTOR = 2;
+constexpr int ELEV1_MOTOR = 17;
+constexpr int ELEV2_MOTOR = 18;
 
 constexpr int LEFT_ENCODER_A = 4;
 constexpr int LEFT_ENCODER_B = 3;
@@ -55,11 +55,12 @@ constexpr int LEFT_JOYSTICK = 0;
 constexpr double PI = 3.141592653589793238462;
 
 //physical properties
-constexpr float GEAR_RATIO = 9.52;
+constexpr float GEAR_RATIO = 9.87;
 constexpr float WHEEL_DIAMETER = 6 * 0.0254; //in meters
 constexpr float DISTANCE_PER_PULSE = PI * WHEEL_DIAMETER / (GEAR_RATIO * 20);
+constexpr float WHEELBASE = 0.497; //in meters
 
 //physical limits
-constexpr double MAX_ROBOT_VELOCITY = 10;//in m/s
+constexpr double MAX_ROBOT_VELOCITY = 2.8;//in m/s
 constexpr double VELOCITY_FEEDFORWARD = 1/MAX_ROBOT_VELOCITY;
 constexpr double MAX_ROBOT_ACCELERATION = 2; //in m/s^2
