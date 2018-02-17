@@ -42,11 +42,11 @@ OI& OI::GetInstance(){
 }
 
 const float OI::GetLeftY() const{
-	return -m_left->GetY();
+	return m_left->GetY();
 }
 
 const float OI::GetRightY() const{
-	return -m_right->GetY();
+	return m_right->GetY();
 }
 
 const float OI::GetOPY() const{

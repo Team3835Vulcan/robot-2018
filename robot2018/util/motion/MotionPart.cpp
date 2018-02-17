@@ -33,8 +33,7 @@ std::unique_ptr<Setpoint> MotionPart::FindSetpoint(float t) const {
 		float dt = t - m_start.GetTime();
 		float pos = m_start.GetPos() + (m_acc * dt * dt / 2);
 		float velocity = m_start.GetVelocity() + (m_acc * dt);
-		auto setpoint = std::make_unique<Setpoint> (t, pos, velocity);
-		return setpoint;
+		return std::make_unique<Setpoint>(t, pos, velocity);
 	}
 	return nullptr;
 }

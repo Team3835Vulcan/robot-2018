@@ -12,7 +12,7 @@ Chassis::Chassis() : Subsystem("Chassis"), m_rLeft(RLEFT_MOTOR), m_fLeft(FLEFT_M
 	m_navx->Reset();
 	m_lEnc->Reset();
 	m_rEnc->Reset();
-	m_left->SetInverted(true);
+	m_right->SetInverted(true);
 	m_lEnc->SetReverseDirection(true);
 	m_lEnc->SetDistancePerPulse(DISTANCE_PER_PULSE);
 	m_rEnc->SetDistancePerPulse(DISTANCE_PER_PULSE);
@@ -37,16 +37,17 @@ void Chassis::Periodic(){
 	float dist = (lDist + rDist) / 2;
 	float lVel = m_lEnc->GetRate();
 	float rVel = m_rEnc->GetRate();
-	float vel = GetVelocity();
+	float vel = (lVel + rVel) / 2;
 	frc::SmartDashboard::PutNumber("dist per pulse", DISTANCE_PER_PULSE);
 	frc::SmartDashboard::PutNumber("yaw", angle);
+	frc::SmartDashboard::PutNumber("velocity (m/s)", 1);
 	frc::SmartDashboard::PutBoolean("navx connected", navxConnected);
 	frc::SmartDashboard::PutNumber("left enc dist", lDist);
 	frc::SmartDashboard::PutNumber("right enc dist", rDist);
 	frc::SmartDashboard::PutNumber("distance[m]", dist);
 	frc::SmartDashboard::PutNumber("left enc vel", lVel);
 	frc::SmartDashboard::PutNumber("right enc vel", rVel);
-	frc::SmartDashboard::PutNumber("velocity[m/s]", vel);
+
 
 }
 
@@ -88,4 +89,14 @@ void Chassis::ZeroYaw()
 const float Chassis::GetVelocity() const
 {
 	return (m_lEnc->GetRate() + m_rEnc->GetRate()) / 2;
+}
+
+const float Chassis::GetDistance() const
+{
+	return (m_lEnc->GetDistance() + m_rEnc->GetDistance()) / 2;
+}
+
+void Chassis::ResetEncoders() const{
+	m_rEnc->Reset();
+	m_lEnc->Reset();
 }

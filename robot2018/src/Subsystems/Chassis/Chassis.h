@@ -41,6 +41,8 @@ public:
 	void ZeroYaw(); //reset angle to zero
 
 	const float GetVelocity() const; //get from encoders(hint: average of both encoder speeds)
+	const float GetDistance() const;
+	void ResetEncoders() const;
 };
 
 #endif  // Chassis_H

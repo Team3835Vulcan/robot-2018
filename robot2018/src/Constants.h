@@ -60,6 +60,6 @@ constexpr float WHEEL_DIAMETER = 6 * 0.0254; //in meters
 constexpr float DISTANCE_PER_PULSE = PI * WHEEL_DIAMETER / (GEAR_RATIO * 20);
 
 //physical limits
-constexpr double MAX_ROBOT_VELOCITY = 10;//in m/s
+constexpr double MAX_ROBOT_VELOCITY = 3;//in m/s
 constexpr double VELOCITY_FEEDFORWARD = 1/MAX_ROBOT_VELOCITY;
 constexpr double MAX_ROBOT_ACCELERATION = 2; //in m/s^2

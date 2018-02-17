@@ -17,17 +17,24 @@
 #include <Subsystems/Conveyor/Conveyor.h>
 #include <Subsystems/Elevator/Elevator.h>
 #include <OI.h>
-
+#include <Commands/Chassis/TimedDrive.h>
+#include <Commands/Chassis/DriveStraightWithMotionProfile.h>
 
 class Robot : public frc::TimedRobot {
 public:
 	void RobotInit() override {
+
 		Chassis::GetInstance();
 		Collector::GetInstance();
 		Conveyor::GetInstance();
 		Elevator::GetInstance();
 		OI::GetInstance();
 		frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+		frc::SmartDashboard::PutNumber("velocity", 0);
+		frc::SmartDashboard::PutData("drive",
+				new DriveStraightWithMotionProfile(2));
+		frc::SmartDashboard::PutData("timed drive",
+						new TimedDrive(1,1));
 		SetPeriod(1e-3);
 	}
 

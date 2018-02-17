@@ -15,6 +15,7 @@ Elevator& Elevator::GetInstance(){
 }
 
 void Elevator::InitDefaultCommand(){
+	SetDefaultCommand(new ManualElevator());
 }
 
 void Elevator::Periodic(){
