@@ -45,6 +45,7 @@ namespace vulcan {
 			m_profile.release();
 
 		m_profile = std::make_unique<MotionProfile>(profile);
+		m_profile->Generate();
 		m_goalDist = m_profile->GetDist();
 		m_goalTime = m_profile->GetTime();
 	}
