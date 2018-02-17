@@ -29,8 +29,8 @@ OI::OI() : m_left(std::make_unique<frc::Joystick>(LEFT_JOYSTICK)),
 				m_ejectBtn->ToggleWhenPressed(new Collect(1));
 				m_convLeft->ToggleWhenPressed(new MoveBelt(0.85));
 				m_convRight->ToggleWhenPressed(new MoveBelt(-0.85));
-				m_rotorUpBtn->WhenPressed(new RotorAction(0.8));
-				m_rotorDownBtn->WhenPressed(new RotorAction(-0.4));
+				m_rotorUpBtn->WhenPressed(new RotorAction(0.35));
+				m_rotorDownBtn->WhenPressed(new RotorAction(-0.60));
 				m_switchClaw->WhenPressed(new SwitchClaw());
 				m_elevUp->WhenPressed(new ElevCtrl(1));
 				m_elevDown->WhenPressed(new ElevCtrl(-0.35));

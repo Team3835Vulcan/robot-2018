@@ -9,8 +9,6 @@ DriveStraightWithMotionProfile::DriveStraightWithMotionProfile(double dist) : m_
 
 // Called just before this Command runs the first time
 void DriveStraightWithMotionProfile::Initialize() {
-	Chassis::GetInstance().ZeroYaw();
-
 	this->m_controller = std::make_unique<vulcan::MotionProfileDriveController>(
 	0.05);
 	vulcan::MotionProfileConfig config(MAX_ROBOT_VELOCITY, MAX_ROBOT_ACCELERATION);

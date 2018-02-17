@@ -36,7 +36,7 @@ void Collector::Collect(double val){
 }
 
 void Collector::Rotate(double val){
-	m_rotor->Set(-val);
+	m_rotor->Set(val);
 }
 
 bool Collector::IsUp(){

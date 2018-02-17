@@ -37,9 +37,9 @@ constexpr int RIGHT_ENCODER_A = 2;
 constexpr int RIGHT_ENCODER_B = 1;
 
 //limit switches
-constexpr int UP_COLL_SWITCH = 7;
+constexpr int UP_COLL_SWITCH = 9;
 constexpr int DOWN_COLL_SWITCH = 8;
-constexpr int CUBE_SWITCH = 9;
+constexpr int CUBE_SWITCH = 7;
 constexpr int ELEV_UP_SWITCH = 5;
 constexpr int ELEV_DOWN_SWITCH = 6;
 
