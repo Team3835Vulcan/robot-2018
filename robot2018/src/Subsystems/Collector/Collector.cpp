@@ -3,16 +3,21 @@
 #include <SmartDashboard/SmartDashboard.h>
 
 Collector::Collector() : Subsystem("Collector"),
-						m_rCollector(std::make_unique<WPI_VictorSPX>(COLL1_MOTOR)),
-						m_lCollector(std::
-								make_unique<WPI_VictorSPX>(COLL2_MOTOR)),
-						m_collectSwitch(std::make_unique<frc::DigitalInput>(CUBE_SWITCH)),
-						m_rotor(std::make_unique<WPI_VictorSPX>(ROTOR_MOTOR)),
-						m_downSwitch(std::make_unique<frc::DigitalInput>(DOWN_COLL_SWITCH)),
-						m_upSwitch(std::make_unique<frc::DigitalInput>(UP_COLL_SWITCH)),
-						m_claw(std::make_unique<frc::DoubleSolenoid>(CLAW_FORWARD, CLAW_BACKWARD)),
-						m_isOpen(false)
-						{}
+	m_rCollector(std::make_unique<WPI_VictorSPX>(COLL1_MOTOR)),
+	m_lCollector(std::
+			make_unique<WPI_VictorSPX>(COLL2_MOTOR)),
+	m_collectSwitch(std::make_unique<frc::DigitalInput>(CUBE_SWITCH)),
+	m_rotor(std::make_unique<WPI_VictorSPX>(ROTOR_MOTOR)),
+	m_downSwitch(std::make_unique<frc::DigitalInput>(DOWN_COLL_SWITCH)),
+	m_upSwitch(std::make_unique<frc::DigitalInput>(UP_COLL_SWITCH)),
+	m_potentiometer(std::make_unique<frc::AnalogInput>(0)),
+	m_claw(std::make_unique<frc::DoubleSolenoid>(CLAW_FORWARD, CLAW_BACKWARD)),
+	m_isOpen(false),
+	ROTOR_VOLT_UP(m_potentiometer->GetAverageVoltage()),
+	ROTOR_VOLT_DOWN(ROTOR_VOLT_UP + ROTOR_VOLT_DELTA)
+	{
+			m_potentiometer->ResetAccumulator();
+	}
 
 Collector& Collector::GetInstance(){
 	static Collector instance;
@@ -28,6 +33,9 @@ void Collector::Periodic(){
 	frc::SmartDashboard::PutBoolean("cube in", CubeIn());
 	frc::SmartDashboard::PutBoolean("rotor down", IsDown());
 	frc::SmartDashboard::PutBoolean("rotor up", IsUp());
+	frc::SmartDashboard::PutNumber("rotor position", m_potentiometer->GetAverageVoltage());
+	frc::SmartDashboard::PutNumber("rotor volt up", ROTOR_VOLT_UP);
+	frc::SmartDashboard::PutNumber("rotor volt down", ROTOR_VOLT_DOWN);
 }
 
 void Collector::Collect(double val){
@@ -37,6 +45,10 @@ void Collector::Collect(double val){
 
 void Collector::Rotate(double val){
 	m_rotor->Set(val);
+}
+
+double Collector::GetRotorPos() const{
+	return m_potentiometer->GetAverageVoltage();
 }
 
 bool Collector::IsUp(){

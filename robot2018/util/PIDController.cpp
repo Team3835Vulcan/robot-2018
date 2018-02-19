@@ -6,6 +6,7 @@
  */
 
 #include "PIDController.h"
+#include <cmath>
 
 namespace vulcan {
 
@@ -145,7 +146,7 @@ void PIDController::Reset(){
 }
 
 bool PIDController::IsOnTarget(){
-	return m_error <= m_tolerance;
+	return fabs(m_error) <= m_tolerance;
 }
 
 } /* namespace vulcan */
