@@ -1,9 +1,9 @@
+#include <Commands/Collector/SwitchClawMode.h>
 #include "CollectRoutine.h"
 #include "Collect.h"
-#include "SwitchClaw.h"
 
 CollectRoutine::CollectRoutine() : CommandGroup("collect routine") {
-	AddSequential(new SwitchClaw(Collector::CLAWMODE::OPEN));
+	AddSequential(new SwitchClawMode(Collector::CLAWMODE::OPEN));
 	AddSequential(new Collect(Collector::COLLECTMODE::COLLECT));
 }
 

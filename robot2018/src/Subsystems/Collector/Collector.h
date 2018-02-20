@@ -24,7 +24,6 @@ private:
 	std::unique_ptr<frc::AnalogInput> m_potentiometer;
 
 	std::unique_ptr<frc::DoubleSolenoid> m_claw;
-
 public:
 	static Collector& GetInstance();
 
@@ -49,6 +48,7 @@ public:
 	bool CubeIn();
 
 	void SwitchClaw(CLAWMODE mode);
+	CLAWMODE GetClawMode() const;
 };
 
 #endif  // Collector_H
