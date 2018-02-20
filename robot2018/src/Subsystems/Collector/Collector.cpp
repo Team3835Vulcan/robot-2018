@@ -12,11 +12,10 @@ Collector::Collector() : Subsystem("Collector"),
 	m_upSwitch(std::make_unique<frc::DigitalInput>(UP_COLL_SWITCH)),
 	m_potentiometer(std::make_unique<frc::AnalogInput>(0)),
 	m_claw(std::make_unique<frc::DoubleSolenoid>(CLAW_FORWARD, CLAW_BACKWARD)),
-	m_isOpen(false),
 	ROTOR_VOLT_UP(m_potentiometer->GetAverageVoltage()),
 	ROTOR_VOLT_DOWN(ROTOR_VOLT_UP + ROTOR_VOLT_DELTA)
 	{
-			m_potentiometer->ResetAccumulator();
+		m_potentiometer->ResetAccumulator();
 	}
 
 Collector& Collector::GetInstance(){
@@ -38,15 +37,24 @@ void Collector::Periodic(){
 	frc::SmartDashboard::PutNumber("rotor volt down", ROTOR_VOLT_DOWN);
 }
 
-void Collector::Collect(double val){
-	m_rCollector->Set(val);
-	m_lCollector->Set(-val);
+void Collector::Collect(COLLECTMODE mode){
+	if(mode == COLLECT){
+		m_rCollector->Set(-1);
+		m_lCollector->Set(1);
+	}
+	else{
+		m_rCollector->Set(1);
+		m_lCollector->Set(-1);
+	}
+}
+void Collector::StopCollect(){
+	m_rCollector->Set(0);
+	m_lCollector->Set(0);
 }
 
 void Collector::Rotate(double val){
 	m_rotor->Set(val);
 }
-
 double Collector::GetRotorPos() const{
 	return m_potentiometer->GetAverageVoltage();
 }
@@ -54,21 +62,18 @@ double Collector::GetRotorPos() const{
 bool Collector::IsUp(){
 	return !m_upSwitch->Get();
 }
-
 bool Collector::IsDown(){
 	return !m_downSwitch->Get();
 }
-
 bool Collector::CubeIn(){
 	return !m_collectSwitch->Get();
 }
 
-void Collector::SwitchPump(){
-	if(m_isOpen)
+void Collector::SwitchClaw(CLAWMODE mode){
+	if(mode == CLAWMODE::CLOSE)
 		m_claw->Set(frc::DoubleSolenoid::Value::kForward);
 	else
 		m_claw->Set(frc::DoubleSolenoid::Value::kReverse);
-	m_isOpen = !m_isOpen;
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

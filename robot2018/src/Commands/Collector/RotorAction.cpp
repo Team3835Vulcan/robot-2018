@@ -1,6 +1,5 @@
 #include "RotorAction.h"
 #include <Constants.h>
-#include <iostream>
 
 RotorAction::RotorAction(Collector::ROTOR_POS pos) : m_pos(pos),
 	m_controller(std::make_unique<vulcan::PIDController>(0,0,0)){
@@ -17,11 +16,11 @@ void RotorAction::Initialize() {
 	m_controller->SetOutputRange(-0.8,0.4);
 	if(m_pos == Collector::ROTOR_POS::UP){
 		m_controller->SetSetpoint(up);
-		m_controller->SetPID(0.3,0,0);
+		m_controller->SetPID(0.4,0,0);
 	}
 	else{
 		m_controller->SetSetpoint(down);
-		m_controller->SetPID(0.175,0,0);
+		m_controller->SetPID(0.125,0,0);
 	}
 	m_controller->SetTolerance(0.05);
 	m_controller->Enable();

@@ -24,19 +24,22 @@ private:
 	std::unique_ptr<frc::AnalogInput> m_potentiometer;
 
 	std::unique_ptr<frc::DoubleSolenoid> m_claw;
-	bool m_isOpen;
 
 public:
 	static Collector& GetInstance();
 
 	enum ROTOR_POS {UP, DOWN};
+	enum COLLECTMODE {EJECT, COLLECT};
+	enum CLAWMODE {OPEN, CLOSE};
+
 	double ROTOR_VOLT_UP;
 	double ROTOR_VOLT_DOWN;
 
 	void InitDefaultCommand();
 	void Periodic();
 
-	void Collect(double val);
+	void Collect(COLLECTMODE mode);
+	void StopCollect();
 
 	void Rotate(double val);
 	double GetRotorPos() const;
@@ -45,7 +48,7 @@ public:
 	bool IsDown();
 	bool CubeIn();
 
-	void SwitchPump();
+	void SwitchClaw(CLAWMODE mode);
 };
 
 #endif  // Collector_H

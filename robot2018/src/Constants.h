@@ -59,9 +59,9 @@ constexpr float GEAR_RATIO = 9.87;
 constexpr float WHEEL_DIAMETER = 6 * 0.0254; //in meters
 constexpr float DISTANCE_PER_PULSE = PI * WHEEL_DIAMETER / (GEAR_RATIO * 20);
 constexpr float WHEELBASE = 0.497; //in meters
+constexpr double ROTOR_VOLT_DELTA = 2.6;
 
 //physical limits
 constexpr double MAX_ROBOT_VELOCITY = 2.8;//in m/s
 constexpr double VELOCITY_FEEDFORWARD = 1/MAX_ROBOT_VELOCITY;
 constexpr double MAX_ROBOT_ACCELERATION = 2; //in m/s^2
-constexpr double ROTOR_VOLT_DELTA = 2.6;
