@@ -13,7 +13,7 @@ void RotorAction::Initialize() {
 	double up = Collector::GetInstance().ROTOR_VOLT_UP; //min
 	double down = Collector::GetInstance().ROTOR_VOLT_DOWN; //max
 	m_controller->SetInputRange(up, down);
-	m_controller->SetOutputRange(-0.8,0.4);
+	m_controller->SetOutputRange(-1,0.4);
 	if(m_pos == Collector::ROTOR_POS::UP){
 		m_controller->SetSetpoint(up);
 		m_controller->SetPID(0.4,0,0);

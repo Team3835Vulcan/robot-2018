@@ -8,10 +8,10 @@ CollectRoutine::CollectRoutine() : CommandGroup("collect routine") {
 }
 
 void CollectRoutine::End(){
-	Collector::GetInstance().SwitchClaw(Collector::CLAWMODE::OPEN);
+	Collector::GetInstance().SwitchClaw(Collector::CLAWMODE::CLOSE);
 }
 
 void CollectRoutine::Interrupted(){
-	Collector::GetInstance().SwitchClaw(Collector::CLAWMODE::OPEN);
+	Collector::GetInstance().SwitchClaw(Collector::CLAWMODE::CLOSE);
 }
 
