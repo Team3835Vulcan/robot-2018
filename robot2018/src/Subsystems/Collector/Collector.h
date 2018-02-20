@@ -22,23 +22,25 @@ private:
 	std::unique_ptr<frc::DigitalInput> m_upSwitch;
 
 	std::unique_ptr<frc::DoubleSolenoid> m_claw;
-	bool m_isOpen;
 
 public:
 	static Collector& GetInstance();
 
+	enum COLLECTMODE {EJECT, COLLECT};
+	enum CLAWMODE {OPEN, CLOSE};
 
 	void InitDefaultCommand();
 	void Periodic();
 
-	void Collect(double val);
+	void Collect(COLLECTMODE mode);
+	void StopCollect();
 	void Rotate(double val);
 
 	bool IsUp();
 	bool IsDown();
 	bool CubeIn();
 
-	void SwitchPump();
+	void SwitchClaw(CLAWMODE mode);
 };
 
 #endif  // Collector_H

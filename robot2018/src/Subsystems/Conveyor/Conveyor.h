@@ -15,7 +15,10 @@ private:
 public:
 	static Conveyor& GetInstance();
 
-	void Set(double val);
+	enum SIDE {LEFT, RIGHT};
+
+	void Eject(SIDE s);
+	void Stop();
 };
 
 #endif  // Conveyor_H

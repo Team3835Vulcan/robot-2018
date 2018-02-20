@@ -22,9 +22,17 @@ bool XboxTrigger::Get() {
 	return m_controller->GetRawAxis(m_axis) > 0.75;
 }
 
-XboxController::XboxController(int port) : Joystick(port), m_aButton(this, 1), m_bButton(this, 2), m_xButton(this, 3), m_yButton(this, 4),
-		m_lButton(this, 5), m_rButton(this, 6), m_backButton(this, 7), m_startButton(this, 8),
-		m_lTrigger(this, XboxTrigger::SIDE::LEFT), m_rTrigger(this, XboxTrigger::SIDE::RIGHT){}
+XboxController::XboxController(int port) : Joystick(port),
+		m_aButton(std::make_unique<JoystickButton>(this, 1)),
+		m_bButton(std::make_unique<JoystickButton>(this, 2)),
+		m_xButton(std::make_unique<JoystickButton>(this, 3)),
+		m_yButton(std::make_unique<JoystickButton>(this, 4)),
+		m_lButton(std::make_unique<JoystickButton>(this, 5)),
+		m_rButton(std::make_unique<JoystickButton>(this, 6)),
+		m_backButton(std::make_unique<JoystickButton>(this, 7)),
+		m_startButton(std::make_unique<JoystickButton>(this, 8)),
+		m_lTrigger(std::make_unique<XboxTrigger>(this, XboxTrigger::SIDE::LEFT)),
+		m_rTrigger(std::make_unique<XboxTrigger>(this, XboxTrigger::SIDE::RIGHT)){}
 
 double XboxController::GetLY() const{
 	return this->GetRawAxis(1);

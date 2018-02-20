@@ -10,8 +10,17 @@ Conveyor& Conveyor::GetInstance(){
 	return instance;
 }
 
-void Conveyor::Set(double val){
-	m_engine->Set(val);
+void Conveyor::Eject(SIDE s){
+	if(s == LEFT){
+		m_engine->Set(0.8);
+	}
+	else{
+		m_engine->Set(-0.8);
+	}
+}
+
+void Conveyor::Stop(){
+	m_engine->Set(0);
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

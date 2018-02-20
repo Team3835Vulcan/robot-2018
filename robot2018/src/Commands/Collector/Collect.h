@@ -2,13 +2,14 @@
 #define Collect_H
 
 #include <Commands/Command.h>
+#include <Subsystems/Collector/Collector.h>
 
 class Collect : public frc::Command {
 private:
-	double m_val;
+	Collector::COLLECTMODE m_mode;
 
 public:
-	Collect(double val);
+	Collect(Collector::COLLECTMODE mode);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
