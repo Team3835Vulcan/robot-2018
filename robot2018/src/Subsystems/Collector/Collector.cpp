@@ -10,8 +10,11 @@ Collector::Collector() : Subsystem("Collector"),
 	m_rotor(std::make_unique<WPI_VictorSPX>(ROTOR_MOTOR)),
 	m_downSwitch(std::make_unique<frc::DigitalInput>(DOWN_COLL_SWITCH)),
 	m_upSwitch(std::make_unique<frc::DigitalInput>(UP_COLL_SWITCH)),
-	m_claw(std::make_unique<frc::DoubleSolenoid>(CLAW_FORWARD, CLAW_BACKWARD))
-	{}
+	m_claw(std::make_unique<frc::DoubleSolenoid>(CLAW_FORWARD, CLAW_BACKWARD)),
+	ROTOR_VOLT_UP(m_potentiometer->GetAverageVoltage()),
+	ROTOR_VOLT_DOWN(ROTOR_VOLT_UP + ROTOR_VOLT_DELTA){
+		m_potentiometer->ResetAccumulator();
+	}
 
 Collector& Collector::GetInstance(){
 	static Collector instance;
@@ -27,6 +30,9 @@ void Collector::Periodic(){
 	frc::SmartDashboard::PutBoolean("cube in", CubeIn());
 	frc::SmartDashboard::PutBoolean("rotor down", IsDown());
 	frc::SmartDashboard::PutBoolean("rotor up", IsUp());
+	frc::SmartDashboard::PutNumber("rotor position", m_potentiometer->GetAverageVoltage());
+	frc::SmartDashboard::PutNumber("rotor volt up", ROTOR_VOLT_UP);
+	frc::SmartDashboard::PutNumber("rotor volt down", ROTOR_VOLT_DOWN);
 }
 
 void Collector::Collect(COLLECTMODE mode){
@@ -47,15 +53,16 @@ void Collector::StopCollect(){
 void Collector::Rotate(double val){
 	m_rotor->Set(val);
 }
+double Collector::GetRotorPos() const{
+	return m_potentiometer->GetAverageVoltage();
+}
 
 bool Collector::IsUp(){
 	return !m_upSwitch->Get();
 }
-
 bool Collector::IsDown(){
 	return !m_downSwitch->Get();
 }
-
 bool Collector::CubeIn(){
 	return !m_collectSwitch->Get();
 }

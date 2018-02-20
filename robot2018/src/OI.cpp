@@ -20,6 +20,8 @@ OI::OI() : m_left(std::make_unique<frc::Joystick>(LEFT_JOYSTICK)),
 				m_op->m_xButton->WhenPressed(new MoveBelt(Conveyor::SIDE::LEFT));
 				m_op->m_rTrigger->ToggleWhenPressed(new CollectRoutine());
 				m_op->m_lTrigger->WhenPressed(new Collect(Collector::COLLECTMODE::EJECT));
+				m_op->m_rButton->WhenPressed(new RotorAction(Collector::ROTOR_POS::UP));
+				m_op->m_lButton->WhenPressed(new RotorAction(Collector::ROTOR_POS::DOWN));
 		   }
 
 OI& OI::GetInstance(){
