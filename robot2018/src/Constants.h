@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <util/motion/MotionProfile.h>
+
 /*
  * Add all needed constants here.
  * Relevant constants are:
@@ -51,17 +53,25 @@ constexpr int CLAW_BACKWARD = 1;
 constexpr int RIGHT_JOYSTICK = 1;
 constexpr int LEFT_JOYSTICK = 0;
 
+//physical limits
+constexpr double MAX_ROBOT_VELOCITY = 3;//in m/s
+constexpr double MAX_ROBOT_ACCELERATION = 2; //in m/s^2
+
 //math
 constexpr double PI = 3.141592653589793238462;
+constexpr double VELOCITY_FEEDFORWARD = 1/MAX_ROBOT_VELOCITY;
+constexpr double ACCELERATION_FEEDFORWARD = 0.02;
+constexpr double K_HEADING = 0.2;
+constexpr double ROTOR_VOLT_DELTA = 2.6;
+constexpr double ROBOT_DT = 1e-3;
+const MotionProfileConfig DEFAULT_CONFIG = {ROBOT_DT, MAX_ROBOT_ACCELERATION,
+		MAX_ROBOT_VELOCITY, 0.05};
 
 //physical properties
 constexpr float GEAR_RATIO = 9.87;
 constexpr float WHEEL_DIAMETER = 6 * 0.0254; //in meters
 constexpr float DISTANCE_PER_PULSE = PI * WHEEL_DIAMETER / (GEAR_RATIO * 20);
 constexpr float WHEELBASE = 0.497; //in meters
-constexpr double ROTOR_VOLT_DELTA = 2.6;
 
-//physical limits
-constexpr double MAX_ROBOT_VELOCITY = 3;//in m/s
-constexpr double VELOCITY_FEEDFORWARD = 1/MAX_ROBOT_VELOCITY;
-constexpr double MAX_ROBOT_ACCELERATION = 2; //in m/s^2
+
+

@@ -17,6 +17,7 @@
 #include <Subsystems/Conveyor/Conveyor.h>
 #include <Subsystems/Elevator/Elevator.h>
 #include <OI.h>
+#include <Commands/Chassis/DrivePath.h>
 
 class Robot : public frc::TimedRobot {
 public:
@@ -29,6 +30,14 @@ public:
 		OI::GetInstance();
 		frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 		frc::SmartDashboard::PutNumber("velocity", 0);
+		Path p = {{0,0},{0.5,1.5},{2,3}};
+		GenerateCatmullRom(p, 90, 23);
+		Trajectory t(DEFAULT_CONFIG, p);
+		Path ps = {{0,0},{0,3}};
+		GenerateCatmullRom(ps);
+		Trajectory ts(DEFAULT_CONFIG, ps);
+		frc::SmartDashboard::PutData("drive path", new DrivePath(t));
+		frc::SmartDashboard::PutData("drive path", new DrivePath(ts));
 		SetPeriod(1e-3);
 	}
 
