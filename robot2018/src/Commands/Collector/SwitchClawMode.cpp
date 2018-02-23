@@ -1,36 +1,32 @@
-#include "SwitchClaw.h"
-#include <Subsystems/Collector/Collector.h>
+#include <Commands/Collector/SwitchClawMode.h>
 
-SwitchClaw::SwitchClaw() {
+SwitchClawMode::SwitchClawMode(Collector::CLAWMODE mode) : m_mode(mode) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
 }
 
 // Called just before this Command runs the first time
-void SwitchClaw::Initialize() {
-	if(Collector::GetInstance().GetClawMode() == Collector::CLAWMODE::OPEN)
-		Collector::GetInstance().SwitchClaw(Collector::CLAWMODE::CLOSE);
-	else
-		Collector::GetInstance().SwitchClaw(Collector::CLAWMODE::OPEN);
+void SwitchClawMode::Initialize() {
+	Collector::GetInstance().SwitchClaw(m_mode);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void SwitchClaw::Execute() {
+void SwitchClawMode::Execute() {
 
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool SwitchClaw::IsFinished() {
+bool SwitchClawMode::IsFinished() {
 	return true;
 }
 
 // Called once after isFinished returns true
-void SwitchClaw::End() {
+void SwitchClawMode::End() {
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void SwitchClaw::Interrupted() {
+void SwitchClawMode::Interrupted() {
 
 }

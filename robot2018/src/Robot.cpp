@@ -24,12 +24,12 @@ public:
 	void RobotInit() override {
 
 		Chassis::GetInstance();
-		Collector::GetInstance();
+		//Collector::GetInstance();
 		Conveyor::GetInstance();
 		Elevator::GetInstance();
-		OI::GetInstance();
-		frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
-		frc::SmartDashboard::PutNumber("velocity", 0);
+		//OI::GetInstance();
+		//frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+		//frc::SmartDashboard::PutNumber("velocity", 0);
 		//Path p ({{0,0},{0.5,1.5},{2,3}});
 		//GenerateCatmullRom(p, 90, 23);
 		//Trajectory t(DEFAULT_CONFIG, p);

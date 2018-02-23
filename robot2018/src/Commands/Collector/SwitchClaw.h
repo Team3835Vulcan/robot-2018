@@ -1,14 +1,11 @@
 #ifndef SwitchClaw_H
 #define SwitchClaw_H
 
-#include <Commands/Command.h>
-#include <Subsystems/Collector/Collector.h>
+#include "Commands/Command.h"
 
 class SwitchClaw : public frc::Command {
-private:
-	Collector::CLAWMODE m_mode;
 public:
-	SwitchClaw(Collector::CLAWMODE);
+	SwitchClaw();
 	void Initialize();
 	void Execute();
 	bool IsFinished();
