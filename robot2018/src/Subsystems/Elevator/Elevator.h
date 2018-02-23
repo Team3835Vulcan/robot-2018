@@ -4,16 +4,16 @@
 #include <Commands/Subsystem.h>
 #include <memory>
 #include <DigitalInput.h>
-#include "ctre/phoenix/MotorControl/CAN/WPI_VictorSPX.h"
+#include <Talon.h>
 
-using ctre::phoenix::motorcontrol::can::WPI_VictorSPX;
+using frc::Talon;
 
 class Elevator : public frc::Subsystem {
 private:
 	Elevator();
 
-	std::unique_ptr<WPI_VictorSPX> m_eng1;
-	std::unique_ptr<WPI_VictorSPX> m_eng2;
+	std::unique_ptr<Talon> m_eng1;
+	std::unique_ptr<Talon> m_eng2;
 
 	std::unique_ptr<frc::DigitalInput> m_elevUp;
 	std::unique_ptr<frc::DigitalInput> m_elevDown;

@@ -62,10 +62,6 @@ constexpr float WHEELBASE = 0.497; //in meters
 constexpr double ROTOR_VOLT_DELTA = 2.6;
 
 //physical limits
-<<<<<<< HEAD
 constexpr double MAX_ROBOT_VELOCITY = 3;//in m/s
-=======
-constexpr double MAX_ROBOT_VELOCITY = 2.8;//in m/s
->>>>>>> robota-xbox
 constexpr double VELOCITY_FEEDFORWARD = 1/MAX_ROBOT_VELOCITY;
 constexpr double MAX_ROBOT_ACCELERATION = 2; //in m/s^2

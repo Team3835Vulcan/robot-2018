@@ -2,13 +2,14 @@
 #include <Commands/Chassis/JoystickTankDrive.h>
 #include <SmartDashboard/SmartDashboard.h>
 
-Chassis::Chassis() : Subsystem("Chassis"), m_rLeft(RLEFT_MOTOR), m_fLeft(FLEFT_MOTOR),
-										   m_rRight(RRIGHT_MOTOR), m_fRight(FRIGHT_MOTOR),
-										   m_left(std::make_unique<frc::SpeedControllerGroup>(m_rLeft, m_fLeft)),
-										   m_right(std::make_unique<frc::SpeedControllerGroup>(m_rRight, m_fRight)),
-										   m_navx(std::make_unique<AHRS>(I2C::Port::kOnboard)), // Should be constant
-										   m_lEnc(std::make_unique<frc::Encoder>(LEFT_ENCODER_A, LEFT_ENCODER_B)),
-										   m_rEnc(std::make_unique<frc::Encoder>(RIGHT_ENCODER_A, RIGHT_ENCODER_B)){
+Chassis::Chassis() : Subsystem("Chassis"), m_rLeft(RLEFT_MOTOR),
+   m_fLeft(FLEFT_MOTOR),
+   m_rRight(RRIGHT_MOTOR), m_fRight(FRIGHT_MOTOR),
+   m_left(std::make_unique<frc::SpeedControllerGroup>(m_rLeft, m_fLeft)),
+   m_right(std::make_unique<frc::SpeedControllerGroup>(m_rRight, m_fRight)),
+   m_navx(std::make_unique<AHRS>(I2C::Port::kOnboard)), // Should be constant
+   m_lEnc(std::make_unique<frc::Encoder>(LEFT_ENCODER_A, LEFT_ENCODER_B)),
+   m_rEnc(std::make_unique<frc::Encoder>(RIGHT_ENCODER_A, RIGHT_ENCODER_B)){
 	m_navx->Reset();
 	m_navx->ZeroYaw();
 	m_lEnc->Reset();
