@@ -15,16 +15,15 @@ void ManualElevator::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ManualElevator::Execute() {
-	double val = -OI::GetInstance().GetOPY();
-		if(val > 0){
-			if(Collector::GetInstance().IsUp() || Elevator::GetInstance().IsUp())
-				val = 0;
-		}
-		else{
-			if(Elevator::GetInstance().IsUp())
-				val = 0;
-		}
-		Elevator::GetInstance().Set(val);
+	double val = OI::GetInstance().GetOPRY();
+	if(val > 0){
+		if(Elevator::GetInstance().IsUp() || Collector::GetInstance().IsUp())
+			val = 0;
+	}
+	else
+		if(Elevator::GetInstance().IsDown())
+			val = 0;
+	Elevator::GetInstance().Set(val);
 }
 
 // Make this return true when this Command no longer needs to run execute()

@@ -41,9 +41,23 @@ void MotionProfileDriveController::Disable(){
 		time.Reset();
 }
 
+<<<<<<< HEAD
 void MotionProfileDriveController::SetProfile(const MotionProfile& profile){
 	if(m_profile.get())
 		m_profile.release();
+=======
+		m_profile = std::make_unique<MotionProfile>(profile);
+		m_profile->Generate();
+		m_goalDist = m_profile->GetDist();
+		m_goalTime = m_profile->GetTime();
+	}
+	void MotionProfileDriveController::SetTolerance(float tolerance){
+		m_tolerance = tolerance;
+	}
+	void MotionProfileDriveController::SetPID(double p, double i, double d){
+		m_velController->SetPID(p,i,d);
+	}
+>>>>>>> robota-xbox
 
 	m_profile = std::make_unique<MotionProfile>(profile);
 	m_profile->Generate();

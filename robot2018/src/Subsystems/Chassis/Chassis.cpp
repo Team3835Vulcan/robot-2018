@@ -10,6 +10,7 @@ Chassis::Chassis() : Subsystem("Chassis"), m_rLeft(RLEFT_MOTOR), m_fLeft(FLEFT_M
 										   m_lEnc(std::make_unique<frc::Encoder>(LEFT_ENCODER_A, LEFT_ENCODER_B)),
 										   m_rEnc(std::make_unique<frc::Encoder>(RIGHT_ENCODER_A, RIGHT_ENCODER_B)){
 	m_navx->Reset();
+	m_navx->ZeroYaw();
 	m_lEnc->Reset();
 	m_rEnc->Reset();
 	m_right->SetInverted(true);

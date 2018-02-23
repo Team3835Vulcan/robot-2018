@@ -3,16 +3,14 @@
 #include <Subsystems/Chassis/Chassis.h>
 #include <iostream>
 
-DriveStraightWithMotionProfile::DriveStraightWithMotionProfile(double dist) : m_dist(dist){
+DriveStraightWithMotionProfile::DriveStraightWithMotionProfile(double dist) : m_dist(dist),
+		m_yaw0(Chassis::GetInstance().GetAngle()){
 	// Use Requires() here to declare subsystem dependencies
 	Requires(&Chassis::GetInstance());
-	frc::SmartDashboard::PutString("hello", "kuku");
 }
 
 // Called just before this Command runs the first time
 void DriveStraightWithMotionProfile::Initialize() {
-	std::cout << "start";
-	Chassis::GetInstance().ResetEncoders();
 	this->m_controller = std::make_unique<vulcan::MotionProfileDriveController>(
 	0.05);
 	std::cout << "controller";
@@ -20,8 +18,7 @@ void DriveStraightWithMotionProfile::Initialize() {
 	vulcan::Setpoint start(0,0,0);
 	vulcan::Setpoint end(0,m_dist,0);
 	m_controller->SetProfile(vulcan::MotionProfile(start,end,config));
-
-	m_controller->SetPID(0.0005,0,0);
+	m_controller->SetPID(0.00005,0,0);
 	m_controller->Enable();
 }
 
@@ -30,10 +27,8 @@ void DriveStraightWithMotionProfile::Execute() {
 
 	m_controller->Calculate();
 	double output = m_controller->GetOutput();
-
-	std::cout << output << "\n" << Chassis::GetInstance().GetVelocity() << "\n";
-
-	Chassis::GetInstance().CurveDrive(output, -m_angleKP*Chassis::GetInstance().GetAngle());
+	double dTheta = Chassis::GetInstance().GetAngle() - m_yaw0;
+	Chassis::GetInstance().CurveDrive(output, -m_angleKP * dTheta);
 }
 
 // Make this return true when this Command no longer needs to run execute()

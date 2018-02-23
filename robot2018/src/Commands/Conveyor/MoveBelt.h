@@ -1,17 +1,17 @@
 #ifndef MoveBelt_H
 #define MoveBelt_H
 
-#include <Commands/Command.h>
+#include <Commands/TimedCommand.h>
+#include <Subsystems/Conveyor/Conveyor.h>
 
-class MoveBelt : public frc::Command {
+class MoveBelt : public frc::TimedCommand {
 private:
-	double m_val;
+	Conveyor::SIDE m_side;
 
 public:
-	MoveBelt(double val);
+	MoveBelt(Conveyor::SIDE s);
 	void Initialize();
 	void Execute();
-	bool IsFinished();
 	void End();
 	void Interrupted();
 };

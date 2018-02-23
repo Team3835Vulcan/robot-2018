@@ -11,6 +11,7 @@
 #include <memory>
 #include <Joystick.h>
 #include <buttons/JoystickButton.h>
+#include <util/XboxController.h>
 
 class OI {
 private:
@@ -18,26 +19,13 @@ private:
 
 	std::unique_ptr<frc::Joystick> m_left;
 	std::unique_ptr<frc::Joystick> m_right;
-	std::unique_ptr<frc::Joystick> m_op;
-
-	std::unique_ptr<frc::JoystickButton> m_collectBtn;
-	std::unique_ptr<frc::JoystickButton> m_ejectBtn;
-	std::unique_ptr<frc::JoystickButton> m_rotorUpBtn;
-	std::unique_ptr<frc::JoystickButton> m_rotorDownBtn;
-
-	std::unique_ptr<frc::JoystickButton> m_switchClaw;
-
-	std::unique_ptr<frc::JoystickButton> m_convLeft;
-	std::unique_ptr<frc::JoystickButton> m_convRight;
-
-	std::unique_ptr<frc::JoystickButton> m_elevUp;
-	std::unique_ptr<frc::JoystickButton> m_elevDown;
-
+	std::unique_ptr<vulcan::XboxController> m_op;
 
 public:
 	static OI& GetInstance();
 
 	const float GetRightY() const;
 	const float GetLeftY() const;
-	const float GetOPY() const;
+	const float GetOPRY() const;
+	const float GetOPLY() const;
 };

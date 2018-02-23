@@ -2,7 +2,7 @@
 #include <Constants.h>
 
 Conveyor::Conveyor() : Subsystem("Conveyor"),
-					   m_engine(std::make_unique<frc::Spark>(CONV_MOTOR)){}
+					   m_engine(std::make_unique<WPI_VictorSPX>(CONV_MOTOR)){}
 
 
 Conveyor& Conveyor::GetInstance(){
@@ -10,8 +10,17 @@ Conveyor& Conveyor::GetInstance(){
 	return instance;
 }
 
-void Conveyor::Set(double val){
-	m_engine->Set(val);
+void Conveyor::Eject(SIDE s){
+	if(s == LEFT){
+		m_engine->Set(0.8);
+	}
+	else{
+		m_engine->Set(-0.8);
+	}
+}
+
+void Conveyor::Stop(){
+	m_engine->Set(0);
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
