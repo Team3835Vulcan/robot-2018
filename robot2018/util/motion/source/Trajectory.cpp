@@ -4,7 +4,7 @@ TrajPoint::TrajPoint(const Setpoint& sp, const Waypoint& wp) : m_sp(sp), m_wp(wp
 
 Trajectory::Trajectory(const MotionProfileConfig& config, const Path& p) :
 		m_config(config),
-		m_path(p, m_config.m_dt),
+		m_path(p),
 		m_profile(Setpoint(0),Setpoint(m_path.GetLength()),m_config){
 }
 

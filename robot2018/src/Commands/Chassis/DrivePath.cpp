@@ -13,6 +13,7 @@ void DrivePath::Initialize() {
 	m_controller.SetTrajectory(m_traj);
 	m_controller.Configure(0,0,0,
 			VELOCITY_FEEDFORWARD, ACCELERATION_FEEDFORWARD, K_HEADING);
+	//Chassis::GetInstance().ZeroYaw();
 	m_controller.Enable();
 }
 

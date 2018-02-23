@@ -19,10 +19,10 @@
  */
 
 //speed controllers
-constexpr int RLEFT_MOTOR = 12;
-constexpr int FLEFT_MOTOR = 13;
-constexpr int RRIGHT_MOTOR = 10;
-constexpr int FRIGHT_MOTOR = 11;
+constexpr int RLEFT_MOTOR = 9;
+constexpr int FLEFT_MOTOR = 10;
+constexpr int RRIGHT_MOTOR = 8;
+constexpr int FRIGHT_MOTOR = 7;
 
 constexpr int CONV_MOTOR = 19;
 
