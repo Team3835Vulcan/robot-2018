@@ -54,18 +54,19 @@ constexpr int RIGHT_JOYSTICK = 1;
 constexpr int LEFT_JOYSTICK = 0;
 
 //physical limits
-constexpr double MAX_ROBOT_VELOCITY = 3.4;//in m/s
+constexpr double MAX_ROBOT_VELOCITY = 3.6;//in m/s
 constexpr double MAX_ROBOT_ACCELERATION = 2; //in m/s^2
 
 //math
 constexpr double PI = 3.141592653589793238462;
 constexpr double VELOCITY_FEEDFORWARD = 1/MAX_ROBOT_VELOCITY;
 constexpr double ACCELERATION_FEEDFORWARD = 0.04;
-constexpr double K_HEADING = 0.7;
+constexpr double K_TURN_HEADING = 0.7;
+constexpr double K_HOLD_HEADING = 0.1;
 constexpr double ROTOR_VOLT_DELTA = 2.865;
 constexpr double ROBOT_DT = 1e-3;
 const MotionProfileConfig DEFAULT_CONFIG = {ROBOT_DT, MAX_ROBOT_ACCELERATION,
-		MAX_ROBOT_VELOCITY, 0.05};
+		MAX_ROBOT_VELOCITY, 0.03};
 
 //physical properties
 constexpr float GEAR_RATIO = 9.52;

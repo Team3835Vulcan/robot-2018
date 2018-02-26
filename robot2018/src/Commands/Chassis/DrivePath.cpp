@@ -2,19 +2,33 @@
 #include <iostream>
 #include <Constants.h>
 
-DrivePath::DrivePath(const Trajectory& traj) :
-	m_traj(std::move(traj)){
+DrivePath::DrivePath(const Path& path, double headingf) :
+	m_path(path), m_headingf(headingf){
 	// Use Requires() here to declare subsystem dependencies
-	m_controller.SetTrajectory(std::move(m_traj));
+	std::cout << "copy ctor\n";
 	m_controller.Configure(0,0,VELOCITY_FEEDFORWARD,
-			1, ACCELERATION_FEEDFORWARD, K_HEADING);
+					0.7, ACCELERATION_FEEDFORWARD, 0.1);
 	Requires(&Chassis::GetInstance());
 }
 
+DrivePath::DrivePath(const Path&& path, double headingf) :
+	m_path(std::move(path)), m_headingf(headingf){
+	// Use Requires() here to declare subsystem dependencies
+	std::cout << "move ctor\n";
+	m_controller.Configure(0,0,VELOCITY_FEEDFORWARD,
+					0.7, ACCELERATION_FEEDFORWARD, 0.1);
+	Requires(&Chassis::GetInstance());
+}
 // Called just before this Command runs the first time
 void DrivePath::Initialize() {
+	double heading0 = Chassis::GetInstance().GetAngle();
+	if(m_headingf != 999)
+		GenerateCatmullRom(m_path, heading0, m_headingf);
+	else
+		GenerateCatmullRom(m_path, heading0);
+	Trajectory t(DEFAULT_CONFIG, std::move(m_path));
+	m_controller.SetTrajectory(std::move(t));
 	Chassis::GetInstance().ResetEncoders();
-	Chassis::GetInstance().ZeroYaw();
 	m_controller.Reset();
 	m_controller.Enable();
 }

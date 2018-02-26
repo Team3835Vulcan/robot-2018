@@ -59,7 +59,7 @@ const DriveSignal TrajectoryController::Calculate(){
 	if(m_enabled){
 		m_currTime = time.Get();
 
-		m_currDist = Chassis::GetInstance().GetDistance();
+		m_currDist = Chassis::GetInstance().GetDistance() + m_tolerance;
 		m_currVel =  Chassis::GetInstance().GetVelocity();
 		m_currHeading =  Chassis::GetInstance().GetAngle();
 

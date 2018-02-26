@@ -31,10 +31,8 @@ public:
 		OI::GetInstance();
 		frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
-		Path p ({ { 0,0 }, {0.8,1.9}, {2.6,3.6} });
-		GenerateCatmullRom(p, 90, 10);
-		Trajectory t(DEFAULT_CONFIG, p);
-		frc::SmartDashboard::PutData("drive path", new DrivePath(t));
+		Path p ({ { 0,0 },{ 0.6,2.6 },{ 2.6,3.6 } });
+		frc::SmartDashboard::PutData("drive path", new DrivePath(std::move(p),45));
 		frc::SmartDashboard::PutData("drive straight", new DriveStraight(3.6));
 		SetPeriod(1e-3);
 	}

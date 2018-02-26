@@ -7,10 +7,12 @@
 
 class DrivePath : public frc::Command {
 private:
-	Trajectory m_traj;
+	Path m_path; //path to drive
+	double m_headingf; //final heading
 	TrajectoryController m_controller;
 public:
-	DrivePath(const Trajectory& traj);
+	DrivePath(const Path& path, double headingf = 999);
+	DrivePath(const Path&& path, double headingf = 999);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

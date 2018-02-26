@@ -8,14 +8,15 @@ DriveStraight::DriveStraight(double dist) : m_dist(dist) {
 
 // Called just before this Command runs the first time
 void DriveStraight::Initialize() {
-	Path p({{0,0}, {0,m_dist}});
+	double angle = Chassis::GetInstance().GetAngle() * PI / 180;
+
+	Path p({{0,0}, {m_dist * cos(angle),m_dist * sin(angle)}});
 	GenerateCatmullRom(p);
 	Trajectory t(DEFAULT_CONFIG, std::move(p));
 	m_controller.SetTrajectory(std::move(t));
 	m_controller.Configure(0,0,VELOCITY_FEEDFORWARD,
-				1, ACCELERATION_FEEDFORWARD, K_HEADING);
+				1, ACCELERATION_FEEDFORWARD, K_HOLD_HEADING);
 	Chassis::GetInstance().ResetEncoders();
-	Chassis::GetInstance().ZeroYaw();
 	m_controller.Reset();
 	m_controller.Enable();
 }
