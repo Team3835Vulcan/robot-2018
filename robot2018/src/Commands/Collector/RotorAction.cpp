@@ -1,5 +1,6 @@
 #include "RotorAction.h"
 #include <Constants.h>
+#include <iostream>
 
 RotorAction::RotorAction(Collector::ROTOR_POS pos) : m_pos(pos),
 	m_controller(std::make_unique<vulcan::PIDController>(0,0,0)){
@@ -13,7 +14,7 @@ void RotorAction::Initialize() {
 	double up = Collector::GetInstance().ROTOR_VOLT_UP; //min
 	double down = Collector::GetInstance().ROTOR_VOLT_DOWN; //max
 	m_controller->SetInputRange(up, down);
-	m_controller->SetOutputRange(-1,0.4);
+	m_controller->SetOutputRange(-0.4,1);
 	if(m_pos == Collector::ROTOR_POS::UP){
 		m_controller->SetSetpoint(up);
 		m_controller->SetPID(0.4,0,0);
@@ -31,7 +32,8 @@ void RotorAction::Execute() {
 	double pos = Collector::GetInstance().GetRotorPos();
 	m_controller->Calculate(pos);
 	double output = m_controller->GetOutput();
-	Collector::GetInstance().Rotate(output);
+	std::cout << output << '\n';
+	Collector::GetInstance().Rotate(-output);
 }
 
 // Make this return true when this Command no longer needs to run execute()

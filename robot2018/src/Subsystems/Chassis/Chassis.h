@@ -6,6 +6,7 @@
 #include <memory>
 #include <VictorSP.h>
 #include <SpeedControllerGroup.h>
+#include <Drive/DifferentialDrive.h>
 #include <AHRS.h>
 
 using frc::VictorSP;
@@ -22,6 +23,7 @@ private:
 	VictorSP m_fRight;
 	std::unique_ptr<frc::SpeedControllerGroup> m_left;
 	std::unique_ptr<frc::SpeedControllerGroup> m_right;
+	std::unique_ptr<frc::DifferentialDrive> m_drive;
 
 	std::unique_ptr<AHRS> m_navx;
 

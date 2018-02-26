@@ -14,8 +14,8 @@
 #include "../Chassis.h"
 
 struct DriveSignal{
-	double left;
-	double right;
+	double speed;
+	double curve;
 };
 
 class TrajectoryController {
@@ -26,6 +26,7 @@ private:
 	double m_ki;
 	double m_kd;
 	double m_kv;
+	double m_kpv; //kp for velocity
 	double m_ka;
 	double m_kt; //rotation parameter
 
@@ -53,13 +54,14 @@ private:
 public:
 	TrajectoryController();
 
-	void Configure(double kp, double ki, double kd, double kv, double ka, double kt);
+	void Configure(double kp, double ki, double kd, double kv, double kpv, double ka, double kt);
 	void SetTrajectory(const Trajectory& traj);
 
 	bool IsOnTarget();
 
 	void Enable();
 	void Disable();
+	void Reset();
 
 	const DriveSignal Calculate();
 

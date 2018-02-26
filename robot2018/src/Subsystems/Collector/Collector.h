@@ -49,6 +49,7 @@ public:
 	bool CubeIn();
 
 	void SwitchClaw(CLAWMODE mode);
+	CLAWMODE GetClawMode();
 };
 
 #endif  // Collector_H

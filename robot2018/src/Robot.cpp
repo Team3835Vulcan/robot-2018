@@ -18,26 +18,24 @@
 #include <Subsystems/Elevator/Elevator.h>
 #include <OI.h>
 #include <Commands/Chassis/DrivePath.h>
+#include <Commands/Chassis/DriveStraight.h>
 
 class Robot : public frc::TimedRobot {
 public:
 	void RobotInit() override {
 
 		Chassis::GetInstance();
-		//Collector::GetInstance();
+		Collector::GetInstance();
 		Conveyor::GetInstance();
 		Elevator::GetInstance();
-		//OI::GetInstance();
-		//frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
-		//frc::SmartDashboard::PutNumber("velocity", 0);
-		//Path p ({{0,0},{0.5,1.5},{2,3}});
-		//GenerateCatmullRom(p, 90, 23);
-		//Trajectory t(DEFAULT_CONFIG, p);
-		//Path ps ({{0,0},{0,3}});
-		//GenerateCatmullRom(ps);
-		//Trajectory ts(DEFAULT_CONFIG, ps);
-		//frc::SmartDashboard::PutData("drive path", new DrivePath(t));
-		//frc::SmartDashboard::PutData("drive path", new DrivePath(ts));
+		OI::GetInstance();
+		frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+
+		Path p ({ { 0,0 }, {0.8,1.9}, {2.6,3.6} });
+		GenerateCatmullRom(p, 90, 10);
+		Trajectory t(DEFAULT_CONFIG, p);
+		frc::SmartDashboard::PutData("drive path", new DrivePath(t));
+		frc::SmartDashboard::PutData("drive straight", new DriveStraight(3.6));
 		SetPeriod(1e-3);
 	}
 

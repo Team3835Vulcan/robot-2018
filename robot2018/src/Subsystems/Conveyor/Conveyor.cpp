@@ -12,10 +12,10 @@ Conveyor& Conveyor::GetInstance(){
 
 void Conveyor::Eject(SIDE s){
 	if(s == LEFT){
-		m_engine->Set(0.8);
+		m_engine->Set(1);
 	}
 	else{
-		m_engine->Set(-0.8);
+		m_engine->Set(-1);
 	}
 }
 
