@@ -12,9 +12,15 @@ MotionProfileConfig& Trajectory::GetConfig(){
 	return m_config;
 }
 
-const TrajPoint Trajectory::GetTrajPoint(double t) {
-	auto sp = m_profile.GetSetpoint(t);
+const TrajPoint Trajectory::GetTrajPointT(double t) {
+	auto sp = m_profile.GetSetpointT(t);
 	auto wp = m_path.GetWaypoint(sp->GetPos());
+	return TrajPoint(*sp, wp);
+
+}
+const TrajPoint Trajectory::GetTrajPointD(double d) {
+	auto sp = m_profile.GetSetpointD(d);
+	auto wp = m_path.GetWaypoint(d);
 	return TrajPoint(*sp, wp);
 
 }

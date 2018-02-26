@@ -2,27 +2,27 @@
 
 
 
-Setpoint::Setpoint(float time, float dist, float velocity, float acceleration) :
+Setpoint::Setpoint(double time, double dist, double velocity, double acceleration) :
 	m_time(time), m_pos(dist), m_velocity(velocity), m_acceleration(acceleration) {}
 
-Setpoint::Setpoint(float time, float dist, float velocity) :
+Setpoint::Setpoint(double time, double dist, double velocity) :
 	m_time(time), m_pos(dist), m_velocity(velocity), m_acceleration(0) {}
 
-Setpoint::Setpoint(float dist) :
+Setpoint::Setpoint(double dist) :
 	m_time(0), m_pos(dist), m_velocity(0), m_acceleration(0) {}
 
-const float Setpoint::GetTime() const{
+const double Setpoint::GetTime() const{
 	return m_time;
 }
 
-const float Setpoint::GetPos() const{
+const double Setpoint::GetPos() const{
 	return m_pos;
 }
 
-const float Setpoint::GetVelocity() const{
+const double Setpoint::GetVelocity() const{
 	return m_velocity;
 }
 
-const float Setpoint::GetAcceleration() const {
+const double Setpoint::GetAcceleration() const {
 	return m_acceleration;
 }

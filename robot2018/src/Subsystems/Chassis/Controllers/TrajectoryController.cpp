@@ -9,15 +9,14 @@
 #include <iostream>
 
 TrajectoryController::TrajectoryController() :
-	m_kp(0), m_ki(0), m_kd(0), m_kv(0), m_kpv(0), m_ka(0), m_kt(0), m_currTime(0),
-	m_goalTime(0), m_totalError(0), m_currDist(0),m_goalDist(0), m_currVel(0),
-	m_goalVel(0), m_currHeading(0),m_goalHeading(0), m_tolerance(0),
-	m_output(0), m_enabled(false){}
+	m_kp(0), m_kd(0), m_kv(0), m_kpv(0), m_ka(0), m_kt(0),
+	m_prevTime(0), m_currTime(0), m_goalTime(0), m_totalError(0),
+    m_currDist(0),m_goalDist(0), m_currVel(0), m_goalVel(0),
+	m_currHeading(0),m_goalHeading(0), m_tolerance(0), m_enabled(false){}
 
-void TrajectoryController::Configure(double kp, double ki, double kd,
+void TrajectoryController::Configure(double kp, double kd,
 		double kv, double kpv, double ka, double kt){
 	m_kp = kp;
-	m_ki = ki;
 	m_kd = kd;
 	m_kv = kv;
 	m_kpv = kpv;
@@ -35,12 +34,12 @@ void TrajectoryController::SetTrajectory(const Trajectory& traj){
 }
 
 bool TrajectoryController::IsOnTarget() {
-	return (m_goalDist - m_currDist) <= m_tolerance ||
-			(m_goalTime - m_currTime) <= m_tolerance;
+	return (m_goalDist - m_currDist) <= m_tolerance;
 }
 
 void TrajectoryController::Enable(){
 	time.Start();
+	m_prevTime = time.Get();
 	m_enabled = true;
 }
 void TrajectoryController::Disable(){
@@ -51,6 +50,8 @@ void TrajectoryController::Reset(){
 	m_currDist = 0;
 	m_currVel = 0;
 	m_currHeading = 0;
+	m_prevTime = 0;
+	m_currTime = 0;
 	time.Reset();
 }
 
@@ -62,7 +63,7 @@ const DriveSignal TrajectoryController::Calculate(){
 		m_currVel =  Chassis::GetInstance().GetVelocity();
 		m_currHeading =  Chassis::GetInstance().GetAngle();
 
-		auto& trajpoint = m_traj->GetTrajPoint(m_currTime);
+		auto& trajpoint = m_traj->GetTrajPointD(m_currDist);
 
 		auto& waypoint = trajpoint.m_wp;
 		auto& setpoint = trajpoint.m_sp;
@@ -79,6 +80,8 @@ const DriveSignal TrajectoryController::Calculate(){
 		double output = m_kp * deltaDist + m_kv * m_goalVel +
 				m_kpv * deltaVel + m_ka * currAccel;
 		output = Clamp(output, -1, 1);
+
+		m_prevTime = m_currTime;
 
 		return {output , turn};
 	}

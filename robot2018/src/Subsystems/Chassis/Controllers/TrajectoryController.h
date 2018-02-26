@@ -23,13 +23,13 @@ private:
 	std::unique_ptr<Trajectory> m_traj;
 
 	double m_kp;
-	double m_ki;
 	double m_kd;
 	double m_kv;
 	double m_kpv; //kp for velocity
 	double m_ka;
 	double m_kt; //rotation parameter
 
+	double m_prevTime;
 	double m_currTime;
 	double m_goalTime;
 	Timer time;
@@ -46,15 +46,13 @@ private:
 
 	double m_tolerance;
 
-	double m_output;
-
 	bool m_enabled;
 
 	double Clamp(double val, double min, double max);
 public:
 	TrajectoryController();
 
-	void Configure(double kp, double ki, double kd, double kv, double kpv, double ka, double kt);
+	void Configure(double kp, double kd, double kv, double kpv, double ka, double kt);
 	void SetTrajectory(const Trajectory& traj);
 
 	bool IsOnTarget();

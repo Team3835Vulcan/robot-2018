@@ -25,9 +25,17 @@ const Setpoint& MotionProfile::GetEnd() const {
 	return m_end;
 }
 
-std::unique_ptr<Setpoint> MotionProfile::GetSetpoint(float t) const {
+std::unique_ptr<Setpoint> MotionProfile::GetSetpointT(double t) const {
 	for (std::size_t i = 0; i < m_parts.size(); ++i) {
-		auto s = m_parts.at(i).FindSetpoint(t);
+		auto s = m_parts.at(i).FindSetpointT(t);
+		if (s)
+			return s;
+	}
+	return nullptr;
+}
+std::unique_ptr<Setpoint> MotionProfile::GetSetpointD(double d) const {
+	for (std::size_t i = 0; i < m_parts.size(); ++i) {
+		auto s = m_parts.at(i).FindSetpointD(d);
 		if (s)
 			return s;
 	}

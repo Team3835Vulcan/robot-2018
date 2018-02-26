@@ -2,17 +2,17 @@
 class Setpoint
 {
 private:
-	const float m_time;
-	const float m_pos;
-	const float m_velocity;
-	const float m_acceleration;
+	const double m_time;
+	const double m_pos;
+	const double m_velocity;
+	const double m_acceleration;
 public:
-	Setpoint(float time, float pos, float velocity, float acceleration);
-	Setpoint(float time, float pos, float velocity);
-	Setpoint(float pos);
-	const float GetTime() const;
-	const float GetPos() const;
-	const float GetVelocity() const;
-	const float GetAcceleration() const;
+	Setpoint(double time, double pos, double velocity, double acceleration);
+	Setpoint(double time, double pos, double velocity);
+	Setpoint(double pos);
+	const double GetTime() const;
+	const double GetPos() const;
+	const double GetVelocity() const;
+	const double GetAcceleration() const;
 };
 
