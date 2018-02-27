@@ -5,6 +5,12 @@
 #include "Commands/Command.h"
 #include <Subsystems/Chassis/Controllers/TrajectoryController.h>
 
+/*
+ * Drive an arbitrary path received as input.
+ * Path is generated according to initial angle.
+ * Optional parameter for final heading
+ */
+
 class DrivePath : public frc::Command {
 private:
 	Path m_path; //path to drive

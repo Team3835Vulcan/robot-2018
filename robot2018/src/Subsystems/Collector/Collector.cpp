@@ -67,7 +67,7 @@ bool Collector::CubeIn(){
 }
 
 void Collector::SwitchClaw(CLAWMODE mode){
-	if(mode == CLAWMODE::CLOSE)
+	if(mode == CLAWMODE::OPEN)
 		m_claw->Set(frc::DoubleSolenoid::Value::kForward);
 	else
 		m_claw->Set(frc::DoubleSolenoid::Value::kReverse);
@@ -75,9 +75,9 @@ void Collector::SwitchClaw(CLAWMODE mode){
 
 Collector::CLAWMODE Collector::GetClawMode(){
 	if(m_claw->Get() == frc::DoubleSolenoid::Value::kForward)
-		return CLAWMODE::CLOSE;
-	else
 		return CLAWMODE::OPEN;
+	else
+		return CLAWMODE::CLOSE;
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

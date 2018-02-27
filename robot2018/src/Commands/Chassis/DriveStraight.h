@@ -4,6 +4,11 @@
 #include "Commands/Command.h"
 #include <Subsystems/Chassis/Controllers/TrajectoryController.h>
 
+/*
+ * Drive x meters with gyro fixing. Uses Trajectory generation
+ * for smooth driving.
+ */
+
 class DriveStraight : public frc::Command {
 private:
 	double m_dist;

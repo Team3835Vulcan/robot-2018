@@ -84,10 +84,8 @@ float Chassis::LimitSpeed(float speed)
 
 const float Chassis::GetAngle() const
 {
-	float angle = -1 * m_navx->GetYaw() + 90;
-	if(angle > 180)
-		return angle - 360;
-	return angle;
+	float angle = -1 * m_navx->GetAngle() + 90;
+	return std::fmod(angle, 360.0);
 }
 
 void Chassis::ZeroYaw()

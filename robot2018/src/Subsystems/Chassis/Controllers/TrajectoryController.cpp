@@ -69,6 +69,9 @@ const DriveSignal TrajectoryController::Calculate(){
 		auto& setpoint = trajpoint.m_sp;
 
 		m_goalHeading = waypoint.GetHeadingInDegrees();
+
+		std::cout << m_goalHeading << "\n";
+
 		m_goalVel = setpoint.GetVelocity();
 		double currAccel = setpoint.GetAcceleration();
 		double deltaDist = m_goalDist - m_currDist;

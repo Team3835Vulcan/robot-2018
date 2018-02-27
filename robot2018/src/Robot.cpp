@@ -19,6 +19,8 @@
 #include <OI.h>
 #include <Commands/Chassis/DrivePath.h>
 #include <Commands/Chassis/DriveStraight.h>
+#include <Commands/Chassis/Turn.h>
+#include <autos/RightSideSwitch.h>
 
 class Robot : public frc::TimedRobot {
 public:
@@ -34,6 +36,8 @@ public:
 		Path p ({ { 0,0 },{ 0.6,2.6 },{ 2.6,3.6 } });
 		frc::SmartDashboard::PutData("drive path", new DrivePath(std::move(p),45));
 		frc::SmartDashboard::PutData("drive straight", new DriveStraight(3.6));
+		frc::SmartDashboard::PutData("turn 60", new Turn(60));
+		frc::SmartDashboard::PutData("right switch", new RightSideSwitch());
 		SetPeriod(1e-3);
 	}
 

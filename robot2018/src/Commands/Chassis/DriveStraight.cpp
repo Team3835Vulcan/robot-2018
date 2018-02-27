@@ -8,8 +8,10 @@ DriveStraight::DriveStraight(double dist) : m_dist(dist) {
 
 // Called just before this Command runs the first time
 void DriveStraight::Initialize() {
-	double angle = Chassis::GetInstance().GetAngle() * PI / 180;
-
+	double angle = Chassis::GetInstance().GetAngle();
+	if(angle > 180)
+		angle = angle - 360;
+	angle = angle * PI / 180;
 	Path p({{0,0}, {m_dist * cos(angle),m_dist * sin(angle)}});
 	GenerateCatmullRom(p);
 	Trajectory t(DEFAULT_CONFIG, std::move(p));

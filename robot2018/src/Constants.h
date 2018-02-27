@@ -68,6 +68,7 @@ constexpr double ROBOT_DT = 1e-3;
 const MotionProfileConfig DEFAULT_CONFIG = {ROBOT_DT, MAX_ROBOT_ACCELERATION,
 		MAX_ROBOT_VELOCITY, 0.03};
 
+
 //physical properties
 constexpr float GEAR_RATIO = 9.52;
 constexpr float WHEEL_DIAMETER = 5.9 * 0.0254; //in meters
