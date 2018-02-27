@@ -11,6 +11,7 @@ Chassis::Chassis() : Subsystem("Chassis"), m_rLeft(RLEFT_MOTOR),
    m_navx(std::make_unique<AHRS>(I2C::Port::kOnboard)), // Should be constant
    m_lEnc(std::make_unique<frc::Encoder>(LEFT_ENCODER_A, LEFT_ENCODER_B)),
    m_rEnc(std::make_unique<frc::Encoder>(RIGHT_ENCODER_A, RIGHT_ENCODER_B)){
+	m_drive->SetSafetyEnabled(false);
 	m_navx->Reset();
 	m_navx->ZeroYaw();
 	m_lEnc->Reset();

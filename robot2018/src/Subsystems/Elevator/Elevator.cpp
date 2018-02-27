@@ -26,8 +26,8 @@ void Elevator::Periodic(){
 }
 
 void Elevator::Set(double val){
-	m_eng1->Set(-val);
-	m_eng2->Set(-val);
+	m_eng1->Set(val);
+	m_eng2->Set(val);
 }
 
 bool Elevator::IsUp(){

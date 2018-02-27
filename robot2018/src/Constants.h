@@ -42,8 +42,8 @@ constexpr int RIGHT_ENCODER_B = 1;
 constexpr int UP_COLL_SWITCH = 9;
 constexpr int DOWN_COLL_SWITCH = 8;
 constexpr int CUBE_SWITCH = 7;
-constexpr int ELEV_UP_SWITCH = 5;
-constexpr int ELEV_DOWN_SWITCH = 6;
+constexpr int ELEV_UP_SWITCH = 6;
+constexpr int ELEV_DOWN_SWITCH = 5;
 
 //pneumatics
 constexpr int CLAW_FORWARD = 0;
@@ -60,7 +60,7 @@ constexpr double MAX_ROBOT_ACCELERATION = 2; //in m/s^2
 //math
 constexpr double PI = 3.141592653589793238462;
 constexpr double VELOCITY_FEEDFORWARD = 1/MAX_ROBOT_VELOCITY;
-constexpr double ACCELERATION_FEEDFORWARD = 0.04;
+constexpr double ACCELERATION_FEEDFORWARD = 0.02;
 constexpr double K_TURN_HEADING = 0.7;
 constexpr double K_HOLD_HEADING = 0.1;
 constexpr double ROTOR_VOLT_DELTA = 2.865;

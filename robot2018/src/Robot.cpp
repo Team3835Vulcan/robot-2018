@@ -21,7 +21,7 @@
 #include <Commands/Chassis/DriveStraight.h>
 #include <Commands/Chassis/Turn.h>
 #include <autos/RightSideSwitch.h>
-
+#include <autos/RightSideScale.h>
 class Robot : public frc::TimedRobot {
 public:
 	void RobotInit() override {
@@ -38,6 +38,7 @@ public:
 		frc::SmartDashboard::PutData("drive straight", new DriveStraight(3.6));
 		frc::SmartDashboard::PutData("turn 60", new Turn(60));
 		frc::SmartDashboard::PutData("right switch", new RightSideSwitch());
+		frc::SmartDashboard::PutData("right scale", new RightSideScale());
 		SetPeriod(1e-3);
 	}
 
