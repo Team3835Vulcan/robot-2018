@@ -33,8 +33,8 @@ public:
 		OI::GetInstance();
 		frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
-		Path p ({ { 0,0 },{ 0.6,2.6 },{ 2.6,3.6 } });
-		frc::SmartDashboard::PutData("drive path", new DrivePath(std::move(p),45));
+		Path p ({ { 0,0 },{ 0.2,3.5 }, {0.6,5.4},{ 0.8,8.5 } });
+		frc::SmartDashboard::PutData("drive path", new DrivePath(std::move(p),90));
 		frc::SmartDashboard::PutData("drive straight", new DriveStraight(3.6));
 		frc::SmartDashboard::PutData("turn 60", new Turn(60));
 		frc::SmartDashboard::PutData("right switch", new RightSideSwitch());

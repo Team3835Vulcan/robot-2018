@@ -4,11 +4,13 @@
 #include <Commands/Command.h>
 
 class ElevCtrl : public frc::Command {
+public: enum ELEVPOS {UP, DOWN};
 private:
-	double m_val;
+	ELEVPOS m_pos;
 
 public:
-	ElevCtrl(double val);
+
+	ElevCtrl(ELEVPOS pos);
 	void Initialize();
 	void Execute();
 	bool IsFinished();
