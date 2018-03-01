@@ -1,5 +1,5 @@
-#ifndef LeftSideSwitch_H
-#define LeftSideSwitch_H
+#ifndef RightSideSwitch_H
+#define RightSideSwitch_H
 
 #include <Commands/CommandGroup.h>
 

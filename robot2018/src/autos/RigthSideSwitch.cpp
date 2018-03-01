@@ -8,7 +8,7 @@
 RightSideSwitch::RightSideSwitch() {
 	AddParallel(new SwitchClawMode(Collector::CLAWMODE::OPEN));
 	AddParallel(new RotorAction(Collector::ROTOR_POS::DOWN));
-	AddSequential(new DriveStraight(4.15));
+	AddSequential(new DriveStraight(4));
 	AddSequential(new Turn(30));
 	AddSequential(new MoveBelt(Conveyor::SIDE::LEFT));
 }
