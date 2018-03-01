@@ -22,6 +22,7 @@
 #include <Commands/Chassis/Turn.h>
 #include <autos/RightSideSwitch.h>
 #include <autos/RightSideScale.h>
+
 class Robot : public frc::TimedRobot {
 public:
 	void RobotInit() override {

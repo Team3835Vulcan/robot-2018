@@ -5,7 +5,8 @@
 #include "Setpoint.h"
 
 /*
-	MotionPart describes a motion between two setpoints which has linear acceleration
+MotionPart describes a motion between two setpoints which
+has linear acceleration
 */
 
 class MotionPart {

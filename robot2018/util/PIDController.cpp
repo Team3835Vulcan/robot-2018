@@ -138,7 +138,7 @@ void PIDController::Disable(){
 
 void PIDController::Reset(){
 	Disable();
-	m_prevTime = 0;
+//	m_prevTime = 0;
 	m_currTime = 0;
 	m_setpoint = 0;
 	m_totalError = 0;

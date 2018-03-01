@@ -22,8 +22,8 @@ public:
 
 	MotionProfileConfig& GetConfig();
 
-	const TrajPoint GetTrajPointT(double t);
-	const TrajPoint GetTrajPointD(double d);
+	const TrajPoint GetTrajPointT(double t); //find by time
+	const TrajPoint GetTrajPointD(double d); //find by distance
 
 	const MotionProfile& GetProfile() const;
 	const Path& GetPath() const;

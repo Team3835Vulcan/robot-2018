@@ -16,14 +16,12 @@ Chassis::Chassis() : Subsystem("Chassis"), m_rLeft(RLEFT_MOTOR),
 	m_navx->ZeroYaw();
 	m_lEnc->Reset();
 	m_rEnc->Reset();
-	//m_left->SetInverted(true);
 	m_lEnc->SetReverseDirection(true);
 	m_lEnc->SetDistancePerPulse(DISTANCE_PER_PULSE);
 	m_rEnc->SetDistancePerPulse(DISTANCE_PER_PULSE);
 }
 
-Chassis& Chassis::GetInstance()
-{
+Chassis& Chassis::GetInstance() {
 	static Chassis instance;
 	return instance;
 }
@@ -33,7 +31,7 @@ void Chassis::InitDefaultCommand() {
 	SetDefaultCommand(new JoystickTankDrive());
 }
 
-void Chassis::Periodic(){
+void Chassis::Periodic() {
 	float angle = GetAngle();
 	bool navxConnected = m_navx->IsConnected();
 	float lDist = m_lEnc->GetDistance();
@@ -42,7 +40,6 @@ void Chassis::Periodic(){
 	float lVel = m_lEnc->GetRate();
 	float rVel = m_rEnc->GetRate();
 	float vel = GetVelocity();
-	double pulses = (m_lEnc->Get() + m_rEnc->Get()) / 2;
 	frc::SmartDashboard::PutNumber("dist per pulse", DISTANCE_PER_PULSE);
 	frc::SmartDashboard::PutNumber("yaw", angle);
 	frc::SmartDashboard::PutNumber("robot speed", vel);
@@ -58,53 +55,40 @@ void Chassis::Periodic(){
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
-void Chassis::TankDrive(double left, double right)
-{
-	//m_left->Set(-LimitSpeed(left));
-	//m_right->Set(-LimitSpeed(right));
+void Chassis::TankDrive(double left, double right) {
 	m_drive->TankDrive(left, right, false);
 }
 
-void Chassis::CurveDrive(double speed, double curve)
-{
-	//m_left->Set(LimitSpeed(speed + curve));
-	//m_right->Set(LimitSpeed(speed - curve));
+void Chassis::CurveDrive(double speed, double curve) {
 	m_drive->CurvatureDrive(speed, curve, false);
 }
 
-float Chassis::LimitSpeed(float speed)
-{
+float Chassis::LimitSpeed(float speed) {
 	if(speed > 1.0)
 		return 1.0;
-
 	if(speed < -1.0)
 		return -1.0;
-
 	return speed;
 }
 
-const float Chassis::GetAngle() const
-{
+const float Chassis::GetAngle() const {
 	float angle = -1 * m_navx->GetAngle() + 90;
 	return std::fmod(angle, 360.0);
 }
 
-void Chassis::ZeroYaw()
-{
+void Chassis::ZeroYaw() {
 	m_navx->ZeroYaw();
 }
 
-const float Chassis::GetVelocity() const
-{
+const float Chassis::GetVelocity() const {
 	return (m_lEnc->GetRate() + m_rEnc->GetRate()) / 2;
 }
 
-const float Chassis::GetDistance() const
-{
+const float Chassis::GetDistance() const {
 	return (m_lEnc->GetDistance() + m_rEnc->GetDistance()) / 2;
 }
 
-void Chassis::ResetEncoders() const{
+void Chassis::ResetEncoders() const {
 	m_rEnc->Reset();
 	m_lEnc->Reset();
 }

@@ -32,8 +32,10 @@ public:
 	enum COLLECTMODE {EJECT, COLLECT};
 	enum CLAWMODE {OPEN, CLOSE};
 
-	double ROTOR_VOLT_UP;
-	double ROTOR_VOLT_DOWN;
+	bool manualRotor = false;
+
+	const double ROTOR_VOLT_UP;
+	const double ROTOR_VOLT_DOWN;
 
 	void InitDefaultCommand();
 	void Periodic();

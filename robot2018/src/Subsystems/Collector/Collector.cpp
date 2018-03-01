@@ -2,7 +2,7 @@
 #include <Constants.h>
 #include <SmartDashboard/SmartDashboard.h>
 
-Collector::Collector() : Subsystem("hi"),
+Collector::Collector() : Subsystem("Collector"),
 	m_rCollector(std::make_unique<Talon>(COLL1_MOTOR)),
 	m_lCollector(std::
 			make_unique<Talon>(COLL2_MOTOR)),
@@ -29,7 +29,8 @@ void Collector::Periodic(){
 	frc::SmartDashboard::PutBoolean("cube in", CubeIn());
 	frc::SmartDashboard::PutBoolean("rotor down", IsDown());
 	frc::SmartDashboard::PutBoolean("rotor up", IsUp());
-	frc::SmartDashboard::PutNumber("rotor position", m_potentiometer->GetAverageVoltage());
+	frc::SmartDashboard::PutNumber("rotor position",
+			m_potentiometer->GetAverageVoltage());
 	frc::SmartDashboard::PutNumber("rotor volt up", ROTOR_VOLT_UP);
 	frc::SmartDashboard::PutNumber("rotor volt down", ROTOR_VOLT_DOWN);
 }

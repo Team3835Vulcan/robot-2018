@@ -7,7 +7,7 @@ DrivePath::DrivePath(const Path& path, double headingf) :
 	// Use Requires() here to declare subsystem dependencies
 	std::cout << "copy ctor\n";
 	m_controller.Configure(0,0,VELOCITY_FEEDFORWARD,
-					0.7, ACCELERATION_FEEDFORWARD, 0.1);
+					1, ACCELERATION_FEEDFORWARD, 0.1);
 	Requires(&Chassis::GetInstance());
 }
 
