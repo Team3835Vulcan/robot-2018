@@ -17,17 +17,41 @@
 #include <Subsystems/Conveyor/Conveyor.h>
 #include <Subsystems/Elevator/Elevator.h>
 #include <OI.h>
-
+#include <Commands/Chassis/DrivePath.h>
+#include <Commands/Chassis/DriveStraight.h>
+#include <Commands/Chassis/Turn.h>
+#include <autos/RightSideSwitch.h>
+#include <autos/LeftSideSwitch.h>
+#include <autos/MiddleRightSwitch.h>
+#include <autos/RightSideScale.h>
+#include <autos/LeftSideScale.h>
+#include <autos/DoNothing.h>
+#include <autos/BaseLine.h>
 
 class Robot : public frc::TimedRobot {
 public:
 	void RobotInit() override {
+
 		Chassis::GetInstance();
 		Collector::GetInstance();
 		Conveyor::GetInstance();
 		Elevator::GetInstance();
 		OI::GetInstance();
+
+		m_chooser.AddDefault("nothing", new DoNothing());
+		m_chooser.AddObject("BaseLine", new BaseLine());
+		m_chooser.AddObject("leftswitch", new LeftSideSwitch());
+		m_chooser.AddObject("midrightswitch", new MiddleRightSwitch());
+		m_chooser.AddObject("rightswitch", new RightSideSwitch());
+		m_chooser.AddObject("leftscale", new LeftSideScale());
+		m_chooser.AddObject("rightscale", new RightSideScale());
+
+
 		frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+
+		frc::SmartDashboard::PutData("base line auto", new BaseLine());
+		frc::SmartDashboard::PutData("middle auto", new MiddleRightSwitch());
+
 		SetPeriod(1e-3);
 	}
 

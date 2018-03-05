@@ -1,21 +1,21 @@
 #pragma once
 #include <vector>
-#include <forward_list>
+#include <unordered_map>
 #include "Setpoint.h"
 #include "MotionPart.h"
 
-
-namespace vulcan{
 /*
 Defines constraints for the the profile
 */
 
 struct MotionProfileConfig {
-	const float m_maxAcc;
-	const float m_maxVel;
+	const double m_dt;
+	const double m_maxAcc;
+	const double m_maxVel;
+	const double m_tolerance;
 
-	MotionProfileConfig(float maxAcc, float maxVel) :
-		m_maxAcc(maxAcc), m_maxVel(maxVel) {}
+	MotionProfileConfig(double dt, double maxAcc, double maxVel, double tolerance) :
+		m_dt(dt), m_maxAcc(maxAcc), m_maxVel(maxVel), m_tolerance(tolerance) {}
 };
 
 /*
@@ -29,23 +29,25 @@ private:
 	MotionProfileConfig m_config;
 	Setpoint m_start, m_end;
 	std::vector<MotionPart> m_parts;
-	
-	float m_dist;
-	float m_time;
 
-public:
-	MotionProfile(const Setpoint& start, const Setpoint& end, const MotionProfileConfig& config);
+	double m_dist;
+	double m_time;
+public:	
+	const MotionProfileConfig& GetConfig() const;
 
 	const Setpoint& GetStart() const;
 	const Setpoint& GetEnd() const;
 
 	const std::vector<MotionPart>& GetParts() const;
-	std::unique_ptr<Setpoint> GetSetpoint(float t) const;
+	void AddPart(const MotionPart& part);
+	std::unique_ptr<Setpoint> GetSetpointT(double t) const;
+	std::unique_ptr<Setpoint> GetSetpointD(double d) const;
 
-	const float GetDist() const;
-	const float GetTime() const;
+	MotionProfile(const Setpoint& start, const Setpoint& end, const MotionProfileConfig& config);
 
 	void Generate();
+
+	const double GetDist() const;
+	const double GetTime() const;
 };
 
-}

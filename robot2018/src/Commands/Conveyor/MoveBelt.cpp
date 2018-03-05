@@ -1,6 +1,6 @@
 #include "MoveBelt.h"
 
-MoveBelt::MoveBelt(Conveyor::SIDE s) : TimedCommand(1), m_side(s) {
+MoveBelt::MoveBelt(Conveyor::SIDE s) : TimedCommand(1.5), m_side(s) {
 	// Use Requires() here to declare subsystem dependencies
 	Requires(&Conveyor::GetInstance());
 }

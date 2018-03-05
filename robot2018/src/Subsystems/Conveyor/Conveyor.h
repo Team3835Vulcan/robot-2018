@@ -3,15 +3,15 @@
 
 #include <Commands/Subsystem.h>
 #include <memory>
-#include "ctre/phoenix/MotorControl/CAN/WPI_VictorSPX.h"
+#include <Talon.h>
 
-using ctre::phoenix::motorcontrol::can::WPI_VictorSPX;
+using frc::Talon;
 
 class Conveyor : public Subsystem {
 private:
 	Conveyor();
 
-	std::unique_ptr<WPI_VictorSPX> m_engine;
+	std::unique_ptr<Talon> m_engine;
 public:
 	static Conveyor& GetInstance();
 

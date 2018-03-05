@@ -1,16 +1,18 @@
 #pragma once
-
-namespace vulcan{
 class Setpoint
 {
 private:
-	const float m_time;
-	const float m_pos;
-	const float m_velocity;
+	const double m_time;
+	const double m_pos;
+	const double m_velocity;
+	const double m_acceleration;
 public:
-	Setpoint(float time, float pos, float velocity);
-	const float GetTime() const;
-	const float GetPos() const;
-	const float GetVelocity() const;
+	Setpoint(double time, double pos, double velocity, double acceleration);
+	Setpoint(double time, double pos, double velocity);
+	Setpoint(double pos);
+	const double GetTime() const;
+	const double GetPos() const;
+	const double GetVelocity() const;
+	const double GetAcceleration() const;
 };
-}
+

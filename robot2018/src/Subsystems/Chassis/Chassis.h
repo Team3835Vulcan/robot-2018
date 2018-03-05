@@ -6,11 +6,10 @@
 #include <memory>
 #include <VictorSP.h>
 #include <SpeedControllerGroup.h>
-#include <AHRS.h>
 #include <Drive/DifferentialDrive.h>
-#include "ctre/phoenix/MotorControl/CAN/WPI_VictorSPX.h"
+#include <AHRS.h>
 
-using ctre::phoenix::motorcontrol::can::WPI_VictorSPX;
+using frc::VictorSP;
 
 class Chassis : public frc::Subsystem {
 private:
@@ -18,12 +17,13 @@ private:
 
 	float LimitSpeed(float speed);
 
-	WPI_VictorSPX m_rLeft;
-	WPI_VictorSPX m_fLeft;
-	WPI_VictorSPX m_rRight;
-	WPI_VictorSPX m_fRight;
+	VictorSP m_rLeft;
+	VictorSP m_fLeft;
+	VictorSP m_rRight;
+	VictorSP m_fRight;
 	std::unique_ptr<frc::SpeedControllerGroup> m_left;
 	std::unique_ptr<frc::SpeedControllerGroup> m_right;
+	std::unique_ptr<frc::DifferentialDrive> m_drive;
 
 	std::unique_ptr<AHRS> m_navx;
 
@@ -43,6 +43,8 @@ public:
 	void ZeroYaw(); //reset angle to zero
 
 	const float GetVelocity() const; //get from encoders(hint: average of both encoder speeds)
+	const float GetDistance() const;
+	void ResetEncoders() const;
 };
 
 #endif  // Chassis_H

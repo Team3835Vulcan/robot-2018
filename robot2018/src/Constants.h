@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <util/motion/MotionProfile.h>
+
 /*
  * Add all needed constants here.
  * Relevant constants are:
@@ -17,19 +19,19 @@
  */
 
 //speed controllers
-constexpr int RLEFT_MOTOR = 12;
-constexpr int FLEFT_MOTOR = 13;
-constexpr int RRIGHT_MOTOR = 10;
-constexpr int FRIGHT_MOTOR = 11;
+constexpr int RLEFT_MOTOR = 8;
+constexpr int FLEFT_MOTOR = 9;
+constexpr int RRIGHT_MOTOR = 6;
+constexpr int FRIGHT_MOTOR = 7;
 
-constexpr int CONV_MOTOR = 19;
+constexpr int CONV_MOTOR = 0;
 
-constexpr int COLL1_MOTOR = 14;
-constexpr int COLL2_MOTOR = 15;
-constexpr int ROTOR_MOTOR = 16;
+constexpr int COLL1_MOTOR = 3;
+constexpr int COLL2_MOTOR = 4;
+constexpr int ROTOR_MOTOR = 5;
 
-constexpr int ELEV1_MOTOR = 17;
-constexpr int ELEV2_MOTOR = 18;
+constexpr int ELEV1_MOTOR = 1;
+constexpr int ELEV2_MOTOR = 2;
 
 constexpr int LEFT_ENCODER_A = 4;
 constexpr int LEFT_ENCODER_B = 3;
@@ -40,8 +42,8 @@ constexpr int RIGHT_ENCODER_B = 1;
 constexpr int UP_COLL_SWITCH = 8;
 constexpr int DOWN_COLL_SWITCH = 9;
 constexpr int CUBE_SWITCH = 7;
-constexpr int ELEV_UP_SWITCH = 5;
-constexpr int ELEV_DOWN_SWITCH = 6;
+constexpr int ELEV_UP_SWITCH = 6;
+constexpr int ELEV_DOWN_SWITCH = 5;
 
 //pneumatics
 constexpr int CLAW_FORWARD = 0;
@@ -51,18 +53,30 @@ constexpr int CLAW_BACKWARD = 1;
 constexpr int RIGHT_JOYSTICK = 1;
 constexpr int LEFT_JOYSTICK = 0;
 
+//physical limits
+constexpr double MAX_ROBOT_VELOCITY = 3.6;//in m/s
+constexpr double MAX_ROBOT_ACCELERATION = 2; //in m/s^2
+
 //math
 constexpr double PI = 3.141592653589793238462;
+constexpr double VELOCITY_FEEDFORWARD = 1/MAX_ROBOT_VELOCITY;
+constexpr double ACCELERATION_FEEDFORWARD = 0.02;
+constexpr double K_TURN_HEADING = 0.7;
+constexpr double K_HOLD_HEADING = 0.1;
+constexpr double ROTOR_VOLT_DELTA = 2.865;
+constexpr double ROBOT_DT = 1e-3;
+const MotionProfileConfig DEFAULT_CONFIG = {ROBOT_DT, MAX_ROBOT_ACCELERATION,
+		MAX_ROBOT_VELOCITY, 0.03};
+
 
 //physical properties
 constexpr double GEAR_RATIO = 9.87;
 constexpr double WHEEL_DIAMETER = 6 * 0.0254; //in meters
-constexpr double PULSES_PER_ROTATION = 0;
-constexpr double DISTANCE_PER_PULSE = PI * WHEEL_DIAMETER / PULSES_PER_ROTATION;
+constexpr int PULSES_PER_REVOLUTION = 166;
+constexpr double DISTANCE_PER_PULSE
+= PI * WHEEL_DIAMETER / PULSES_PER_REVOLUTION;
 constexpr double WHEELBASE = 0.497; //in meters
 constexpr double ROTOR_VOLT_DELTA = 2.6;
 
-//physical limits
-constexpr double MAX_ROBOT_VELOCITY = 2.8;//in m/s
-constexpr double VELOCITY_FEEDFORWARD = 1/MAX_ROBOT_VELOCITY;
-constexpr double MAX_ROBOT_ACCELERATION = 2; //in m/s^2
+
+
