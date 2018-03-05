@@ -55,10 +55,11 @@ constexpr int LEFT_JOYSTICK = 0;
 constexpr double PI = 3.141592653589793238462;
 
 //physical properties
-constexpr float GEAR_RATIO = 9.87;
-constexpr float WHEEL_DIAMETER = 6 * 0.0254; //in meters
-constexpr float DISTANCE_PER_PULSE = PI * WHEEL_DIAMETER / (GEAR_RATIO * 20);
-constexpr float WHEELBASE = 0.497; //in meters
+constexpr double GEAR_RATIO = 9.87;
+constexpr double WHEEL_DIAMETER = 6 * 0.0254; //in meters
+constexpr double PULSES_PER_ROTATION = 0;
+constexpr double DISTANCE_PER_PULSE = PI * WHEEL_DIAMETER / PULSES_PER_ROTATION;
+constexpr double WHEELBASE = 0.497; //in meters
 constexpr double ROTOR_VOLT_DELTA = 2.6;
 
 //physical limits
