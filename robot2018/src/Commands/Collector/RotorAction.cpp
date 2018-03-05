@@ -10,19 +10,19 @@ RotorAction::RotorAction(Collector::ROTOR_POS pos) : m_pos(pos),
 
 // Called just before this Command runs the first time
 void RotorAction::Initialize() {
-	if(!Collector::GetInstance().manualRotor){
-		m_controller->Reset();
+	m_controller->Reset();
+	if(Collector::GetInstance().manualRotor == false) {
 		double up = Collector::GetInstance().ROTOR_VOLT_UP; //min
 		double down = Collector::GetInstance().ROTOR_VOLT_DOWN; //max
 		m_controller->SetInputRange(up, down);
 		m_controller->SetOutputRange(-0.4,1);
 		if(m_pos == Collector::ROTOR_POS::UP){
 			m_controller->SetSetpoint(up);
-			m_controller->SetPID(0.4,0,0);
+			m_controller->SetPID(0.6,0,0.3);
 		}
 		else{
 			m_controller->SetSetpoint(down);
-			m_controller->SetPID(0.125,0,0);
+			m_controller->SetPID(0.125,0,0.8);
 		}
 		m_controller->SetTolerance(0.05);
 		m_controller->Enable();
@@ -31,7 +31,7 @@ void RotorAction::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void RotorAction::Execute() {
-	if(!Collector::GetInstance().manualRotor){
+	if(Collector::GetInstance().manualRotor == false){
 		double pos = Collector::GetInstance().GetRotorPos();
 		m_controller->Calculate(pos);
 		double output = m_controller->GetOutput();
@@ -42,7 +42,7 @@ void RotorAction::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool RotorAction::IsFinished() {
-	if(!Collector::GetInstance().manualRotor)
+	if(Collector::GetInstance().manualRotor)
 		return true;
 	else{
 		if(m_controller->IsOnTarget())

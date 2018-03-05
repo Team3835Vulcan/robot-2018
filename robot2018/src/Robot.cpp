@@ -21,7 +21,12 @@
 #include <Commands/Chassis/DriveStraight.h>
 #include <Commands/Chassis/Turn.h>
 #include <autos/RightSideSwitch.h>
+#include <autos/LeftSideSwitch.h>
+#include <autos/MiddleRightSwitch.h>
 #include <autos/RightSideScale.h>
+#include <autos/LeftSideScale.h>
+#include <autos/DoNothing.h>
+#include <autos/BaseLine.h>
 
 class Robot : public frc::TimedRobot {
 public:
@@ -32,14 +37,21 @@ public:
 		Conveyor::GetInstance();
 		Elevator::GetInstance();
 		OI::GetInstance();
+
+		m_chooser.AddDefault("nothing", new DoNothing());
+		m_chooser.AddObject("BaseLine", new BaseLine());
+		m_chooser.AddObject("leftswitch", new LeftSideSwitch());
+		m_chooser.AddObject("midrightswitch", new MiddleRightSwitch());
+		m_chooser.AddObject("rightswitch", new RightSideSwitch());
+		m_chooser.AddObject("leftscale", new LeftSideScale());
+		m_chooser.AddObject("rightscale", new RightSideScale());
+
+
 		frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
-		Path p ({ { 0,0 },{ 0.2,3.5 }, {0.6,5.4},{ 0.8,8.5 } });
-		frc::SmartDashboard::PutData("drive path", new DrivePath(std::move(p),90));
-		frc::SmartDashboard::PutData("drive straight", new DriveStraight(3.6));
-		frc::SmartDashboard::PutData("turn 60", new Turn(60));
-		frc::SmartDashboard::PutData("right switch", new RightSideSwitch());
-		frc::SmartDashboard::PutData("right scale", new RightSideScale());
+		frc::SmartDashboard::PutData("base line auto", new BaseLine());
+		frc::SmartDashboard::PutData("middle auto", new MiddleRightSwitch());
+
 		SetPeriod(1e-3);
 	}
 

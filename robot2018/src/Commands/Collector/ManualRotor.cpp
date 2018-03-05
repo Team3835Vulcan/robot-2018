@@ -1,6 +1,8 @@
 #include "ManualRotor.h"
 #include <Subsystems/Collector/Collector.h>
 #include <OI.h>
+#include <iostream>
+#include <cmath>
 
 ManualRotor::ManualRotor() {
 	// Use Requires() here to declare subsystem dependencies
@@ -14,12 +16,18 @@ void ManualRotor::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ManualRotor::Execute() {
-	Collector::GetInstance().Rotate(OI::GetInstance().GetOPLY());
+	double val = OI::GetInstance().GetOPRY();
+	if(val > 0.35)
+		val = 0.35;
+	else if(val < -0.8)
+		val = -0.8;
+	std::cout << val << '\n';
+	Collector::GetInstance().Rotate(val);
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool ManualRotor::IsFinished() {
-	return !Collector::GetInstance().manualRotor;
+	return false;
 }
 
 // Called once after isFinished returns true

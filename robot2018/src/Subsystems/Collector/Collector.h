@@ -32,19 +32,19 @@ public:
 	enum COLLECTMODE {EJECT, COLLECT};
 	enum CLAWMODE {OPEN, CLOSE};
 
-	bool manualRotor = false;
+	bool manualRotor = false; //indicates if driver has direct control of rotor
 
-	const double ROTOR_VOLT_UP;
-	const double ROTOR_VOLT_DOWN;
+	const double ROTOR_VOLT_UP; //potentiometer value at top position
+	const double ROTOR_VOLT_DOWN; //at bottom position
 
 	void InitDefaultCommand();
 	void Periodic();
 
 	void Collect(COLLECTMODE mode);
-	void StopCollect();
+	void StopCollect(); //stops collectors
 
 	void Rotate(double val);
-	double GetRotorPos() const;
+	double GetRotorPos() const; //returns potentiometer voltage
 
 	bool IsUp();
 	bool IsDown();
