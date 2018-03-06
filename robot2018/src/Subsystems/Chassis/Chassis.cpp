@@ -5,20 +5,20 @@
 Chassis::Chassis() : Subsystem("Chassis"), m_rLeft(RLEFT_MOTOR),
    m_fLeft(FLEFT_MOTOR),
    m_rRight(RRIGHT_MOTOR), m_fRight(FRIGHT_MOTOR),
-   m_left(std::make_unique<frc::SpeedControllerGroup>(m_rLeft, m_fLeft)),
-   m_right(std::make_unique<frc::SpeedControllerGroup>(m_rRight, m_fRight)),
-   m_drive(std::make_unique<frc::DifferentialDrive>(*m_left.get(), *m_right.get())),
-   m_navx(std::make_unique<AHRS>(I2C::Port::kOnboard)), // Should be constant
-   m_lEnc(std::make_unique<frc::Encoder>(LEFT_ENCODER_A, LEFT_ENCODER_B)),
-   m_rEnc(std::make_unique<frc::Encoder>(RIGHT_ENCODER_A, RIGHT_ENCODER_B)){
-	m_drive->SetSafetyEnabled(false);
-	m_navx->Reset();
-	m_navx->ZeroYaw();
-	m_lEnc->Reset();
-	m_rEnc->Reset();
-	m_lEnc->SetReverseDirection(true);
-	m_lEnc->SetDistancePerPulse(DISTANCE_PER_PULSE);
-	m_rEnc->SetDistancePerPulse(DISTANCE_PER_PULSE);
+   m_left(m_rLeft, m_fLeft),
+   m_right(m_rRight, m_fRight),
+   m_drive(m_left, m_right),
+   m_navx(I2C::Port::kOnboard), // Should be constant
+   m_lEnc(LEFT_ENCODER_A, LEFT_ENCODER_B),
+   m_rEnc(RIGHT_ENCODER_A, RIGHT_ENCODER_B){
+	m_drive.SetSafetyEnabled(false);
+	m_navx.Reset();
+	m_navx.ZeroYaw();
+	m_lEnc.Reset();
+	m_rEnc.Reset();
+	m_lEnc.SetReverseDirection(true);
+	m_lEnc.SetDistancePerPulse(DISTANCE_PER_PULSE);
+	m_rEnc.SetDistancePerPulse(DISTANCE_PER_PULSE);
 }
 
 Chassis& Chassis::GetInstance() {
@@ -33,12 +33,12 @@ void Chassis::InitDefaultCommand() {
 
 void Chassis::Periodic() {
 	float angle = GetAngle();
-	bool navxConnected = m_navx->IsConnected();
-	float lDist = m_lEnc->GetDistance();
-	float rDist = m_rEnc->GetDistance();
+	bool navxConnected = m_navx.IsConnected();
+	float lDist = m_lEnc.GetDistance();
+	float rDist = m_rEnc.GetDistance();
 	float dist = (lDist + rDist) / 2;
-	float lVel = m_lEnc->GetRate();
-	float rVel = m_rEnc->GetRate();
+	float lVel = m_lEnc.GetRate();
+	float rVel = m_rEnc.GetRate();
 	float vel = GetVelocity();
 	frc::SmartDashboard::PutNumber("dist per pulse", DISTANCE_PER_PULSE);
 	frc::SmartDashboard::PutNumber("yaw", angle);
@@ -49,18 +49,18 @@ void Chassis::Periodic() {
 	frc::SmartDashboard::PutNumber("distance[m]", dist);
 	frc::SmartDashboard::PutNumber("left enc vel", lVel);
 	frc::SmartDashboard::PutNumber("right enc vel", rVel);
-	frc::SmartDashboard::PutNumber("avg enc pulses", m_rEnc->Get());
+	frc::SmartDashboard::PutNumber("avg enc pulses", m_rEnc.Get());
 
 }
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 void Chassis::TankDrive(double left, double right) {
-	m_drive->TankDrive(left, right, false);
+	m_drive.TankDrive(left, right, false);
 }
 
 void Chassis::CurveDrive(double speed, double curve) {
-	m_drive->CurvatureDrive(speed, curve, false);
+	m_drive.CurvatureDrive(speed, curve, false);
 }
 
 float Chassis::LimitSpeed(float speed) {
@@ -71,24 +71,24 @@ float Chassis::LimitSpeed(float speed) {
 	return speed;
 }
 
-const float Chassis::GetAngle() const {
-	float angle = -1 * m_navx->GetAngle() + 90;
+const double Chassis::GetAngle() {
+	double angle = -m_navx.GetAngle() + 90;
 	return std::fmod(angle, 360.0);
 }
 
 void Chassis::ZeroYaw() {
-	m_navx->ZeroYaw();
+	m_navx.ZeroYaw();
 }
 
-const float Chassis::GetVelocity() const {
-	return (m_lEnc->GetRate() + m_rEnc->GetRate()) / 2;
+const double Chassis::GetVelocity() const {
+	return (m_lEnc.GetRate() + m_rEnc.GetRate()) / 2;
 }
 
-const float Chassis::GetDistance() const {
-	return (m_lEnc->GetDistance() + m_rEnc->GetDistance()) / 2;
+const double Chassis::GetDistance() const {
+	return (m_lEnc.GetDistance() + m_rEnc.GetDistance()) / 2;
 }
 
-void Chassis::ResetEncoders() const {
-	m_rEnc->Reset();
-	m_lEnc->Reset();
+void Chassis::ResetEncoders() {
+	m_rEnc.Reset();
+	m_lEnc.Reset();
 }

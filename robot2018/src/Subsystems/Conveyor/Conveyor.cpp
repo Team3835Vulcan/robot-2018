@@ -2,7 +2,7 @@
 #include <Constants.h>
 
 Conveyor::Conveyor() : Subsystem("Conveyor"),
-   m_engine(std::make_unique<Talon>(CONV_MOTOR)){
+   m_engine(std::make_unique<WPI_VictorSPX>(CONV_MOTOR)){
 	m_engine->SetInverted(true);
 }
 

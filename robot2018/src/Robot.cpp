@@ -38,19 +38,15 @@ public:
 		Elevator::GetInstance();
 		OI::GetInstance();
 
-		m_chooser.AddDefault("nothing", new DoNothing());
-		m_chooser.AddObject("BaseLine", new BaseLine());
-		m_chooser.AddObject("leftswitch", new LeftSideSwitch());
-		m_chooser.AddObject("midrightswitch", new MiddleRightSwitch());
-		m_chooser.AddObject("rightswitch", new RightSideSwitch());
-		m_chooser.AddObject("leftscale", new LeftSideScale());
-		m_chooser.AddObject("rightscale", new RightSideScale());
+		m_pos.AddDefault("middle", 'M');
+		m_pos.AddObject("left", 'L');
+		m_pos.AddObject("right", 'R');
 
+		m_pref.AddDefault("sw", "switch");
+		m_pref.AddObject("sc", "scale");
 
-		frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
-
-		frc::SmartDashboard::PutData("base line auto", new BaseLine());
-		frc::SmartDashboard::PutData("middle auto", new MiddleRightSwitch());
+		frc::SmartDashboard::PutData("Robot Position", &m_pos);
+		frc::SmartDashboard::PutData("Auto Preference", &m_pref);
 
 		SetPeriod(1e-3);
 	}
@@ -83,12 +79,60 @@ public:
 	 * to the if-else structure below with additional strings & commands.
 	 */
 	void AutonomousInit() override {
+		std::string gameData =
+				frc::DriverStation::GetInstance().GetGameSpecificMessage();
 
-		m_autonomousCommand = m_chooser.GetSelected();
+		char side = m_pos.GetSelected();
+		std::string pref = m_pref.GetSelected();
 
-		if (m_autonomousCommand != nullptr) {
-			m_autonomousCommand->Start();
+		char switchSide;
+		char scaleSide;
+
+		//choose autonomous according to side and preference
+		if (gameData.length() > 0) {
+			switchSide = gameData[0];
+			scaleSide = gameData[1];
+
+			if(m_pos == 'M'){
+				if(switchSide == 'R')
+					m_autonomous = new MiddleRightSwitch();
+				else
+					m_autonomous = new BaseLine();
+			}
+			else if(m_pos == 'R'){
+				if(m_pref == "sc" && m_pos == scaleSide)
+					m_autonomous = new RightSideScale();
+				else if(m_pref == "sw" && m_pos == switchSide)
+					m_autonomous = new RightSideSwitch();
+				else{
+					if(switchSide == m_pos)
+						m_autonomous = new RightSideSwitch();
+					else if(scaleSide == m_pos)
+						m_autonomous = new RightSideScale();
+					else
+						m_autonomous = new BaseLine();
+				}
+			}
+			else if(m_pos == 'L'){
+				if(m_pref == "sc" && m_pos == scaleSide)
+					m_autonomous = new LeftSideScale();
+				else if(m_pref == "sw" && m_pos == switchSide)
+					m_autonomous = new LeftSideSwitch();
+				else{
+					if(switchSide == m_pos)
+						m_autonomous = new RightSideSwitch();
+					else if(scaleSide == m_pos)
+						m_autonomous = new RightSideScale();
+					else
+						m_autonomous = new BaseLine();
+				}
+			}
 		}
+
+		//just to be sure
+		if(m_autonomous == nullptr)
+			m_autonomous = new BaseLine();
+		m_autonomous->Start();
 	}
 
 	void AutonomousPeriodic() override {
@@ -100,9 +144,9 @@ public:
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (m_autonomousCommand != nullptr) {
-			m_autonomousCommand->Cancel();
-			m_autonomousCommand = nullptr;
+		if (m_autonomous != nullptr) {
+			m_autonomous->Cancel();
+			m_autonomous= nullptr;
 		}
 	}
 
@@ -113,8 +157,10 @@ public:
 private:
 	// Have it null by default so that if testing teleop it
 	// doesn't have undefined behavior and potentially crash.
-	frc::Command* m_autonomousCommand = nullptr;
-	frc::SendableChooser<frc::Command*> m_chooser;
+	frc::Command* m_autonomous = nullptr;
+	frc::SendableChooser<char> m_pos;
+	frc::SendableChooser<std::string> m_pref;
+
 };
 
 START_ROBOT_CLASS(Robot)

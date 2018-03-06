@@ -7,8 +7,8 @@
 
 LeftSideSwitch::LeftSideSwitch() {
 	AddParallel(new SwitchClawMode(Collector::CLAWMODE::OPEN));
-	AddParallel(new RotorAction(Collector::ROTOR_POS::DOWN));
+	AddSequential(new RotorAction(Collector::ROTOR_POS::DOWN));
+	AddParallel(new SwitchClawMode(Collector::CLAWMODE::CLOSE));
 	AddSequential(new DriveStraight(4));
-	AddSequential(new Turn(-30));
 	AddSequential(new MoveBelt(Conveyor::SIDE::RIGHT));
 }
