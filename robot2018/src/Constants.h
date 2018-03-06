@@ -30,8 +30,8 @@ constexpr int COLL1_MOTOR = 3;
 constexpr int COLL2_MOTOR = 4;
 constexpr int ROTOR_MOTOR = 5;
 
-constexpr int ELEV1_MOTOR = 1;
-constexpr int ELEV2_MOTOR = 2;
+constexpr int ELEV1_MOTOR = 17;
+constexpr int ELEV2_MOTOR = 1;
 
 constexpr int LEFT_ENCODER_A = 4;
 constexpr int LEFT_ENCODER_B = 3;
@@ -63,7 +63,6 @@ constexpr double VELOCITY_FEEDFORWARD = 1/MAX_ROBOT_VELOCITY;
 constexpr double ACCELERATION_FEEDFORWARD = 0.02;
 constexpr double K_TURN_HEADING = 0.7;
 constexpr double K_HOLD_HEADING = 0.1;
-constexpr double ROTOR_VOLT_DELTA = 2.865;
 constexpr double ROBOT_DT = 1e-3;
 const MotionProfileConfig DEFAULT_CONFIG = {ROBOT_DT, MAX_ROBOT_ACCELERATION,
 		MAX_ROBOT_VELOCITY, 0.03};
@@ -74,7 +73,7 @@ constexpr double GEAR_RATIO = 9.87;
 constexpr double WHEEL_DIAMETER = 6 * 0.0254; //in meters
 constexpr int PULSES_PER_REVOLUTION = 166;
 constexpr double DISTANCE_PER_PULSE
-= PI * WHEEL_DIAMETER / PULSES_PER_REVOLUTION;
+	= PI * WHEEL_DIAMETER / PULSES_PER_REVOLUTION;
 constexpr double WHEELBASE = 0.497; //in meters
 constexpr double ROTOR_VOLT_DELTA = 2.6;
 

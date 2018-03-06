@@ -3,11 +3,11 @@
 #include <SmartDashboard/SmartDashboard.h>
 
 Collector::Collector() : Subsystem("Collector"),
-	m_rCollector(std::make_unique<Talon>(COLL1_MOTOR)),
+	m_rCollector(std::make_unique<WPI_VictorSPX>(COLL1_MOTOR)),
 	m_lCollector(std::
-			make_unique<Talon>(COLL2_MOTOR)),
+			make_unique<WPI_VictorSPX>(COLL2_MOTOR)),
 	m_collectSwitch(std::make_unique<frc::DigitalInput>(CUBE_SWITCH)),
-	m_rotor(std::make_unique<Talon>(ROTOR_MOTOR)),
+	m_rotor(std::make_unique<WPI_VictorSPX>(ROTOR_MOTOR)),
 	m_downSwitch(std::make_unique<frc::DigitalInput>(DOWN_COLL_SWITCH)),
 	m_upSwitch(std::make_unique<frc::DigitalInput>(UP_COLL_SWITCH)),
 	m_potentiometer(std::make_unique<frc::AnalogInput>(0)),

@@ -8,8 +8,9 @@
 #include <SpeedControllerGroup.h>
 #include <Drive/DifferentialDrive.h>
 #include <AHRS.h>
+#include "ctre/phoenix/MotorControl/CAN/WPI_VictorSPX.h"
 
-using frc::VictorSP;
+using ctre::phoenix::motorcontrol::can::WPI_VictorSPX;
 
 class Chassis : public frc::Subsystem {
 private:
@@ -17,18 +18,18 @@ private:
 
 	float LimitSpeed(float speed);
 
-	VictorSP m_rLeft;
-	VictorSP m_fLeft;
-	VictorSP m_rRight;
-	VictorSP m_fRight;
-	std::unique_ptr<frc::SpeedControllerGroup> m_left;
-	std::unique_ptr<frc::SpeedControllerGroup> m_right;
-	std::unique_ptr<frc::DifferentialDrive> m_drive;
+	WPI_VictorSPX m_rLeft;
+	WPI_VictorSPX m_fLeft;
+	WPI_VictorSPX m_rRight;
+	WPI_VictorSPX m_fRight;
+	frc::SpeedControllerGroup m_left;
+	frc::SpeedControllerGroup m_right;
+	frc::DifferentialDrive m_drive;
 
-	std::unique_ptr<AHRS> m_navx;
+	AHRS m_navx;
 
-	std::unique_ptr<frc::Encoder> m_lEnc;
-	std::unique_ptr<frc::Encoder> m_rEnc;
+	frc::Encoder m_lEnc;
+	frc::Encoder m_rEnc;
 
 public:
 	static Chassis& GetInstance();
@@ -39,12 +40,12 @@ public:
 	void TankDrive(double left, double right);
 	void CurveDrive(double speed, double curve);
 
-	const float GetAngle() const;
+	const double GetAngle();
 	void ZeroYaw(); //reset angle to zero
 
-	const float GetVelocity() const; //get from encoders(hint: average of both encoder speeds)
-	const float GetDistance() const;
-	void ResetEncoders() const;
+	const double GetVelocity() const; //get from encoders(hint: average of both encoder speeds)
+	const double GetDistance() const;
+	void ResetEncoders();
 };
 
 #endif  // Chassis_H

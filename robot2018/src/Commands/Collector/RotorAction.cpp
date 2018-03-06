@@ -11,15 +11,6 @@ RotorAction::RotorAction(Collector::ROTOR_POS pos) : m_pos(pos),
 // Called just before this Command runs the first time
 void RotorAction::Initialize() {
 	m_controller->Reset();
-<<<<<<< HEAD
-	double up = Collector::GetInstance().ROTOR_VOLT_UP; //min
-	double down = Collector::GetInstance().ROTOR_VOLT_DOWN; //max
-	m_controller->SetInputRange(up, down);
-	m_controller->SetOutputRange(-1,0.4);
-	if(m_pos == Collector::ROTOR_POS::UP){
-		m_controller->SetSetpoint(up);
-		m_controller->SetPID(0.4,0,0);
-=======
 	if(Collector::GetInstance().manualRotor == false) {
 		double up = Collector::GetInstance().ROTOR_VOLT_UP; //min
 		double down = Collector::GetInstance().ROTOR_VOLT_DOWN; //max
@@ -35,7 +26,6 @@ void RotorAction::Initialize() {
 		}
 		m_controller->SetTolerance(0.05);
 		m_controller->Enable();
->>>>>>> robotB-auto
 	}
 }
 

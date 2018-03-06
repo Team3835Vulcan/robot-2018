@@ -15,7 +15,7 @@ void ManualElevator::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ManualElevator::Execute() {
-	double val = -OI::GetInstance().GetOPRY();
+	double val = -OI::GetInstance().GetOPLY();
 	if(val > 0){
 		if(Elevator::GetInstance().IsUp() ||
 				(Collector::GetInstance().IsUp() &&
