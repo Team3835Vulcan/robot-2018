@@ -31,7 +31,7 @@
 #include <autos/BaseLine.h>
 #include <iostream>
 
-class Robot : public frc::TimedRobot {
+class Robot: public frc::TimedRobot {
 public:
 	void RobotInit() override {
 
@@ -43,7 +43,7 @@ public:
 
 		cam = frc::CameraServer::GetInstance()->StartAutomaticCapture();
 		cam.SetFPS(10);
-		cam.SetResolution(360,240);
+		cam.SetResolution(360, 240);
 
 		m_pos.AddDefault("middle", 'M');
 		m_pos.AddObject("left", 'L');
@@ -60,7 +60,8 @@ public:
 		frc::SmartDashboard::PutData("left scale", new LeftSideScale());
 		frc::SmartDashboard::PutData("right switch", new RightSideScale());
 		frc::SmartDashboard::PutData("midleft switch", new MiddleLeftSwitch());
-		frc::SmartDashboard::PutData("midright switch", new MiddleRightSwitch());
+		frc::SmartDashboard::PutData("midright switch",
+				new MiddleRightSwitch());
 		frc::SmartDashboard::PutData("baseline", new BaseLine());
 		frc::SmartDashboard::PutData("straigtdrive", new DriveStraight(3));
 
@@ -74,7 +75,8 @@ public:
 	 * when
 	 * the robot is disabled.
 	 */
-	void DisabledInit() override {}
+	void DisabledInit() override {
+	}
 
 	void DisabledPeriodic() override {
 		frc::Scheduler::GetInstance()->Run();
@@ -109,68 +111,66 @@ public:
 			switchSide = gameData[0];
 			scaleSide = gameData[1];
 
-			if(side == 'M'){
-				if(switchSide == 'R'){
+			if (side == 'M') {
+				if (switchSide == 'R') {
 					m_autonomous = new MiddleRightSwitch();
 					frc::SmartDashboard::PutString("auto chosen", "mid right");
-				}
-				else{
+				} else {
 					m_autonomous = new MiddleLeftSwitch();
 					frc::SmartDashboard::PutString("auto chosen", "mid left");
 				}
-			}
-			else if(side == 'R') {
-				if(pref == "sc" && side == scaleSide){
+			} else if (side == 'R') {
+				if (pref == "sc" && side == scaleSide) {
 					m_autonomous = new RightSideScale();
-					frc::SmartDashboard::PutString("auto chosen", "right scale");
-				}
-				else if(pref == "sw" && side == switchSide){
+					frc::SmartDashboard::PutString("auto chosen",
+							"right scale");
+				} else if (pref == "sw" && side == switchSide) {
 					m_autonomous = new RightSideSwitch();
-					frc::SmartDashboard::PutString("auto chosen", "right switch");
-				}
-				else{
-					if(switchSide == side) {
+					frc::SmartDashboard::PutString("auto chosen",
+							"right switch");
+				} else {
+					if (switchSide == side) {
 						m_autonomous = new RightSideSwitch();
-						frc::SmartDashboard::PutString("auto chosen", "right switch");
-					}
-					else if(scaleSide == side) {
+						frc::SmartDashboard::PutString("auto chosen",
+								"right switch");
+					} else if (scaleSide == side) {
 						m_autonomous = new RightSideScale();
-						frc::SmartDashboard::PutString("auto chosen", "right scale");
-					}
-					else {
+						frc::SmartDashboard::PutString("auto chosen",
+								"right scale");
+					} else {
 						m_autonomous = new BaseLine();
-						frc::SmartDashboard::PutString("auto chosen", "base line");
+						frc::SmartDashboard::PutString("auto chosen",
+								"base line");
 					}
 				}
-			}
-			else if(side == 'L'){
-				if(pref == "sc" && side == scaleSide){
+			} else if (side == 'L') {
+				if (pref == "sc" && side == scaleSide) {
 					m_autonomous = new LeftSideScale();
-					frc::SmartDashboard::PutString("auto chosen", "left switch");
-				}
-				else if(pref == "sw" && side == switchSide){
+					frc::SmartDashboard::PutString("auto chosen",
+							"left switch");
+				} else if (pref == "sw" && side == switchSide) {
 					m_autonomous = new LeftSideSwitch();
 					frc::SmartDashboard::PutString("auto chosen", "left scale");
-				}
-				else{
-					if(switchSide == side){
+				} else {
+					if (switchSide == side) {
 						m_autonomous = new LeftSideSwitch();
-						frc::SmartDashboard::PutString("auto chosen", "left switch");
-					}
-					else if(scaleSide == side){
+						frc::SmartDashboard::PutString("auto chosen",
+								"left switch");
+					} else if (scaleSide == side) {
 						m_autonomous = new LeftSideScale();
-						frc::SmartDashboard::PutString("auto chosen", "left scale");
-					}
-					else{
+						frc::SmartDashboard::PutString("auto chosen",
+								"left scale");
+					} else {
 						m_autonomous = new BaseLine();
-						frc::SmartDashboard::PutString("auto chosen", "baseline");
+						frc::SmartDashboard::PutString("auto chosen",
+								"baseline");
 					}
 				}
 			}
 		}
 
 		//just to be sure
-		if(m_autonomous == nullptr){
+		if (m_autonomous == nullptr) {
 			m_autonomous = new BaseLine();
 			frc::SmartDashboard::PutString("auto chosen", "baseline");
 		}
@@ -188,13 +188,16 @@ public:
 		// this line or comment it out.
 		if (m_autonomous != nullptr) {
 			m_autonomous->Cancel();
-			m_autonomous= nullptr;
+			m_autonomous = nullptr;
 		}
 	}
 
-	void TeleopPeriodic() override { frc::Scheduler::GetInstance()->Run(); }
+	void TeleopPeriodic() override {
+		frc::Scheduler::GetInstance()->Run();
+	}
 
-	void TestPeriodic() override {}
+	void TestPeriodic() override {
+	}
 
 private:
 	// Have it null by default so that if testing teleop it
