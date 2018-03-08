@@ -129,14 +129,15 @@ public:
 					frc::SmartDashboard::PutString("auto chosen",
 							"right switch");
 				} else {
-					if (switchSide == side) {
-						m_autonomous = new RightSideSwitch();
-						frc::SmartDashboard::PutString("auto chosen",
-								"right switch");
-					} else if (scaleSide == side) {
+
+					if (scaleSide == side) {
 						m_autonomous = new RightSideScale();
 						frc::SmartDashboard::PutString("auto chosen",
 								"right scale");
+					} else if (switchSide == side) {
+						m_autonomous = new RightSideSwitch();
+						frc::SmartDashboard::PutString("auto chosen",
+								"right switch");
 					} else {
 						m_autonomous = new BaseLine();
 						frc::SmartDashboard::PutString("auto chosen",
@@ -152,14 +153,14 @@ public:
 					m_autonomous = new LeftSideSwitch();
 					frc::SmartDashboard::PutString("auto chosen", "left scale");
 				} else {
-					if (switchSide == side) {
-						m_autonomous = new LeftSideSwitch();
-						frc::SmartDashboard::PutString("auto chosen",
-								"left switch");
-					} else if (scaleSide == side) {
+					if (scaleSide == side) {
 						m_autonomous = new LeftSideScale();
 						frc::SmartDashboard::PutString("auto chosen",
 								"left scale");
+					} else if (switchSide == side) {
+						m_autonomous = new LeftSideSwitch();
+						frc::SmartDashboard::PutString("auto chosen",
+								"left switch");
 					} else {
 						m_autonomous = new BaseLine();
 						frc::SmartDashboard::PutString("auto chosen",
