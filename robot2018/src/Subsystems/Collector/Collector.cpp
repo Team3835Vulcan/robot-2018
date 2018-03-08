@@ -13,7 +13,7 @@ Collector::Collector() : Subsystem("Collector"),
 	m_potentiometer(std::make_unique<frc::AnalogInput>(0)),
 	m_claw(std::make_unique<frc::DoubleSolenoid>(CLAW_FORWARD, CLAW_BACKWARD)),
 	ROTOR_VOLT_UP(m_potentiometer->GetAverageVoltage()),
-	ROTOR_VOLT_DOWN(ROTOR_VOLT_UP + ROTOR_VOLT_DELTA){
+	ROTOR_VOLT_DOWN(0.002441406){
 		m_potentiometer->ResetAccumulator();
 	}
 
@@ -68,16 +68,16 @@ bool Collector::CubeIn(){
 }
 
 void Collector::SwitchClaw(CLAWMODE mode){
-	if(mode == CLAWMODE::OPEN)
+	if(mode == CLAWMODE::CLOSE)
 		m_claw->Set(frc::DoubleSolenoid::Value::kForward);
 	else
 		m_claw->Set(frc::DoubleSolenoid::Value::kReverse);
 }
 
 Collector::CLAWMODE Collector::GetClawMode() const{
-	if(m_claw->Get() == frc::DoubleSolenoid::Value::kForward)
-		return CLAWMODE::CLOSE;
-	return CLAWMODE::OPEN;
+	if(m_claw->Get() == frc::DoubleSolenoid::Value::kReverse)
+		return CLAWMODE::OPEN;
+	return CLAWMODE::CLOSE;
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

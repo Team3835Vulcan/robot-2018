@@ -6,9 +6,9 @@
 #include <Commands/Collector/SwitchClawMode.h>
 
 LeftSideSwitch::LeftSideSwitch() {
-	AddParallel(new SwitchClawMode(Collector::CLAWMODE::OPEN));
+	AddSequential(new SwitchClawMode(Collector::CLAWMODE::OPEN));
 	AddSequential(new RotorAction(Collector::ROTOR_POS::DOWN));
-	AddParallel(new SwitchClawMode(Collector::CLAWMODE::CLOSE));
+	AddSequential(new SwitchClawMode(Collector::CLAWMODE::CLOSE));
 	AddSequential(new DriveStraight(4));
 	AddSequential(new MoveBelt(Conveyor::SIDE::RIGHT));
 }

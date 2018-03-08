@@ -10,6 +10,7 @@
 #include <LiveWindow/LiveWindow.h>
 #include <SmartDashboard/SendableChooser.h>
 #include <SmartDashboard/SmartDashboard.h>
+#include <cscore_oo.h>
 #include <TimedRobot.h>
 #include <RobotBase.h>
 #include <Subsystems/Chassis/Chassis.h>
@@ -23,10 +24,12 @@
 #include <autos/RightSideSwitch.h>
 #include <autos/LeftSideSwitch.h>
 #include <autos/MiddleRightSwitch.h>
+#include <autos/MiddleLeftSwitch.h>
 #include <autos/RightSideScale.h>
 #include <autos/LeftSideScale.h>
 #include <autos/DoNothing.h>
 #include <autos/BaseLine.h>
+#include <iostream>
 
 class Robot : public frc::TimedRobot {
 public:
@@ -38,15 +41,28 @@ public:
 		Elevator::GetInstance();
 		OI::GetInstance();
 
+		cam = frc::CameraServer::GetInstance()->StartAutomaticCapture();
+		cam.SetFPS(10);
+		cam.SetResolution(360,240);
+
 		m_pos.AddDefault("middle", 'M');
 		m_pos.AddObject("left", 'L');
 		m_pos.AddObject("right", 'R');
 
-		m_pref.AddDefault("sw", "switch");
-		m_pref.AddObject("sc", "scale");
+		m_pref.AddDefault("sc", "sc");
+		m_pref.AddObject("sw", "sw");
 
 		frc::SmartDashboard::PutData("Robot Position", &m_pos);
 		frc::SmartDashboard::PutData("Auto Preference", &m_pref);
+
+		frc::SmartDashboard::PutData("left switch", new LeftSideSwitch());
+		frc::SmartDashboard::PutData("right switch", new RightSideSwitch());
+		frc::SmartDashboard::PutData("left scale", new LeftSideScale());
+		frc::SmartDashboard::PutData("right switch", new RightSideScale());
+		frc::SmartDashboard::PutData("midleft switch", new MiddleLeftSwitch());
+		frc::SmartDashboard::PutData("midright switch", new MiddleRightSwitch());
+		frc::SmartDashboard::PutData("baseline", new BaseLine());
+		frc::SmartDashboard::PutData("straigtdrive", new DriveStraight(3));
 
 		SetPeriod(1e-3);
 	}
@@ -93,45 +109,71 @@ public:
 			switchSide = gameData[0];
 			scaleSide = gameData[1];
 
-			if(m_pos == 'M'){
-				if(switchSide == 'R')
+			if(side == 'M'){
+				if(switchSide == 'R'){
 					m_autonomous = new MiddleRightSwitch();
-				else
-					m_autonomous = new BaseLine();
-			}
-			else if(m_pos == 'R'){
-				if(m_pref == "sc" && m_pos == scaleSide)
-					m_autonomous = new RightSideScale();
-				else if(m_pref == "sw" && m_pos == switchSide)
-					m_autonomous = new RightSideSwitch();
+					frc::SmartDashboard::PutString("auto chosen", "mid right");
+				}
 				else{
-					if(switchSide == m_pos)
-						m_autonomous = new RightSideSwitch();
-					else if(scaleSide == m_pos)
-						m_autonomous = new RightSideScale();
-					else
-						m_autonomous = new BaseLine();
+					m_autonomous = new MiddleLeftSwitch();
+					frc::SmartDashboard::PutString("auto chosen", "mid left");
 				}
 			}
-			else if(m_pos == 'L'){
-				if(m_pref == "sc" && m_pos == scaleSide)
-					m_autonomous = new LeftSideScale();
-				else if(m_pref == "sw" && m_pos == switchSide)
-					m_autonomous = new LeftSideSwitch();
+			else if(side == 'R') {
+				if(pref == "sc" && side == scaleSide){
+					m_autonomous = new RightSideScale();
+					frc::SmartDashboard::PutString("auto chosen", "right scale");
+				}
+				else if(pref == "sw" && side == switchSide){
+					m_autonomous = new RightSideSwitch();
+					frc::SmartDashboard::PutString("auto chosen", "right switch");
+				}
 				else{
-					if(switchSide == m_pos)
+					if(switchSide == side) {
 						m_autonomous = new RightSideSwitch();
-					else if(scaleSide == m_pos)
+						frc::SmartDashboard::PutString("auto chosen", "right switch");
+					}
+					else if(scaleSide == side) {
 						m_autonomous = new RightSideScale();
-					else
+						frc::SmartDashboard::PutString("auto chosen", "right scale");
+					}
+					else {
 						m_autonomous = new BaseLine();
+						frc::SmartDashboard::PutString("auto chosen", "base line");
+					}
+				}
+			}
+			else if(side == 'L'){
+				if(pref == "sc" && side == scaleSide){
+					m_autonomous = new LeftSideScale();
+					frc::SmartDashboard::PutString("auto chosen", "left switch");
+				}
+				else if(pref == "sw" && side == switchSide){
+					m_autonomous = new LeftSideSwitch();
+					frc::SmartDashboard::PutString("auto chosen", "left scale");
+				}
+				else{
+					if(switchSide == side){
+						m_autonomous = new LeftSideSwitch();
+						frc::SmartDashboard::PutString("auto chosen", "left switch");
+					}
+					else if(scaleSide == side){
+						m_autonomous = new LeftSideScale();
+						frc::SmartDashboard::PutString("auto chosen", "left scale");
+					}
+					else{
+						m_autonomous = new BaseLine();
+						frc::SmartDashboard::PutString("auto chosen", "baseline");
+					}
 				}
 			}
 		}
 
 		//just to be sure
-		if(m_autonomous == nullptr)
+		if(m_autonomous == nullptr){
 			m_autonomous = new BaseLine();
+			frc::SmartDashboard::PutString("auto chosen", "baseline");
+		}
 		m_autonomous->Start();
 	}
 
@@ -160,7 +202,7 @@ private:
 	frc::Command* m_autonomous = nullptr;
 	frc::SendableChooser<char> m_pos;
 	frc::SendableChooser<std::string> m_pref;
-
+	cs::UsbCamera cam;
 };
 
 START_ROBOT_CLASS(Robot)

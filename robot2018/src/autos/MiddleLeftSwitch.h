@@ -1,5 +1,5 @@
-#ifndef MiddleRightSwitch_H
-#define MiddleRightSwitch_H
+#ifndef MiddleLeftSwitch_H
+#define MiddleLeftSwitch_H
 
 #include <Commands/CommandGroup.h>
 

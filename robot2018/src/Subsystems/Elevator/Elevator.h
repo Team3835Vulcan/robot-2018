@@ -13,7 +13,6 @@ private:
 	Elevator();
 
 	std::unique_ptr<WPI_VictorSPX> m_eng1;
-	std::unique_ptr<WPI_VictorSPX> m_eng2;
 
 	std::unique_ptr<frc::DigitalInput> m_elevUp;
 	std::unique_ptr<frc::DigitalInput> m_elevDown;

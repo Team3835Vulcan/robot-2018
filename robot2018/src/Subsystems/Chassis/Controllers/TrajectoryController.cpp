@@ -78,7 +78,7 @@ const DriveSignal TrajectoryController::Calculate(){
 		double deltaVel = m_goalVel - m_currVel;
 		double deltaTheta = m_goalHeading - m_currHeading;
 
-		double turn = Clamp(-m_kt * deltaTheta, -1, 1);
+		double turn = Clamp(m_kt * deltaTheta, -1, 1);
 
 		double output = m_kp * deltaDist + m_kv * m_goalVel +
 				m_kpv * deltaVel + m_ka * currAccel;

@@ -2,7 +2,7 @@
 
 SwitchClawMode::SwitchClawMode(Collector::CLAWMODE mode) : m_mode(mode) {
 	// Use Requires() here to declare subsystem dependencies
-	// eg. Requires(Robot::chassis.get());
+	Requires(&Collector::GetInstance());
 }
 
 // Called just before this Command runs the first time

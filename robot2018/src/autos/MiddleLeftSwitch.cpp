@@ -6,10 +6,10 @@
 #include <Commands/Collector/SwitchClawMode.h>
 
 MiddleLeftSwitch::MiddleLeftSwitch() {
-	Path p({ {5.02, 0.487}, {4.88, 1.407}, {4, 2.347}, {3.64, 3.027}, {2.72, 3.107} });
-	AddParallel(new SwitchClawMode(Collector::CLAWMODE::OPEN));
+	Path p({ {4.92, 0.507}, {4.86, 1.2}, {3.96, 1.95}, {3.8, 3.1}, {3.5, 3.1}});
+	AddSequential(new SwitchClawMode(Collector::CLAWMODE::OPEN));
 	AddSequential(new RotorAction(Collector::ROTOR_POS::DOWN));
-	AddParallel(new SwitchClawMode(Collector::CLAWMODE::CLOSE));
-	AddSequential(new DrivePath(std::move(p),0));
-	AddSequential(new MoveBelt(Conveyor::SIDE::LEFT));
+	AddSequential(new SwitchClawMode(Collector::CLAWMODE::CLOSE));
+	AddSequential(new DrivePath(std::move(p),180));
+	AddSequential(new MoveBelt(Conveyor::SIDE::RIGHT));
 }

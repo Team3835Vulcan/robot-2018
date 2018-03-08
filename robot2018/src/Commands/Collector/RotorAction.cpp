@@ -22,7 +22,7 @@ void RotorAction::Initialize() {
 		}
 		else{
 			m_controller->SetSetpoint(down);
-			m_controller->SetPID(0.125,0,0.8);
+			m_controller->SetPID(0.18,0,0.8);
 		}
 		m_controller->SetTolerance(0.05);
 		m_controller->Enable();

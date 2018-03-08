@@ -7,7 +7,7 @@ DrivePath::DrivePath(const Path& path, double headingf) :
 	// Use Requires() here to declare subsystem dependencies
 	std::cout << "copy ctor\n";
 	m_controller.Configure(0,0,VELOCITY_FEEDFORWARD,
-					1, ACCELERATION_FEEDFORWARD, 0.25);
+					1, ACCELERATION_FEEDFORWARD, 0.4);
 	Requires(&Chassis::GetInstance());
 }
 
@@ -16,7 +16,7 @@ DrivePath::DrivePath(const Path&& path, double headingf) :
 	// Use Requires() here to declare subsystem dependencies
 	std::cout << "move ctor\n";
 	m_controller.Configure(0,0,VELOCITY_FEEDFORWARD,
-					1, ACCELERATION_FEEDFORWARD, 0.25);
+					1, ACCELERATION_FEEDFORWARD, 0.4);
 	Requires(&Chassis::GetInstance());
 }
 // Called just before this Command runs the first time

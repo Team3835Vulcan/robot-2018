@@ -11,9 +11,9 @@ ElevCtrl::ElevCtrl(ELEVPOS pos) : m_pos(pos) {
 // Called just before this Command runs the first time
 void ElevCtrl::Initialize() {
 	if(m_pos == ELEVPOS::UP)
-		Elevator::GetInstance().Set(1);
-	else
 		Elevator::GetInstance().Set(-1);
+	else
+		Elevator::GetInstance().Set(1);
 }
 
 // Called repeatedly when this Command is scheduled to run
