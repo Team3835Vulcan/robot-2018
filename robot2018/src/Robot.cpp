@@ -49,8 +49,8 @@ public:
 		m_pos.AddObject("left", 'L');
 		m_pos.AddObject("right", 'R');
 
-		m_pref.AddDefault("sc", "sc");
-		m_pref.AddObject("sw", "sw");
+		m_pref.AddDefault("scale", "sc");
+		m_pref.AddObject("switch", "sw");
 
 		frc::SmartDashboard::PutData("Robot Position", &m_pos);
 		frc::SmartDashboard::PutData("Auto Preference", &m_pref);
