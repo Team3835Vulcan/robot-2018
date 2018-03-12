@@ -15,10 +15,11 @@ class DrivePath : public frc::Command {
 private:
 	Path m_path; //path to drive
 	double m_headingf; //final heading
+	bool m_reverse; //drive in reverse or not
 	TrajectoryController m_controller;
 public:
-	DrivePath(const Path& path, double headingf = 999);
-	DrivePath(const Path&& path, double headingf = 999);
+	DrivePath(const Path& path, double headingf = 999, bool reverse = false);
+	DrivePath(const Path&& path, double headingf = 999, bool reverse = false);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

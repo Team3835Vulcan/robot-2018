@@ -1,7 +1,7 @@
 #include "DriveStraight.h"
 #include <iostream>
 
-DriveStraight::DriveStraight(double dist) : m_dist(dist) {
+DriveStraight::DriveStraight(double dist, bool reverse) : m_dist(dist), m_reverse(reverse) {
 	// Use Requires() here to declare subsystem dependencies
 	Requires(&Chassis::GetInstance());
 }

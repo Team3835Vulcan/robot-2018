@@ -12,9 +12,10 @@
 class DriveStraight : public frc::Command {
 private:
 	double m_dist;
+	bool m_reverse;
 	TrajectoryController m_controller;
 public:
-	DriveStraight(double dist);
+	DriveStraight(double dist, bool reverse = false);
 	void Initialize();
 	void Execute();
 	bool IsFinished();

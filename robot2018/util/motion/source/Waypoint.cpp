@@ -33,5 +33,8 @@ const float Waypoint::GetHeading() const {
 }
 
 const float Waypoint::GetHeadingInDegrees() const {
-	return 180/M_PI * atan2(m_gradient.GetY(), m_gradient.GetX());
+	double res = 180/M_PI * atan2(m_gradient.GetY(), m_gradient.GetX()); //convert to degrees
+	if(res < 0)
+		res += 180; //limit the heading between 0 and 180
+	return res;
 }

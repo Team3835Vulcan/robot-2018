@@ -2,8 +2,8 @@
 #include <iostream>
 #include <Constants.h>
 
-DrivePath::DrivePath(const Path& path, double headingf) :
-	m_path(path), m_headingf(headingf){
+DrivePath::DrivePath(const Path& path, double headingf, bool reverse) :
+	m_path(path), m_headingf(headingf), m_reverse(reverse){
 	// Use Requires() here to declare subsystem dependencies
 	std::cout << "copy ctor\n";
 	m_controller.Configure(0,0,VELOCITY_FEEDFORWARD,
@@ -11,8 +11,8 @@ DrivePath::DrivePath(const Path& path, double headingf) :
 	Requires(&Chassis::GetInstance());
 }
 
-DrivePath::DrivePath(const Path&& path, double headingf) :
-	m_path(std::move(path)), m_headingf(headingf){
+DrivePath::DrivePath(const Path&& path, double headingf, bool reverse) :
+	m_path(std::move(path)), m_headingf(headingf), m_reverse(reverse){
 	// Use Requires() here to declare subsystem dependencies
 	std::cout << "move ctor\n";
 	m_controller.Configure(0,0,VELOCITY_FEEDFORWARD,
@@ -37,9 +37,12 @@ void DrivePath::Initialize() {
 void DrivePath::Execute() {
 	std::cout << "calculating\n";
 	const DriveSignal signal = m_controller.Calculate();
+	double speed = signal.speed;
+	if(m_reverse)
+		speed *= -1;
 	std::cout << "got signal";
-	std::cout << signal.speed << '\n' << signal.curve << '\n';
-	Chassis::GetInstance().CurveDrive(signal.speed, signal.curve);
+	std::cout << speed << '\n' << signal.curve << '\n';
+	Chassis::GetInstance().CurveDrive(speed, signal.curve);
 }
 
 // Make this return true when this Command no longer needs to run execute()
