@@ -7,11 +7,11 @@
 
 using ctre::phoenix::motorcontrol::can::WPI_VictorSPX;
 
-class Conveyor : public Subsystem {
+class Conveyor : public frc::Subsystem {
 private:
 	Conveyor();
 
-	std::unique_ptr<WPI_VictorSPX> m_engine;
+	WPI_VictorSPX m_engine;
 public:
 	static Conveyor& GetInstance();
 

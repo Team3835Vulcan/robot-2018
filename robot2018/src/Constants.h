@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <util/motion/MotionProfile.h>
+#include <motion/MotionProfile.h>
 
 /*
  * Add all needed constants here.

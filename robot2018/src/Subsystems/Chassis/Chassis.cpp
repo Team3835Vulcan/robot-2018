@@ -73,7 +73,7 @@ float Chassis::LimitSpeed(float speed) {
 	return speed;
 }
 
-const double Chassis::GetAngle() {
+double Chassis::GetAngle() {
 	double angle = -m_navx.GetAngle() + 90;
 	return std::fmod(angle, 360.0);
 }
@@ -82,11 +82,23 @@ void Chassis::ZeroYaw() {
 	m_navx.ZeroYaw();
 }
 
-const double Chassis::GetVelocity() const {
+double Chassis::GetLeftVelocity() const {
+	return m_lEnc.GetRate();
+}
+double Chassis::GetRightVelocity() const {
+	return m_rEnc.GetRate();
+}
+double Chassis::GetVelocity() const {
 	return (m_lEnc.GetRate() + m_rEnc.GetRate()) / 2;
 }
 
-const double Chassis::GetDistance() const {
+double Chassis::GetLeftDistance() const {
+	return m_lEnc.GetDistance();
+}
+double Chassis::GetRightDistance() const {
+	return m_rEnc.GetDistance();
+}
+double Chassis::GetDistance() const {
 	return (m_lEnc.GetDistance() + m_rEnc.GetDistance()) / 2;
 }
 

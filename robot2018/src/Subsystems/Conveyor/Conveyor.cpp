@@ -1,8 +1,8 @@
 #include "Conveyor.h"
 #include <Constants.h>
 
-Conveyor::Conveyor() : Subsystem("Conveyor"),
-   m_engine(std::make_unique<WPI_VictorSPX>(CONV_MOTOR)){}
+Conveyor::Conveyor() : frc::Subsystem("Conveyor"),
+   m_engine(CONV_MOTOR){}
 
 
 Conveyor& Conveyor::GetInstance(){
@@ -12,14 +12,14 @@ Conveyor& Conveyor::GetInstance(){
 
 void Conveyor::Eject(SIDE s){
 	if(s == LEFT){
-		m_engine->Set(1);
+		m_engine.Set(1);
 	}
 	else{
-		m_engine->Set(-1);
+		m_engine.Set(-1);
 	}
 }
 
 void Conveyor::Stop(){
-	m_engine->Set(0);
+	m_engine.Set(0);
 }
 
