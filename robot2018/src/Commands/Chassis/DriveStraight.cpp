@@ -1,23 +1,36 @@
 #include "DriveStraight.h"
+#include <Subsystems/Chassis/Chassis.h>
 #include <iostream>
 
-DriveStraight::DriveStraight(double dist, bool reverse) : m_dist(dist), m_reverse(reverse) {
+DriveStraight::DriveStraight(double dist, bool reversed) :
+	m_dist(dist),
+	m_reverse(reversed) {
 	// Use Requires() here to declare subsystem dependencies
+	std::cout << "FV";
 	Requires(&Chassis::GetInstance());
+	std::cout << "A";
 }
 
 // Called just before this Command runs the first time
 void DriveStraight::Initialize() {
+	std::cout << "trilili\n";
+	std::cout << "sadl;ma\n";
+	std::cout << "lsamd;lasm;\n";
 	double angle = Chassis::GetInstance().GetAngle();
+	std::cout << "angl\n";
 	if(angle > 180)
 		angle = angle - 360;
-	angle = angle * PI / 180;
-	Path p({{0,0}, {m_dist * cos(angle),m_dist * sin(angle)}});
-	GenerateCatmullRom(p);
-	Trajectory t(DEFAULT_CONFIG, std::move(p));
-	m_controller.SetTrajectory(std::move(t));
+	std::cout << "switched\n";
+	double angleRad = angle * PI / 180;
+	Path p({{{0,0}, angle},
+		{{m_dist * std::cos(angleRad),m_dist * std::sin(angleRad)}, angle}});
+	p.Generate();
+	std::cout << "generated\n";
+	m_traj =  std::make_unique<Trajectory>(std::move(p), DEFAULT_CONFIG, 0, m_reverse);
+	std::cout << "created";
+	m_controller.SetTrajectory(*m_traj);
 	m_controller.Configure(0,0,VELOCITY_FEEDFORWARD,
-				1, ACCELERATION_FEEDFORWARD, K_HOLD_HEADING);
+				1, ACCELERATION_FEEDFORWARD);
 	Chassis::GetInstance().ResetEncoders();
 	m_controller.Reset();
 	m_controller.Enable();
@@ -26,10 +39,15 @@ void DriveStraight::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void DriveStraight::Execute() {
 	std::cout << "calculating\n";
-	const DriveSignal signal = m_controller.Calculate();
-	std::cout << "got signal";
-	std::cout << signal.speed << '\n' << signal.curve << '\n';
-	Chassis::GetInstance().CurveDrive(signal.speed, signal.curve);
+	double speed = Chassis::GetInstance().GetVelocity();
+	double dist = Chassis::GetInstance().GetDistance();
+	double heading = Chassis::GetInstance().GetAngle();
+	double result = m_controller.Calculate(dist, speed);
+	double deltaTheta = m_traj->GetTrajPointD(dist).GetHeadingDegrees() - heading;
+	std::cout << deltaTheta << "\n";
+	double turn = K_HOLD_HEADING * deltaTheta;
+	std::cout << result << " " << turn << "\n";
+	Chassis::GetInstance().CurveDrive(result, -turn);
 }
 
 // Make this return true when this Command no longer needs to run execute()
