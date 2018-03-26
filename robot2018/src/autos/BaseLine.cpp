@@ -3,6 +3,5 @@
 #include <iostream>
 
 BaseLine::BaseLine() {
-	AddSequential(new DriveStraight(4.3));
-
+	AddSequential(new DriveStraight(6));
 }
