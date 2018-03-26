@@ -14,16 +14,16 @@ class Collector : public frc::Subsystem {
 private:
 	Collector();
 
-	std::unique_ptr<WPI_VictorSPX> m_rCollector;
-	std::unique_ptr<WPI_VictorSPX> m_lCollector;
-	std::unique_ptr<frc::DigitalInput> m_collectSwitch;
+	WPI_VictorSPX m_rCollector;
+	WPI_VictorSPX m_lCollector;
+	frc::DigitalInput m_collectSwitch;
 
-	std::unique_ptr<WPI_VictorSPX> m_rotor;
-	std::unique_ptr<frc::DigitalInput> m_downSwitch;
-	std::unique_ptr<frc::DigitalInput> m_upSwitch;
-	std::unique_ptr<frc::AnalogInput> m_potentiometer;
+	WPI_VictorSPX m_rotor;
+	frc::DigitalInput m_downSwitch;
+	frc::DigitalInput m_upSwitch;
+	frc::AnalogInput m_potentiometer;
 
-	std::unique_ptr<frc::DoubleSolenoid> m_claw;
+	frc::DoubleSolenoid m_claw;
 public:
 	static Collector& GetInstance();
 

@@ -40,11 +40,17 @@ public:
 	void TankDrive(double left, double right);
 	void CurveDrive(double speed, double curve);
 
-	const double GetAngle();
+	double GetAngle();
 	void ZeroYaw(); //reset angle to zero
 
-	const double GetVelocity() const; //get from encoders(hint: average of both encoder speeds)
-	const double GetDistance() const;
+	double GetLeftVelocity() const;
+	double GetRightVelocity() const;
+	double GetVelocity() const;
+
+	double GetLeftDistance() const;
+	double GetRightDistance() const;
+	double GetDistance() const;
+
 	void ResetEncoders();
 };
 

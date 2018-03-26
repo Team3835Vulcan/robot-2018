@@ -2,37 +2,30 @@
  * TrajectoryController.h
  *
  *  Created on: Feb 19, 2018
- *      Author: Coding Monkeys
+ *      Author: Nadav Strahilevitz
+ *
+ *  This class maintains an encoder and a trajectory
+ *  and determines according to the encoder what output to give
+ *  to the engine
  */
 
 #ifndef SRC_SUBSYSTEMS_CHASSIS_CONTROLLERS_TRAJECTORYCONTROLLER_H_
 #define SRC_SUBSYSTEMS_CHASSIS_CONTROLLERS_TRAJECTORYCONTROLLER_H_
 
-#include <memory>
-#include <util/motion/Trajectory.h>
+#include <Trajectory.h>
 #include <RobotController.h>
-#include "../Chassis.h"
-
-struct DriveSignal{
-	double speed;
-	double curve;
-};
+#include <Encoder.h>
 
 class TrajectoryController {
 private:
-	std::unique_ptr<Trajectory> m_traj;
+
+	Trajectory* m_traj;
 
 	double m_kp;
 	double m_kd;
 	double m_kv;
 	double m_kpv; //kp for velocity
 	double m_ka;
-	double m_kt; //rotation parameter
-
-	double m_prevTime;
-	double m_currTime;
-	double m_goalTime;
-	Timer time;
 
 	double m_totalError;
 	double m_currDist;
@@ -40,9 +33,6 @@ private:
 
 	double m_currVel;
 	double m_goalVel;
-
-	double m_currHeading;
-	double m_goalHeading;
 
 	double m_tolerance;
 
@@ -52,8 +42,8 @@ private:
 public:
 	TrajectoryController();
 
-	void Configure(double kp, double kd, double kv, double kpv, double ka, double kt);
-	void SetTrajectory(const Trajectory& traj);
+	void Configure(double kp, double kd, double kv, double kpv, double ka);
+	void SetTrajectory(Trajectory& traj);
 
 	bool IsOnTarget();
 
@@ -61,7 +51,7 @@ public:
 	void Disable();
 	void Reset();
 
-	const DriveSignal Calculate();
+	double Calculate(double dist, double vel);
 
 };
 
