@@ -12,8 +12,10 @@ RightSideScale::RightSideScale() {
 	CatmullRom pathMaker(true, 90, 90);
 	p.SetGradients(pathMaker);
 	p.Generate();
+	MotionProfileConfig config = DEFAULT_CONFIG;
+	config.maxAcc = 1;
 
-	Trajectory t(p, DEFAULT_CONFIG);
+	Trajectory t(p, config);
 	AddSequential(new SwitchClawMode(Collector::CLAWMODE::OPEN));
 	AddSequential(new RotorAction(Collector::ROTOR_POS::DOWN));
 	AddParallel(new ElevCtrl(ElevCtrl::ELEVPOS::UP));
