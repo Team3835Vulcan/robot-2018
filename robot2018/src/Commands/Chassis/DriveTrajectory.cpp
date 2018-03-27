@@ -11,13 +11,10 @@ DriveTrajectory::DriveTrajectory(const Trajectory& t) :
 	m_leftTraj = std::make_unique<Trajectory>(fitter.GetLeft());
 	m_rightTraj = std::make_unique<Trajectory>(fitter.GetRight());
 	Requires(&Chassis::GetInstance());
-	std::cout << "traj built\n";
 }
 
 // Called just before this Command runs the first time
 void DriveTrajectory::Initialize() {
-	std::cout << "sad\n";
-	std::cout << "bpy\n";
 	m_leftFollower.SetTrajectory(*m_leftTraj);
 	m_leftFollower.Configure(0,0,VELOCITY_FEEDFORWARD,
 			1, ACCELERATION_FEEDFORWARD);
