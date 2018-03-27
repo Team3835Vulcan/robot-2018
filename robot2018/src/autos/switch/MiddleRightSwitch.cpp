@@ -8,16 +8,19 @@
 #include <Commands/Collector/SwitchClawMode.h>
 
 MiddleRightSwitch::MiddleRightSwitch() {
-	Path p({ {{0,0}}, {{1.8, 3.15}} });
+	Path p({ {{0,0}}, {{1.8, 2.9}} });
 	CatmullRom pathMaker(true, 90, 0);
 	p.SetGradients(pathMaker);
 	p.Generate();
 
-	Trajectory t(p, DEFAULT_CONFIG);
+	MotionProfileConfig config = DEFAULT_CONFIG;
+	config.maxVel = 2.6;
+	config.maxAcc = 1.4;
+	Trajectory t(p, config);
+	AddSequential(new DriveTrajectory(std::move(t)));
 	AddSequential(new SwitchClawMode(Collector::CLAWMODE::OPEN));
 	AddSequential(new RotorAction(Collector::ROTOR_POS::DOWN));
 	AddParallel(new SwitchClawMode(Collector::CLAWMODE::CLOSE));
-	AddSequential(new DriveTrajectory(std::move(t)));
 	AddSequential(new MoveBelt(Conveyor::SIDE::LEFT));
 	AddSequential(new RotorAction(Collector::ROTOR_POS::UP));
 
