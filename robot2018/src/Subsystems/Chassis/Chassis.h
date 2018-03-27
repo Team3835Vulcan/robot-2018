@@ -50,6 +50,7 @@ public:
 	double GetLeftDistance() const;
 	double GetRightDistance() const;
 	double GetDistance() const;
+
 	void ResetEncoders();
 };
 

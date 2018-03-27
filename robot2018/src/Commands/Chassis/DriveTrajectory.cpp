@@ -46,7 +46,7 @@ void DriveTrajectory::Execute() {
 
 
 	double deltaTheta = m_traj->GetTrajPointD(dist).GetHeadingDegrees() - heading;
-	double turn = -K_TURN_HEADING * deltaTheta;
+	double turn = K_TURN_HEADING * deltaTheta;
 	std::cout << deltaTheta << '\n';
 	std::cout << leftRes << " " << rightRes << " " << turn << '\n';
 
@@ -55,6 +55,9 @@ void DriveTrajectory::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool DriveTrajectory::IsFinished() {
+	/*double len = m_traj->GetDistance();
+	double dist = Chassis::GetInstance().GetDistance();
+	return std::fabs(len - dist) <= m_traj->GetConfig().tolerance;*/
 	return m_leftFollower.IsOnTarget() || m_rightFollower.IsOnTarget();
 }
 

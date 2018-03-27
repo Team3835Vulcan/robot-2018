@@ -4,5 +4,4 @@
 
 BaseLine::BaseLine() {
 	AddSequential(new DriveStraight(4.3));
-
 }

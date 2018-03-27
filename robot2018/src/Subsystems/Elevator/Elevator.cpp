@@ -6,9 +6,7 @@
 Elevator::Elevator() : frc::Subsystem("Elevator"),
 	m_eng1(ELEV1_MOTOR),
     m_elevUp(ELEV_UP_SWITCH),
-    m_elevDown(ELEV_DOWN_SWITCH){
-	//m_eng1.SetInverted(true);
-}
+    m_elevDown(ELEV_DOWN_SWITCH){}
 
 Elevator& Elevator::GetInstance(){
 	static Elevator instance;

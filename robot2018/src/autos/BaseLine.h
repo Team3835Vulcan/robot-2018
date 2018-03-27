@@ -3,7 +3,7 @@
 
 #include <Commands/CommandGroup.h>
 
-class BaseLine : public CommandGroup {
+class BaseLine : public frc::CommandGroup {
 public:
 	BaseLine();
 };

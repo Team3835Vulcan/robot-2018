@@ -64,7 +64,7 @@ constexpr double K_TURN_HEADING = 0.025;
 constexpr double K_HOLD_HEADING = 0.1;
 constexpr double ROBOT_DT = 1e-3;
 const MotionProfileConfig DEFAULT_CONFIG = {ROBOT_DT, MAX_ROBOT_ACCELERATION,
-		MAX_ROBOT_VELOCITY, 0.03};
+		MAX_ROBOT_VELOCITY, 0.05};
 
 
 //physical properties

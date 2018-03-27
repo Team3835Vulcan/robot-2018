@@ -7,8 +7,8 @@
 
 #include <OI.h>
 #include <Commands/Collector/Collect.h>
+#include <Commands/Collector/Eject.h>
 #include <Commands/Collector/SwitchClaw.h>
-#include <Commands/Collector/CollectRoutine.h>
 #include <Commands/Collector/RotorAction.h>
 #include <Commands/Collector/ManualRotor.h>
 #include <Commands/Conveyor/MoveBelt.h>
@@ -19,10 +19,10 @@ OI::OI() : m_left(std::make_unique<frc::Joystick>(LEFT_JOYSTICK)),
    m_op(std::make_unique<vulcan::XboxController>(2)){
 		m_op->m_bButton->WhenPressed(new MoveBelt(Conveyor::SIDE::RIGHT));
 		m_op->m_xButton->WhenPressed(new MoveBelt(Conveyor::SIDE::LEFT));
-		m_op->m_yButton->WhenPressed(new Collect(Collector::COLLECTMODE::EJECT));
+		m_op->m_yButton->WhenPressed(new Eject());
 		m_op->m_aButton->WhenPressed(new SwitchClaw());
 		m_op->m_lTrigger->ToggleWhenPressed(
-				new Collect(Collector::COLLECTMODE::COLLECT));
+				new Collect());
 		m_op->m_rButton->WhenPressed(new RotorAction(Collector::ROTOR_POS::UP));
 		m_op->m_lButton->WhenPressed(new RotorAction(Collector::ROTOR_POS::DOWN));
 		m_op->m_backButton->ToggleWhenPressed(new ManualRotor());
@@ -47,4 +47,9 @@ const float OI::GetOPLY() const{
 
 const float OI::GetOPRY() const{
 	return m_op->GetRY();
+}
+
+void OI::RumbleXbox(double val){
+	m_op->SetRumble(frc::GenericHID::RumbleType::kLeftRumble, val);
+	m_op->SetRumble(frc::GenericHID::RumbleType::kRightRumble, val);
 }

@@ -57,7 +57,7 @@ public:
 		frc::SmartDashboard::PutData("left switch", new LeftSideSwitch());
 		frc::SmartDashboard::PutData("right switch", new RightSideSwitch());
 		frc::SmartDashboard::PutData("left scale", new LeftSideScale());
-		frc::SmartDashboard::PutData("right switch", new RightSideScale());
+		frc::SmartDashboard::PutData("right scale", new RightSideScale());
 		frc::SmartDashboard::PutData("midleft switch", new MiddleLeftSwitch());
 		frc::SmartDashboard::PutData("midright switch",
 				new MiddleRightSwitch());
@@ -128,7 +128,6 @@ public:
 					frc::SmartDashboard::PutString("auto chosen",
 							"right switch");
 				} else {
-
 					if (scaleSide == side) {
 						m_autonomous = new RightSideScale();
 						frc::SmartDashboard::PutString("auto chosen",
@@ -188,7 +187,7 @@ public:
 		// this line or comment it out.
 		if (m_autonomous != nullptr) {
 			m_autonomous->Cancel();
-			m_autonomous = nullptr;
+		m_autonomous = nullptr;
 		}
 	}
 
@@ -205,6 +204,7 @@ private:
 	frc::Command* m_autonomous = nullptr;
 	frc::SendableChooser<char> m_pos;
 	frc::SendableChooser<std::string> m_pref;
+
 	cs::UsbCamera cam;
 };
 

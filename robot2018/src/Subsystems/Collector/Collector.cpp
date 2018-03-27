@@ -74,9 +74,9 @@ void Collector::SwitchClaw(CLAWMODE mode){
 }
 
 Collector::CLAWMODE Collector::GetClawMode() const{
-	if(m_claw.Get() == frc::DoubleSolenoid::Value::kReverse)
-		return CLAWMODE::OPEN;
-	return CLAWMODE::CLOSE;
+	if(m_claw.Get() == frc::DoubleSolenoid::Value::kForward)
+		return CLAWMODE::CLOSE;
+	return CLAWMODE::OPEN;
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

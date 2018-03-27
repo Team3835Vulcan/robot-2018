@@ -11,13 +11,13 @@ Chassis::Chassis() : Subsystem("Chassis"), m_rLeft(RLEFT_MOTOR),
    m_navx(I2C::Port::kOnboard), // Should be constant
    m_lEnc(LEFT_ENCODER_A, LEFT_ENCODER_B),
    m_rEnc(RIGHT_ENCODER_A, RIGHT_ENCODER_B){
-	m_left.SetInverted(true);
-	m_right.SetInverted(true);
 	m_drive.SetSafetyEnabled(false);
 	m_navx.Reset();
 	m_navx.ZeroYaw();
 	m_lEnc.Reset();
 	m_rEnc.Reset();
+	m_left.SetInverted(true);
+	m_right.SetInverted(true);
 	m_lEnc.SetReverseDirection(true);
 	m_lEnc.SetDistancePerPulse(DISTANCE_PER_PULSE);
 	m_rEnc.SetDistancePerPulse(DISTANCE_PER_PULSE);

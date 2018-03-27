@@ -4,7 +4,6 @@
 Conveyor::Conveyor() : frc::Subsystem("Conveyor"),
    m_engine(CONV_MOTOR){}
 
-
 Conveyor& Conveyor::GetInstance(){
 	static Conveyor instance;
 	return instance;

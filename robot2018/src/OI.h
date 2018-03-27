@@ -28,4 +28,6 @@ public:
 	const float GetLeftY() const;
 	const float GetOPRY() const;
 	const float GetOPLY() const;
+
+	void RumbleXbox(double val);
 };

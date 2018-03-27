@@ -3,7 +3,7 @@
 
 #include <Commands/CommandGroup.h>
 
-class MiddleLeftSwitch : public CommandGroup {
+class MiddleLeftSwitch : public frc::CommandGroup {
 public:
 	MiddleLeftSwitch();
 };
