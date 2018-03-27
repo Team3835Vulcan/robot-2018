@@ -31,10 +31,6 @@ constexpr int COLL2_MOTOR = 15;
 constexpr int ROTOR_MOTOR = 16;
 
 constexpr int ELEV1_MOTOR = 17;
-<<<<<<< HEAD
-constexpr int ELEV2_MOTOR = 1;
-=======
->>>>>>> robotA-autoOH
 
 constexpr int LEFT_ENCODER_A = 4;
 constexpr int LEFT_ENCODER_B = 3;
@@ -68,7 +64,7 @@ constexpr double K_TURN_HEADING = 0.025;
 constexpr double K_HOLD_HEADING = 0.1;
 constexpr double ROBOT_DT = 1e-3;
 const MotionProfileConfig DEFAULT_CONFIG = {ROBOT_DT, MAX_ROBOT_ACCELERATION,
-		MAX_ROBOT_VELOCITY, 0.03};
+		MAX_ROBOT_VELOCITY, 0.05};
 
 
 //physical properties

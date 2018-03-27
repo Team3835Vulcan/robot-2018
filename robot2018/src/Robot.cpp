@@ -57,7 +57,7 @@ public:
 		frc::SmartDashboard::PutData("left switch", new LeftSideSwitch());
 		frc::SmartDashboard::PutData("right switch", new RightSideSwitch());
 		frc::SmartDashboard::PutData("left scale", new LeftSideScale());
-		frc::SmartDashboard::PutData("right switch", new RightSideScale());
+		frc::SmartDashboard::PutData("right scale", new RightSideScale());
 		frc::SmartDashboard::PutData("midleft switch", new MiddleLeftSwitch());
 		frc::SmartDashboard::PutData("midright switch",
 				new MiddleRightSwitch());

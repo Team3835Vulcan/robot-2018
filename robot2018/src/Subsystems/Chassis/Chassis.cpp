@@ -16,6 +16,8 @@ Chassis::Chassis() : Subsystem("Chassis"), m_rLeft(RLEFT_MOTOR),
 	m_navx.ZeroYaw();
 	m_lEnc.Reset();
 	m_rEnc.Reset();
+	m_left.SetInverted(true);
+	m_right.SetInverted(true);
 	m_lEnc.SetReverseDirection(true);
 	m_lEnc.SetDistancePerPulse(DISTANCE_PER_PULSE);
 	m_rEnc.SetDistancePerPulse(DISTANCE_PER_PULSE);
@@ -97,7 +99,6 @@ double Chassis::GetRightDistance() const {
 	return m_rEnc.GetDistance();
 }
 double Chassis::GetDistance() const {
->>>>>>> robotA-autoOH
 	return (m_lEnc.GetDistance() + m_rEnc.GetDistance()) / 2;
 }
 

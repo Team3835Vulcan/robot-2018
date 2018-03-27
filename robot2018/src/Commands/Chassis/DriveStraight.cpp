@@ -47,7 +47,7 @@ void DriveStraight::Execute() {
 	std::cout << deltaTheta << "\n";
 	double turn = K_HOLD_HEADING * deltaTheta;
 	std::cout << result << " " << turn << "\n";
-	Chassis::GetInstance().CurveDrive(result, -turn);
+	Chassis::GetInstance().CurveDrive(result, turn);
 }
 
 // Make this return true when this Command no longer needs to run execute()

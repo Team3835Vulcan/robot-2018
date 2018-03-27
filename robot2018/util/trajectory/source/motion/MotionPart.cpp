@@ -45,7 +45,7 @@ const Setpoint MotionPart::FindSetpointT(double t) const {
 			acc *= -1;
 		}
 
-		return{ t, pos, velocity, acc };
+		return{ pos, t, velocity, acc };
 	}
 	return{ 0,0,0,0 };
 }
@@ -62,7 +62,7 @@ const Setpoint MotionPart::FindSetpointD(double d) const {
 			acc *= -1;
 		}
 
-		return {t, d, vel, acc};
+		return {d, t, vel, acc};
 	}
 	return{ 0,0,0,0 };
 }

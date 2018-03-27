@@ -16,11 +16,11 @@ LeftRightScale::LeftRightScale() {
 	config.maxVel = 2;
 	Trajectory t(p, config);
 
-	//AddParallel(new SwitchClawMode(Collector::CLAWMODE::OPEN));
-	//AddSequential(new RotorAction(Collector::ROTOR_POS::DOWN));
-	//AddParallel(new ElevCtrl(ElevCtrl::ELEVPOS::UP));
-	//AddParallel(new SwitchClawMode(Collector::CLAWMODE::CLOSE));
+	AddSequential(new SwitchClawMode(Collector::CLAWMODE::OPEN));
+	AddSequential(new RotorAction(Collector::ROTOR_POS::DOWN));
+	AddParallel(new ElevCtrl(ElevCtrl::ELEVPOS::UP));
+	AddParallel(new SwitchClawMode(Collector::CLAWMODE::CLOSE));
 	AddSequential(new DriveTrajectory(std::move(t)));
-	//AddSequential(new MoveBelt(Conveyor::SIDE::RIGHT));
-	//AddSequential(new ElevCtrl(ElevCtrl::ELEVPOS::DOWN));
+	AddSequential(new MoveBelt(Conveyor::SIDE::RIGHT));
+	AddSequential(new ElevCtrl(ElevCtrl::ELEVPOS::DOWN));
 }

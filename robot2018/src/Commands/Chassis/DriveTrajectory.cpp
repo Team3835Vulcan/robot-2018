@@ -11,13 +11,10 @@ DriveTrajectory::DriveTrajectory(const Trajectory& t) :
 	m_leftTraj = std::make_unique<Trajectory>(fitter.GetLeft());
 	m_rightTraj = std::make_unique<Trajectory>(fitter.GetRight());
 	Requires(&Chassis::GetInstance());
-	std::cout << "traj built\n";
 }
 
 // Called just before this Command runs the first time
 void DriveTrajectory::Initialize() {
-	std::cout << "sad\n";
-	std::cout << "bpy\n";
 	m_leftFollower.SetTrajectory(*m_leftTraj);
 	m_leftFollower.Configure(0,0,VELOCITY_FEEDFORWARD,
 			1, ACCELERATION_FEEDFORWARD);
@@ -49,7 +46,7 @@ void DriveTrajectory::Execute() {
 
 
 	double deltaTheta = m_traj->GetTrajPointD(dist).GetHeadingDegrees() - heading;
-	double turn = -K_TURN_HEADING * deltaTheta;
+	double turn = K_TURN_HEADING * deltaTheta;
 	std::cout << deltaTheta << '\n';
 	std::cout << leftRes << " " << rightRes << " " << turn << '\n';
 
@@ -58,6 +55,9 @@ void DriveTrajectory::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool DriveTrajectory::IsFinished() {
+	/*double len = m_traj->GetDistance();
+	double dist = Chassis::GetInstance().GetDistance();
+	return std::fabs(len - dist) <= m_traj->GetConfig().tolerance;*/
 	return m_leftFollower.IsOnTarget() || m_rightFollower.IsOnTarget();
 }
 

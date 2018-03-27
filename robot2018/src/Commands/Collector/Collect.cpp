@@ -1,14 +1,16 @@
 #include "Collect.h"
-#include <Timer.h>
+#include <Subsystems/Collector/Collector.h>
+#include <OI.h>
 
-Collect::Collect(Collector::COLLECTMODE mode) : m_mode(mode){
+Collect::Collect() {
 	// Use Requires() here to declare subsystem dependencies
 	Requires(&Collector::GetInstance());
 }
 
 // Called just before this Command runs the first time
 void Collect::Initialize() {
-	Collector::GetInstance().Collect(m_mode);
+	Collector::GetInstance().Collect(Collector::COLLECTMODE::COLLECT);
+	OI::GetInstance().RumbleXbox(0.7);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -17,23 +19,18 @@ void Collect::Execute() {
 }
 
 bool Collect::IsFinished(){
-	if(m_mode == Collector::COLLECTMODE::COLLECT)
-		return false;
-	else
-		return true;
+	return false;
 }
 
 // Called once after isFinished returns true
 void Collect::End() {
-	if(m_mode == Collector::COLLECTMODE::EJECT)
-		Wait(1);
 	Collector::GetInstance().StopCollect();
+	OI::GetInstance().RumbleXbox(0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void Collect::Interrupted() {
-	if(m_mode == Collector::COLLECTMODE::EJECT)
-			Wait(1);
 	Collector::GetInstance().StopCollect();
+	OI::GetInstance().RumbleXbox(0);
 }
