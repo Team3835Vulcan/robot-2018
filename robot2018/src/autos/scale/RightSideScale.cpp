@@ -13,7 +13,6 @@ RightSideScale::RightSideScale() {
 	p.SetGradients(pathMaker);
 	p.Generate();
 	MotionProfileConfig config = DEFAULT_CONFIG;
-	config.maxAcc = 1;
 
 	Trajectory t(p, config);
 	AddSequential(new SwitchClawMode(Collector::CLAWMODE::OPEN));
