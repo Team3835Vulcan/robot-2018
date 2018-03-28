@@ -17,11 +17,11 @@ DriveTrajectory::DriveTrajectory(const Trajectory& t) :
 void DriveTrajectory::Initialize() {
 	m_leftFollower.SetTrajectory(*m_leftTraj);
 	m_leftFollower.Configure(0,0,VELOCITY_FEEDFORWARD,
-			1, ACCELERATION_FEEDFORWARD);
+			0, ACCELERATION_FEEDFORWARD);
 	m_leftFollower.Reset();
 	m_rightFollower.SetTrajectory(*m_rightTraj);
 	m_rightFollower.Configure(0,0,VELOCITY_FEEDFORWARD,
-			1, ACCELERATION_FEEDFORWARD);
+			0, ACCELERATION_FEEDFORWARD);
 	m_rightFollower.Reset();
 	Chassis::GetInstance().ResetEncoders();
 
@@ -55,10 +55,10 @@ void DriveTrajectory::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool DriveTrajectory::IsFinished() {
-	/*double len = m_traj->GetDistance();
+	double len = m_traj->GetDistance();
 	double dist = Chassis::GetInstance().GetDistance();
-	return std::fabs(len - dist) <= m_traj->GetConfig().tolerance;*/
-	return m_leftFollower.IsOnTarget() || m_rightFollower.IsOnTarget();
+	return std::fabs(len - dist) <= m_traj->GetConfig().tolerance;
+	//return m_leftFollower.IsOnTarget() || m_rightFollower.IsOnTarget();
 }
 
 // Called once after isFinished returns true
