@@ -58,11 +58,16 @@ void Chassis::Periodic() {
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 void Chassis::TankDrive(double left, double right) {
-	m_drive.TankDrive(left, right, false);
+	left = LimitSpeed(left);
+	right = LimitSpeed(right);
+	m_left.Set(left);
+	m_right.Set(right);
 }
 
 void Chassis::CurveDrive(double speed, double curve) {
-	m_drive.CurvatureDrive(speed, curve, false);
+	speed = LimitSpeed(speed);
+	m_left.Set(speed + curve);
+	m_right.Set(speed - curve);
 }
 
 float Chassis::LimitSpeed(float speed) {

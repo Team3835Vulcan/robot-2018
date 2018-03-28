@@ -6,7 +6,6 @@
 #include <memory>
 #include <VictorSP.h>
 #include <SpeedControllerGroup.h>
-#include <Drive/DifferentialDrive.h>
 #include <AHRS.h>
 #include "ctre/phoenix/MotorControl/CAN/WPI_VictorSPX.h"
 
@@ -24,7 +23,6 @@ private:
 	WPI_VictorSPX m_fRight;
 	frc::SpeedControllerGroup m_left;
 	frc::SpeedControllerGroup m_right;
-	frc::DifferentialDrive m_drive;
 
 	AHRS m_navx;
 
