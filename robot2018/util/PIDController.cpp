@@ -121,6 +121,9 @@ void PIDController::Calculate(double input){
 		double output = m_p * m_error + m_i * m_totalError + m_d * diffTerm + m_f * m_setpoint;
 		m_output = Limit(output, m_minOutput, m_maxOutput);
 	}
+	else{
+		m_output = 0;
+	}
 }
 
 double PIDController::GetOutput(){
