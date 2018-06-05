@@ -54,12 +54,12 @@ constexpr int LEFT_JOYSTICK = 0;
 
 //physical limits
 constexpr double MAX_ROBOT_VELOCITY = 3;//in m/s
-constexpr double MAX_ROBOT_ACCELERATION = 1.8; //in m/s^2
+constexpr double MAX_ROBOT_ACCELERATION = 1.6; //in m/s^2
 
 //math
 constexpr double PI = 3.141592653589793238462;
 constexpr double VELOCITY_FEEDFORWARD = 1/MAX_ROBOT_VELOCITY;
-constexpr double ACCELERATION_FEEDFORWARD = 0;
+constexpr double ACCELERATION_FEEDFORWARD = 0.02;
 constexpr double K_TURN_HEADING = 0.025;
 constexpr double K_HOLD_HEADING = 0.1;
 constexpr double ROBOT_DT = 1e-3;
