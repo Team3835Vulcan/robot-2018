@@ -7,8 +7,21 @@
 
 #include "OI.h"
 
-#include <WPILib.h>
+OI::OI() : m_left(std::make_unique<frc::Joystick>(LEFT_JOYSTICK)), m_right(std::make_unique<frc::Joystick>(RIGHT_JOYSTICK)){
+}
 
-OI::OI() {
-	// Process operator interface input here.
+OI& OI::GetInstance()
+{
+	static OI instance;
+	return instance;
+}
+
+const float OI::GetLeftY() const
+{
+	return m_left->GetY();
+}
+
+const float OI::GetRightY() const
+{
+	return m_right->GetY();
 }
